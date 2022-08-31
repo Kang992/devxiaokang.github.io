@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>dcoker on 基层码农~</title>
+    <link>http://x-xkang.com/categories/dcoker/</link>
+    <description>Recent content in dcoker on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Wed, 18 Sep 2019 02:01:58 +0530</lastBuildDate><atom:link href="http://x-xkang.com/categories/dcoker/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Docker 常用命令</title>
+      <link>http://x-xkang.com/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Wed, 18 Sep 2019 02:01:58 +0530</pubDate>
+      
+      <guid>http://x-xkang.com/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

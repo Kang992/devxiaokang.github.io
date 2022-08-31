@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>database on 基层码农~</title>
+    <link>http://x-xkang.com/categories/database/</link>
+    <description>Recent content in database on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Mon, 22 Nov 2021 10:48:54 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/database/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql Deadlock</title>
+      <link>http://x-xkang.com/mysql-deadlock/</link>
+      <pubDate>Mon, 22 Nov 2021 10:48:54 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/mysql-deadlock/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

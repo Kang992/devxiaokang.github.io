@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <title>Mysql Deadlock - 基层码农~</title>
+  <meta name="renderer" content="webkit" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+<meta name="theme-color" content="#f8f5ec" />
+<meta name="msapplication-navbutton-color" content="#f8f5ec">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="#f8f5ec">
+
+
+<meta name="author" content="kang" /><meta name="description" content="" /><meta name="keywords" content="mysql, deadLock" />
+
+
+
+
+
+
+<meta name="generator" content="Hugo 0.88.1 with theme even" />
+
+
+<link rel="canonical" href="http://x-xkang.com/mysql-deadlock/" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+<link rel="manifest" href="/manifest.json">
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<link href="/sass/main.min.154ed883776547b0e136be39b3037f61350da06f888d0868d1756a9463cd9520.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.css" integrity="sha256-7TyXnr2YU040zfSP+rEcz29ggW4j56/ujTPwjMzyqFY=" crossorigin="anonymous">
+
+
+<meta property="og:title" content="Mysql Deadlock" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://x-xkang.com/mysql-deadlock/" /><meta property="article:section" content="post" />
+<meta property="article:published_time" content="2021-11-22T10:48:54+08:00" />
+<meta property="article:modified_time" content="2021-11-22T10:48:54+08:00" />
+
+<meta itemprop="name" content="Mysql Deadlock">
+<meta itemprop="description" content=""><meta itemprop="datePublished" content="2021-11-22T10:48:54+08:00" />
+<meta itemprop="dateModified" content="2021-11-22T10:48:54+08:00" />
+<meta itemprop="wordCount" content="678">
+<meta itemprop="keywords" content="database," /><meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Mysql Deadlock"/>
+<meta name="twitter:description" content=""/>
+
+<!--[if lte IE 9]>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+<![endif]-->
+
+<!--[if lt IE 9]>
+  <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+<![endif]-->
+
+</head>
+<body>
+  <div id="mobile-navbar" class="mobile-navbar">
+  <div class="mobile-header-logo">
+    <a href="/" class="logo"> </a>
+  </div>
+  <div class="mobile-navbar-icon">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+</div>
+<nav id="mobile-menu" class="mobile-menu slideout-menu">
+  <ul class="mobile-menu-list">
+    <a href="/">
+        <li class="mobile-menu-item">Home</li>
+      </a><a href="/post/">
+        <li class="mobile-menu-item">Archives</li>
+      </a>
+  </ul>
+</nav>
+  <div class="container" id="mobile-panel">
+    <header id="header" class="header">
+        <div class="logo-wrapper">
+  <a href="/" class="logo"> </a>
+</div>
+
+<nav class="site-navbar">
+  <ul id="menu" class="menu">
+    <li class="menu-item">
+        <a class="menu-item-link" href="/">Home</a>
+      </li><li class="menu-item">
+        <a class="menu-item-link" href="/post/">Archives</a>
+      </li>
+  </ul>
+</nav>
+    </header>
+
+    <main id="main" class="main">
+      <div class="content-wrapper">
+        <div id="content" class="content">
+          <article class="post">
+    
+    <header class="post-header">
+      <h1 class="post-title">Mysql Deadlock</h1>
+
+      <div class="post-meta">
+        <span class="post-time"> 2021-11-22 </span>
+        <div class="post-category">
+            <a href="/categories/database/"> database </a>
+            </div>
+          <span class="more-meta"> 678 words </span>
+          <span class="more-meta"> 2 mins read </span>
+        <span id="busuanzi_container_page_pv" class="more-meta"> <span id="busuanzi_value_page_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> times read </span>
+      </div>
+    </header>
+
+    <div class="post-toc" id="post-toc">
+  <h2 class="post-toc-title">Contents</h2>
+  <div class="post-toc-content">
+    <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#问题描述">问题描述</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+  </div>
+</div>
+    <div class="post-content">
+      <h2 id="问题描述">问题描述</h2>
+<p>生产环境每隔一段时间会出现mysql数据库的死锁日志:</p>
+<p><img src="/images/mysql-dead-lock/question-show.png" alt="quest-show"></p>
+<p>同一条update语句，where 条件不同，但是会触发死锁，于是查看阿里云的数据库死锁日志，如下：</p>
+<p><img src="/images/mysql-dead-lock/deadlock-show.jpg" alt="quest-show"></p>
+<p>update 语句如果使用的是主键索引，会将主键索引锁住，如果是普通索引，会先将普通索引锁住，然后根据普通索引的主键id再锁住主键索引，同一条update语句的索引执行应该是一样的，不应该存在互相等待释放的情况，于是有点陷入僵局，google一下有遇到相似问题的帖子，查看了执行计划，之前也看了执行计划，但是忽略了<code>type</code>字段和<code>extra</code>字段，结果如下：</p>
+<p><img src="/images/mysql-dead-lock/explain-show.jpg" alt="explain-show"></p>
+<p><img src="/images/mysql-dead-lock/explain-extra-show.jpg" alt="explain-show"></p>
+<p>索引合并查询，会同时使用<code>idx_status_vmstatus</code> 和 <code>uniq_instance</code> 扫描记录并给普通索引加锁，然后通过普通索引中的主键ID去锁定主键索引，问题就出现在这里，由于 idx_status_vmstatus 索引扫描和 <code>uniq_instance</code>索引扫描是同时的，如果两条update语句同时执行，则 事务2 先锁定 锁定 <code>uniq_instance</code> 成功后锁定对应的主键，然后事务1 锁定<code>idx_status_vmstatus</code> 成功后也去锁定主键,此时主键已被事务2锁定，于是阻塞等待<code>primary</code>释放，接着事务2开始扫描 <code>idx_status_vmstatus</code> 发现普通索引被事务1锁住，于是阻塞等待<code>idx_status_vmstatus</code>，于是出现最终的 事务2等待 事务2释放<code>idx_status_vmstatus</code>，事务1等待事务1释放<code>primary</code>，即出现死锁。</p>
+<p>解决方案也比较简单，先查出主键ID，使用主键ID再更新记录，因为使用主键ID直接加锁的话，锁粒度更小，及时同时更新一条记录，也不会出现同时等待对方将锁释放的场景。问题描述的比较简单，但在排查过程中还是走了不少弯路的。</p>
+    </div>
+
+    
+<footer class="post-footer">
+      <div class="post-tags">
+          <a href="/tags/database/">database</a>
+          </div>
+      <nav class="post-nav">
+        <a class="prev" href="/asciiunicode%E5%92%8Cutf8/">
+            <i class="iconfont icon-left"></i>
+            <span class="prev-text nav-default">ASCII、Unicode和UTF8</span>
+            <span class="prev-text nav-mobile">Prev</span>
+          </a>
+        <a class="next" href="/gmt-%E4%B8%8E-utc-%E6%97%B6%E9%97%B4%E6%A0%BC%E5%BC%8F/">
+            <span class="next-text nav-default">GMT 与 UTC 时间格式</span>
+            <span class="next-text nav-mobile">Next</span>
+            <i class="iconfont icon-right"></i>
+          </a>
+      </nav>
+    </footer>
+  </article>
+        </div>
+        
+
+  
+
+  
+    <script src="https://utteranc.es/client.js"
+            repo="devxiaokang/blog"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+    <noscript>Please enable JavaScript to view the <a href="https://github.com/utterance">comments powered by utterances.</a></noscript>
+
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="social-links">
+      <a href="https://devxiaokang@gmail.com" class="iconfont icon-email" title="email"></a>
+      <a href="http://github.com/devxiaokang" class="iconfont icon-github" title="github"></a>
+  <a href="http://x-xkang.com/index.xml" type="application/rss+xml" class="iconfont icon-rss" title="rss"></a>
+</div>
+
+<div class="copyright">
+  <span class="power-by">
+    Powered by <a class="hexo-link" href="https://gohugo.io">Hugo</a>
+  </span>
+  <span class="division">|</span>
+  <span class="theme-info">
+    Theme - 
+    <a class="theme-link" href="https://github.com/olOwOlo/hugo-theme-even">Even</a>
+  </span>
+
+  <div class="busuanzi-footer">
+    <span id="busuanzi_container_site_pv"> site pv: <span id="busuanzi_value_site_pv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+      <span class="division">|</span>
+    <span id="busuanzi_container_site_uv"> site uv: <span id="busuanzi_value_site_uv"><img src="/img/spinner.svg" alt="spinner.svg"/></span> </span>
+  </div>
+
+  <span class="copyright-year">
+    &copy; 
+    2019 - 
+    2022<span class="heart"><i class="iconfont icon-heart"></i></span><span>皖ICP备20014602号</span>
+  </span>
+</div>
+
+    </footer>
+
+    <div class="back-to-top" id="back-to-top">
+      <i class="iconfont icon-up"></i>
+    </div>
+  </div>
+  
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.2.1/dist/jquery.min.js" integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/slideout@1.0.1/dist/slideout.min.js" integrity="sha256-t+zJ/g8/KXIJMjSVQdnibt4dlaDxc9zXr/9oNPeWqdg=" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@fancyapps/fancybox@3.1.20/dist/jquery.fancybox.min.js" integrity="sha256-XVLffZaxoWfGUEbdzuLi7pwaUJv1cecsQJQqGLe7axY=" crossorigin="anonymous"></script>
+
+
+
+<script type="text/javascript" src="/js/main.min.c99b103c33d1539acf3025e1913697534542c4a5aa5af0ccc20475ed2863603b.js"></script>
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>http on 基层码农~</title>
+    <link>http://x-xkang.com/categories/http/</link>
+    <description>Recent content in http on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Fri, 17 Jun 2022 10:09:23 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/http/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Http 协议版本进化</title>
+      <link>http://x-xkang.com/http-%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC%E8%BF%9B%E5%8C%96/</link>
+      <pubDate>Fri, 17 Jun 2022 10:09:23 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/http-%E5%8D%8F%E8%AE%AE%E7%89%88%E6%9C%AC%E8%BF%9B%E5%8C%96/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>DNS 域名解析流程</title>
+      <link>http://x-xkang.com/dns-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</link>
+      <pubDate>Thu, 16 Jun 2022 17:00:53 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/dns-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Http 状态码</title>
+      <link>http://x-xkang.com/http-%E7%8A%B6%E6%80%81%E7%A0%81/</link>
+      <pubDate>Tue, 14 Jun 2022 21:33:58 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/http-%E7%8A%B6%E6%80%81%E7%A0%81/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>mysql on 基层码农~</title>
+    <link>http://x-xkang.com/tags/mysql/</link>
+    <description>Recent content in mysql on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Wed, 24 Mar 2021 11:18:58 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/mysql/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql 事务浅析</title>
+      <link>http://x-xkang.com/mysql-%E4%BA%8B%E5%8A%A1%E6%B5%85%E6%9E%90/</link>
+      <pubDate>Wed, 24 Mar 2021 11:18:58 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/mysql-%E4%BA%8B%E5%8A%A1%E6%B5%85%E6%9E%90/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Mysql 连接池问题</title>
+      <link>http://x-xkang.com/mysql-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E9%97%AE%E9%A2%98/</link>
+      <pubDate>Fri, 12 Mar 2021 17:42:20 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/mysql-%E8%BF%9E%E6%8E%A5%E6%B1%A0%E9%97%AE%E9%A2%98/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

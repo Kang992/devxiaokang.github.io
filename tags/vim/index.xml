@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>vim on 基层码农~</title>
+    <link>http://x-xkang.com/tags/vim/</link>
+    <description>Recent content in vim on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Mon, 06 Jan 2020 09:42:51 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/vim/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Vim常用命令</title>
+      <link>http://x-xkang.com/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</link>
+      <pubDate>Mon, 06 Jan 2020 09:42:51 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

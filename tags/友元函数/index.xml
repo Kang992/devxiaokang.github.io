@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>友元函数 on 基层码农~</title>
+    <link>http://x-xkang.com/tags/%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/</link>
+    <description>Recent content in 友元函数 on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Thu, 16 Apr 2020 16:29:28 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/%E5%8F%8B%E5%85%83%E5%87%BD%E6%95%B0/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;学习--友元函数</title>
+      <link>http://x-xkang.com/cpp-friend/</link>
+      <pubDate>Thu, 16 Apr 2020 16:29:28 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/cpp-friend/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

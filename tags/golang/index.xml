@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>golang on 基层码农~</title>
+    <link>http://x-xkang.com/tags/golang/</link>
+    <description>Recent content in golang on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Thu, 16 Dec 2021 09:35:02 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/golang/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Golang 源码里的 //go: 指令，都代表什么意思？</title>
+      <link>http://x-xkang.com/golang-%E6%BA%90%E7%A0%81%E9%87%8C%E7%9A%84-/go-%E6%8C%87%E4%BB%A4%E9%83%BD%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/</link>
+      <pubDate>Thu, 16 Dec 2021 09:35:02 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/golang-%E6%BA%90%E7%A0%81%E9%87%8C%E7%9A%84-/go-%E6%8C%87%E4%BB%A4%E9%83%BD%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Golang 常用数据类型转换</title>
+      <link>http://x-xkang.com/golang-%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</link>
+      <pubDate>Thu, 24 Jun 2021 13:58:33 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/golang-%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

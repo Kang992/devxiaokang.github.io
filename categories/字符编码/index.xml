@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>字符编码 on 基层码农~</title>
+    <link>http://x-xkang.com/categories/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/</link>
+    <description>Recent content in 字符编码 on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Thu, 02 Dec 2021 09:31:17 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/%E5%AD%97%E7%AC%A6%E7%BC%96%E7%A0%81/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>ASCII、Unicode和UTF8</title>
+      <link>http://x-xkang.com/asciiunicode%E5%92%8Cutf8/</link>
+      <pubDate>Thu, 02 Dec 2021 09:31:17 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/asciiunicode%E5%92%8Cutf8/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

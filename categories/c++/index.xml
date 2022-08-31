@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>C&#43;&#43; on 基层码农~</title>
+    <link>http://x-xkang.com/categories/c&#43;&#43;/</link>
+    <description>Recent content in C&#43;&#43; on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Thu, 16 Apr 2020 16:29:28 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/c++/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>C&#43;&#43;学习--友元函数</title>
+      <link>http://x-xkang.com/cpp-friend/</link>
+      <pubDate>Thu, 16 Apr 2020 16:29:28 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/cpp-friend/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>C&#43;&#43; 面向对象学习笔记-1</title>
+      <link>http://x-xkang.com/cpp-oo/</link>
+      <pubDate>Tue, 11 Feb 2020 16:52:03 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/cpp-oo/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

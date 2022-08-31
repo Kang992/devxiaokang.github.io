@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>计算机网络 on 基层码农~</title>
+    <link>http://x-xkang.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+    <description>Recent content in 计算机网络 on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Thu, 04 Feb 2021 13:35:56 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>计算机网络学习笔记（三）</title>
+      <link>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/</link>
+      <pubDate>Thu, 04 Feb 2021 13:35:56 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%89/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机网络学习笔记（二）</title>
+      <link>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</link>
+      <pubDate>Thu, 04 Feb 2021 09:55:34 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%BA%8C/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机网络学习笔记（一）</title>
+      <link>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</link>
+      <pubDate>Fri, 22 Jan 2021 16:13:30 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%E4%B8%80/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>计算机网络--物理层</title>
+      <link>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%89%A9%E7%90%86%E5%B1%82/</link>
+      <pubDate>Sat, 25 Jan 2020 17:21:56 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C-%E7%89%A9%E7%90%86%E5%B1%82/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

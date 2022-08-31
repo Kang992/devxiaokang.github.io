@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>正则 on 基层码农~</title>
+    <link>http://x-xkang.com/categories/%E6%AD%A3%E5%88%99/</link>
+    <description>Recent content in 正则 on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Tue, 11 Jan 2022 09:29:51 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/%E6%AD%A3%E5%88%99/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>常用正则表达式</title>
+      <link>http://x-xkang.com/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</link>
+      <pubDate>Tue, 11 Jan 2022 09:29:51 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
