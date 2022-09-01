@@ -1,21 +1,87 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
-  <channel>
-    <title>dns on 基层码农~</title>
-    <link>http://x-xkang.com/tags/dns/</link>
-    <description>Recent content in dns on 基层码农~</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en</language>
-    <copyright>皖ICP备20014602号</copyright>
-    <lastBuildDate>Thu, 16 Jun 2022 17:00:53 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/dns/index.xml" rel="self" type="application/rss+xml" />
-    <item>
-      <title>DNS 域名解析流程</title>
-      <link>http://x-xkang.com/dns-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</link>
-      <pubDate>Thu, 16 Jun 2022 17:00:53 +0800</pubDate>
-      
-      <guid>http://x-xkang.com/dns-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</guid>
-      <description></description>
-    </item>
-    
-  </channel>
+    <channel>
+        <title>dns on Hello, It&#39;s me</title>
+        <link>https://x-xkang.com/tags/dns/</link>
+        <description>Recent content in dns on Hello, It&#39;s me</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 16 Jun 2022 17:00:53 +0800</lastBuildDate><atom:link href="https://x-xkang.com/tags/dns/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>DNS 域名解析流程</title>
+        <link>https://x-xkang.com/p/dns-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</link>
+        <pubDate>Thu, 16 Jun 2022 17:00:53 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/dns-%E5%9F%9F%E5%90%8D%E8%A7%A3%E6%9E%90%E6%B5%81%E7%A8%8B/</guid>
+        <description>&lt;p&gt;了解域名结构&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;以&lt;code&gt;mail.qq.com&lt;/code&gt;域名为例，&lt;code&gt;com&lt;/code&gt;为顶级域名，&lt;code&gt;qq.com&lt;/code&gt; 为二级域名， &lt;code&gt;mail.qq.com&lt;/code&gt;为三级域名&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;顶级域名服务器&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;顶级域名为最后一个&lt;code&gt;.&lt;/code&gt;右侧部分的内容，如&lt;code&gt;mail.qq.com&lt;/code&gt;的&lt;code&gt;com&lt;/code&gt;就是顶级域名，顶级域名对应的服务器称之为顶级域名服务器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;二级域名服务器&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;域名 &lt;code&gt;mail.qq.com&lt;/code&gt;中的倒数第二个&lt;code&gt;.&lt;/code&gt;右侧部分&lt;code&gt;qq.com&lt;/code&gt;成为二级域名&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根域名服务器&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;在2016年之前全球一共拥有13台根服务器，1台主根服务器在美国，其他12台为辅根服务器，其中美国9台，英国1台，瑞典1台，日本1台，这13台根服务器主要管理互联网的主目录，主要作用IPV4。
+2016年，中国下一代互联网工程中心领衔发起雪人计划，旨在为下一代互联网(IPV6)提供更多的根服务器解决方案，该计划于2017年完成，其中包含3台主根服务器，中国1台，美国1台，日本1台，22台辅根服务器，中国3台，美国2台，印度和法国分别有3台，德国2台，俄罗斯、意大利、西班牙、奥地利、智利、南非、澳大利亚、瑞士、荷兰各1台，共22台，从此形成了13台原有根加25台IPV6根服务器的新格局&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;本地域名服务器&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;本地域名服务器的范围非常广，没有一个详细的定位，可能是某个运营商部署在该城市的一台服务器，也可能是某个公司的一台服务器，甚至可能是某个学校的服务器&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;存放地址&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;浏览器缓存&lt;/li&gt;
+&lt;li&gt;系统缓存&lt;/li&gt;
+&lt;li&gt;本地域名服务器&lt;/li&gt;
+&lt;li&gt;根域名服务器&lt;/li&gt;
+&lt;li&gt;顶级域名服务器&lt;/li&gt;
+&lt;li&gt;二级域名服务器&lt;/li&gt;
+&lt;li&gt;&amp;hellip; &amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;查询顺序&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;检查浏览器缓存中是否存在改域名与IP地址的映射关系，如果有则解析结束，没有则继续&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;2&#34;&gt;
+&lt;li&gt;到系统本地查找映射关系，一般存在 &lt;code&gt;hosts&lt;/code&gt; 文件中，如果有则解析结束，否则继续&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;3&#34;&gt;
+&lt;li&gt;到本地域名服务器去查询，有则结束，否则继续&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;4&#34;&gt;
+&lt;li&gt;本地域名服务器去查询 根域名服务器，该过程不会返回映射关系，只会告诉你去下级服务器（顶级域名服务器）查询&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;5&#34;&gt;
+&lt;li&gt;本地域名服务器查询顶级域名服务器（即 &lt;code&gt;com&lt;/code&gt; 服务器），同样不会返回映射关系，只会引导你去二级域名服务器查询&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;6&#34;&gt;
+&lt;li&gt;本地域名服务器查询二级域名服务器（即 &lt;code&gt;qq.com&lt;/code&gt; 服务器），引导去三级域名服务器&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol start=&#34;7&#34;&gt;
+&lt;li&gt;本地域名服务器查询三级域名服务器（即 &lt;code&gt;mail.qq.com&lt;/code&gt;）， 此时已经是最后一级，如果有则返回映射关系，并且本地服务器加入自身的映射表中，方便下次查询，同时返回给用户的计算机，没有找到则网页报错&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+        </item>
+        
+    </channel>
 </rss>

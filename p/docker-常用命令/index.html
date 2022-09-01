@@ -1,0 +1,1109 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Docker'><title>Docker 常用命令</title>
+
+<link rel='canonical' href='https://x-xkang.com/p/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
+
+<link rel="stylesheet" href="/scss/style.min.5a8e892f6fa14515e9065eee1f5d2e05302606ec7f11750b2fb95198f9cdcbfd.css"><meta property='og:title' content='Docker 常用命令'>
+<meta property='og:description' content='Docker'>
+<meta property='og:url' content='https://x-xkang.com/p/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/'>
+<meta property='og:site_name' content='Hello, It&#39;s me'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='docker' /><meta property='article:tag' content='shell' /><meta property='article:published_time' content='2019-09-18T02:01:58&#43;05:30'/><meta property='article:modified_time' content='2019-10-09T10:13:38&#43;08:00'/>
+<meta name="twitter:title" content="Docker 常用命令">
+<meta name="twitter:description" content="Docker">
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_huda2458f72ce188392d75c5d51cd8e24e_373_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Hello, It&#39;s me</a></h1>
+            <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/devxiaokang'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+
+
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+                <li id="i18n-switch">  
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-language" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M4 5h7" />
+  <path d="M9 3v2c0 4.418 -2.239 8 -5 8" />
+  <path d="M5 9c-.003 2.144 2.952 3.908 6.7 4" />
+  <path d="M12 20l4 -9l4 9" />
+  <path d="M19.1 18h-6.2" />
+</svg>
+
+
+
+                    <select name="language" onchange="window.location.href = this.selectedOptions[0].value">
+                        
+                            <option value="https://x-xkang.com/" selected>English</option>
+                        
+                            <option value="https://x-xkang.com/zh-cn/" >中文</option>
+                        
+                    </select>
+                </li>
+            
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/dcoker/" >
+                dcoker
+            </a>
+        
+            <a href="/categories/shell/" >
+                shell
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">Docker 常用命令</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            Docker
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Sep 18, 2019</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    2 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <hr>
+<h2 id="1构建镜像">1、构建镜像</h2>
+<blockquote>
+<p>在项目根目录下新建 <code>Dockerfile</code> 文件并编辑保存</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-Dockerfile" data-lang="Dockerfile"><span class="err">
+</span><span class="err"></span><span class="k">FROM</span><span class="s"> golang:latest            # 依赖的镜像:镜像版本</span><span class="err">
+</span><span class="err"></span><span class="k">ADD</span> . /var/www/go-aimaster    <span class="c1"># 将当前工作目录copy到镜像的/var/www/go-aimaster 目录下</span><span class="err">
+</span><span class="err"></span><span class="k">WORKDIR</span><span class="s"> /var/www/go-aimaster  # 设置镜像内的工作目录</span><span class="err">
+</span><span class="err"></span><span class="k">RUN</span> <span class="nv">GOPROXY</span><span class="o">=</span><span class="s2">&#34;https://goproxy.cn,direct&#34;</span> go build -o main /var/www/go-aimaster/main.go   <span class="c1"># 运行命令(当前为golang 项目demo)</span><span class="err">
+</span><span class="err"></span><span class="k">CMD</span> <span class="p">[</span><span class="s2">&#34;/var/www/go-aimaster/main&#34;</span><span class="p">]</span> <span class="c1"># 可执行文件目录，上一步build生成的main可执行文件</span><span class="err">
+</span><span class="err"></span><span class="k">EXPOSE</span><span class="s"> 8080                   # 暴露端口，最终暴露的端口不一定是当前的8080 端口</span><span class="err">
+</span><span class="err"></span><span class="k">ENTRYPOINT</span> <span class="p">[</span><span class="s2">&#34;./main&#34;</span><span class="p">]</span>         <span class="c1"># 入口文件</span><span class="err">
+</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>执行命令：<code>docker image build -t 镜像名称[:版本号] .</code>  (注意最后有个点 .)</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker image  build -t go-aimamster:v0.01 .<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>上面代码中，<code>-t</code> 参数用来指定 <code>image</code> 文件的名字，后面还可以用冒号指定标签。如果不指定，默认的标签就是<code>latest</code>。最后的那个点表示 <code>Dockerfile</code> 文件所在的路径，上例是当前路径，所以是一个点。
+执行结果如下：</p>
+</blockquote>
+<p><img src="/images/docker-learning/docker-build-1.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-build-1"
+	
+	
+>
+<img src="/images/docker-learning/docker-build-2.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-build-2"
+	
+	
+></p>
+<blockquote>
+<p>出现上图的<code>Successfully</code>成功标识表示已构建成功，执行 <code>docker images</code> 查看，列表中出现刚刚构建的<code>go-aimaster</code>镜像</p>
+</blockquote>
+<p><img src="/images/docker-learning/docker-build-3.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-build-3"
+	
+	
+></p>
+<hr>
+<h2 id="2下载远端镜像">2、下载远端镜像</h2>
+<blockquote>
+<p>命令：<code>docker pull 仓库名称</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker pull nginx<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-pull.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-pull"
+	
+	
+></p>
+<hr>
+<h2 id="3推送本地镜像至远端仓库">3、推送本地镜像至远端仓库</h2>
+<ul>
+<li>命令：</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-shell" data-lang="shell">docker image tag go-docker:v1.0 devxiaokang/go-docker:v1.0
+
+docker push devxiaokang/go-docker:v1.0
+</code></pre></td></tr></table>
+</div>
+</div><h2 id="4查看镜像列表">4、查看镜像列表</h2>
+<blockquote>
+<p>命令：<code>docker image ls</code> | <code>docker images</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker images<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-images.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-images"
+	
+	
+></p>
+<hr>
+<h2 id="5删除本地镜像">5、删除本地镜像</h2>
+<blockquote>
+<p>命令：docker rmi 镜像标识|镜像名称:版本号</p>
+</blockquote>
+<blockquote>
+<p>【注意】若有容器正在依赖该镜像，则无法删除</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker rmi go-aimamster:v0.01<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-rmi.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-rmi"
+	
+	
+></p>
+<hr>
+<h2 id="6生成容器">6、生成容器</h2>
+<blockquote>
+<p>命令： <code>docker [container] run 镜像标识 /bin/bash</code>（简单操作）| <code>docker [container] run -d -p 宿主机端口:容器端口 -it --name 容器名称  镜像标识  /bin/bash</code> （常用操作）</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker run nginx<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p>或者：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker run  -d -p 8080:80 -it --name nginx nginx:latest /bin/bash<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>以上代码中<code>-d</code> 代表后台运行， <code>-p</code> 代表宿主机端口与容器端口的映射关系，<code>-it</code> 代表容器的 <code>shell</code> 映射到当前的 <code>shell</code>，然后再本机窗口输入命令，就会传入容器中，<code>--name nginx</code> 代表定义容器名称<code>nginx</code> 为自定义名称，。</p>
+</blockquote>
+<p>执行结果如下：
+<img src="/images/docker-learning/docker-run.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-run"
+	
+	
+></p>
+<hr>
+<h2 id="7查看容器列表">7、查看容器列表</h2>
+<blockquote>
+<p>命令：<code>docker ps -a[q]</code>，
+<code>-a</code> 表示显示所有容器（包括已停止的），<code>-q</code> 列表值显示容器的唯一标识</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker ps -a<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-ps-a.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-ps-a"
+	
+	
+></p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker ps -aq<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-ps-aq.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-ps-aq"
+	
+	
+></p>
+<hr>
+<h2 id="8进入容器">8、进入容器</h2>
+<blockquote>
+<p>命令：<code>docker exec -it 容器ID|容器名称 /bin/bash</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker <span class="nb">exec</span> -it nginx /bin/bash<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-exec.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-exec"
+	
+	
+></p>
+<hr>
+<h2 id="9启动容器">9、启动容器</h2>
+<blockquote>
+<p>命令：<code>docker start 容器ID|容器名称</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker start nginx<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="10重启容器">10、重启容器</h2>
+<blockquote>
+<p>命令：<code>docker restart 容器ID|容器名称</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker restart nginx<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="11停止容器">11、停止容器</h2>
+<blockquote>
+<p>命令：<code>docker stop 容器ID|容器名称</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker stop nginx<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>停止全部容器</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker stop <span class="k">$(</span>docker ps -qa<span class="k">)</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-stop-all.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-stop-all"
+	
+	
+></p>
+<hr>
+<h2 id="12删除容器">12、删除容器</h2>
+<blockquote>
+<p>命令：<code>docker rm 容器ID|容器名称</code></p>
+</blockquote>
+<blockquote>
+<p>删除指定容器</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker rm nginx<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-rm.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-rm"
+	
+	
+></p>
+<blockquote>
+<p>删除全部容器</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker rm <span class="k">$(</span>docker ps -qa<span class="k">)</span><span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="13数据卷">13、数据卷</h2>
+<blockquote>
+<p>数据卷：将宿主机的一个目录映射到容器的一个目录中，可以在宿主机中操作目录中的内容，那么容器内部映射的文件，也会跟着一起改变,创建数据卷之后，默认会存在一个目录下 <code>/var/lib/docker/volumes/数据卷名称/_data</code></p>
+</blockquote>
+<blockquote>
+<p>创建数据卷</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker volume create volume_name<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>查看数据卷</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker volume inspect volume_name<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-volume-inspect.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-volume-inspect"
+	
+	
+></p>
+<blockquote>
+<p>查看全部数据卷</p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker volume ls<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><p><img src="/images/docker-learning/docker-volume-ls.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="docker-volume-ls"
+	
+	
+></p>
+<blockquote>
+<p>删除数据卷：<code>docker volume rm 数据卷名称</code></p>
+</blockquote>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-docker" data-lang="docker">docker volume rm volume_name<span class="err">
+</span></code></pre></td></tr></table>
+</div>
+</div><hr>
+<h2 id="14管理多容器">14、管理多容器</h2>
+<blockquote>
+<p>.yml文件以key: value 方式来指定配置信息，多个配置信息以换行+锁紧的方式来区分，在docker-compose文件中，不要使用制表符</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># yml
+version: ‘3.1’
+service:
+   mysql:
+       restart: always        # 代表只要docker启动，这个容器就会跟着启动
+       image: daoclound.io/lib/mysql:5.7.4    # 镜像路径
+       container_name: mysql      # 指定容器名称
+       ports:
+   - 3306:3306
+       environment:
+         MYSQL_ROOT_PASSWORD: 123456
+         TZ: Asia/Shanghai         # 时区
+       volumes:        # 数据卷
+           - /opt/docker_mysql/data:/var/lib/mysql   
+   tomcat:
+     restart: always
+     Image: daocloud.io/library/tomcat:8.5.15-jre8 # 镜像
+container_name: tomcat
+     ports:
+       - 8080:8080
+     environment:
+       TZ: Asia/Shanghai
+     volumes:
+       - /opt/docker_mysql_tomcat/tomcat_webapps:/usr/local/tomcat/webapps
+       - /opt/docker_mysql_tomcat/tomcat_logs:/usr/local/tomcat/logs   
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<blockquote>
+<p>Docker-Compose 配置Dockerfile使用
+使用docker-compose.yml文件以及Dockerfile文件在生成自定义镜像的同时启动当前镜像，并且由docker-compose去管理容器</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-fallback" data-lang="fallback"># yml
+
+version: ‘3.1’
+services:
+ mysql:
+  restart: always
+  build:
+    context: ../   # 指定dockerfile文件所在路径
+    dockerfile: Dockerfile  #指定dockerfile文件名称
+    container_name: mysql
+    ports:
+      - 3306:3306
+    environment:
+      TZ: Asia/Shanghai
+</code></pre></td></tr></table>
+</div>
+</div></blockquote>
+<p>可以直接启动基于 docker-compose.yml以及Dockerfile文件构建的自定义镜像
+docker-compose up -d
+如果自定义镜像不存在，会帮助我们构建出自定义镜像，如果自定义镜像已存在，会直接运行这个自定义镜像，重新构建的话需执行 docker-compose build , 运行前重新构建 docker-compose up -d —build</p>
+<blockquote>
+<p>Docker-compose 命令：</p>
+<ul>
+<li>后台启动： <code>docker-compose up -d</code></li>
+<li>关闭并删除容器： <code>docker-compose down</code></li>
+<li>开启|关闭|重启已经存在的有docker-compose维护的容器： <code>docker-compose start</code> | <code>stop</code> | <code>restart</code></li>
+<li>查看docker-compose管理的容器： <code>docker-compose ps</code></li>
+<li>查看日志： <code>docker-compose logs -f</code></li>
+</ul>
+</blockquote>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/docker/">docker</a>
+        
+            <a href="/tags/shell/">shell</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    <section class="article-lastmod">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+        <span>
+            Last updated on Oct 09, 2019 10:13 CST
+        </span>
+    </section></footer>
+
+
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/vim%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Vim常用命令</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="devxiaokang/blog"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        
+        2019 -
+        
+        2022 Hello, It&#39;s me
+    </section>
+
+    <section class="powerby">
+        
+        皖ICP备20014602号 <br />
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+                data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#1构建镜像">1、构建镜像</a></li>
+    <li><a href="#2下载远端镜像">2、下载远端镜像</a></li>
+    <li><a href="#3推送本地镜像至远端仓库">3、推送本地镜像至远端仓库</a></li>
+    <li><a href="#4查看镜像列表">4、查看镜像列表</a></li>
+    <li><a href="#5删除本地镜像">5、删除本地镜像</a></li>
+    <li><a href="#6生成容器">6、生成容器</a></li>
+    <li><a href="#7查看容器列表">7、查看容器列表</a></li>
+    <li><a href="#8进入容器">8、进入容器</a></li>
+    <li><a href="#9启动容器">9、启动容器</a></li>
+    <li><a href="#10重启容器">10、重启容器</a></li>
+    <li><a href="#11停止容器">11、停止容器</a></li>
+    <li><a href="#12删除容器">12、删除容器</a></li>
+    <li><a href="#13数据卷">13、数据卷</a></li>
+    <li><a href="#14管理多容器">14、管理多容器</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+
+
+
+</script>
+
+    </body>
+</html>
