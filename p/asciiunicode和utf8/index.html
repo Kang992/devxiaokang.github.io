@@ -12,6 +12,8 @@
 <meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='ascii' /><meta property='article:tag' content='unicode' /><meta property='article:tag' content='utf8' /><meta property='article:published_time' content='2021-12-02T09:31:17&#43;08:00'/><meta property='article:modified_time' content='2021-12-02T09:31:17&#43;08:00'/>
 <meta name="twitter:title" content="ASCII、Unicode和UTF8">
 <meta name="twitter:description" content="ascii, unicode, utf8">
+    <link rel="shortcut icon" href="favicon.ico" />
+
     </head>
     <body class="
     article-page
@@ -55,7 +57,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -122,15 +124,24 @@
                 
                 
                 
-                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
   <path stroke="none" d="M0 0h24v24H0z"/>
   <rect x="3" y="4" width="18" height="4" rx="2" />
   <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
   <line x1="10" y1="12" x2="14" y2="12" />
 </svg>
 
+ -->
 
-
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#bfbfc0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <line x1="9" y1="6" x2="20" y2="6" />
+  <line x1="9" y1="12" x2="20" y2="12" />
+  <line x1="9" y1="18" x2="20" y2="18" />
+  <line x1="5" y1="6" x2="5" y2="6.01" />
+  <line x1="5" y1="12" x2="5" y2="12.01" />
+  <line x1="5" y1="18" x2="5" y2="18.01" />
+</svg>
                 
                 <span>Archives</span>
             </a>
@@ -395,7 +406,7 @@
 <p>代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -417,33 +428,31 @@
 </span><span class="lnt">20
 </span><span class="lnt">21
 </span><span class="lnt">22
-</span><span class="lnt">23
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kd">func</span> <span class="nf">twoSum</span><span class="p">(</span><span class="nx">arr</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">target</span> <span class="kt">int</span><span class="p">)[]</span><span class="kt">int</span><span class="p">{</span>
-
-  <span class="kd">var</span> <span class="nx">m</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
-
-  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
-
-    <span class="nx">another</span> <span class="o">:=</span> <span class="nx">target</span> <span class="o">-</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
-
-    <span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">[</span><span class="nx">another</span><span class="p">];</span> <span class="nx">ok</span> <span class="o">==</span> <span class="kc">true</span> <span class="p">{</span>
-
-      <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="nx">m</span><span class="p">[</span><span class="nx">another</span><span class="p">],</span> <span class="nx">i</span><span class="p">}</span>
-
-    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
-
-      <span class="nx">m</span><span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="p">=</span> <span class="nx">i</span>
-
-    <span class="p">}</span>
-
-  <span class="p">}</span>
-  
-  <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
-<span class="p">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-golang" data-lang="golang"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">twoSum</span><span class="p">(</span><span class="nx">arr</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">target</span> <span class="kt">int</span><span class="p">)[]</span><span class="kt">int</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="nx">m</span> <span class="p">=</span> <span class="kd">map</span><span class="p">[</span><span class="kt">int</span><span class="p">]</span><span class="kt">int</span><span class="p">{}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">arr</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">another</span> <span class="o">:=</span> <span class="nx">target</span> <span class="o">-</span> <span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="nx">_</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="nx">m</span><span class="p">[</span><span class="nx">another</span><span class="p">];</span> <span class="nx">ok</span> <span class="o">==</span> <span class="kc">true</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="nx">m</span><span class="p">[</span><span class="nx">another</span><span class="p">],</span> <span class="nx">i</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span><span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="nx">m</span><span class="p">[</span><span class="nx">arr</span><span class="p">[</span><span class="nx">i</span><span class="p">]]</span> <span class="p">=</span> <span class="nx">i</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">  
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="o">-</span><span class="mi">1</span><span class="p">,</span> <span class="o">-</span><span class="mi">1</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div>
 </section>
@@ -477,6 +486,29 @@
     </footer>
 
 
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
     
 </article>
 
