@@ -57,7 +57,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -271,7 +271,7 @@
 <p>以下是 <code>get</code> 命令的部分源码</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -288,31 +288,33 @@
 </span><span class="lnt">15
 </span><span class="lnt">16
 </span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// src/t_string.c line 78
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">setGenericCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">expire</span><span class="p">,</span> <span class="kt">int</span> <span class="n">unit</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">ok_reply</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">abort_reply</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">long</span> <span class="kt">long</span> <span class="n">milliseconds</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* initialized to avoid any harmness warning */</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">found</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="kt">int</span> <span class="n">setkey_flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">expire</span> <span class="o">&amp;&amp;</span> <span class="n">getExpireMillisecondsOrReply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">expire</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">milliseconds</span><span class="p">)</span> <span class="o">!=</span> <span class="n">C_OK</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_GET</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">getGenericCommand</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="n">C_ERR</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="n">found</span> <span class="o">=</span> <span class="p">(</span><span class="n">lookupKeyWrite</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// 重点，开始查找当前key
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// ... 省略部分源码
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="c1">// src/t_string.c line 78
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">setGenericCommand</span><span class="p">(</span><span class="n">client</span> <span class="o">*</span><span class="n">c</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">val</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">expire</span><span class="p">,</span> <span class="kt">int</span> <span class="n">unit</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">ok_reply</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">abort_reply</span><span class="p">)</span> <span class="p">{</span>
+    <span class="kt">long</span> <span class="kt">long</span> <span class="n">milliseconds</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="cm">/* initialized to avoid any harmness warning */</span>
+    <span class="kt">int</span> <span class="n">found</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+    <span class="kt">int</span> <span class="n">setkey_flags</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">expire</span> <span class="o">&amp;&amp;</span> <span class="n">getExpireMillisecondsOrReply</span><span class="p">(</span><span class="n">c</span><span class="p">,</span> <span class="n">expire</span><span class="p">,</span> <span class="n">flags</span><span class="p">,</span> <span class="n">unit</span><span class="p">,</span> <span class="o">&amp;</span><span class="n">milliseconds</span><span class="p">)</span> <span class="o">!=</span> <span class="n">C_OK</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">flags</span> <span class="o">&amp;</span> <span class="n">OBJ_SET_GET</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">getGenericCommand</span><span class="p">(</span><span class="n">c</span><span class="p">)</span> <span class="o">==</span> <span class="n">C_ERR</span><span class="p">)</span> <span class="k">return</span><span class="p">;</span>
+    <span class="p">}</span>
+
+    <span class="n">found</span> <span class="o">=</span> <span class="p">(</span><span class="n">lookupKeyWrite</span><span class="p">(</span><span class="n">c</span><span class="o">-&gt;</span><span class="n">db</span><span class="p">,</span><span class="n">key</span><span class="p">)</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">);</span>  <span class="c1">// 重点，开始查找当前key
+</span><span class="c1"></span>    <span class="c1">// ... 省略部分源码
+</span><span class="c1"></span><span class="p">}</span>
+
+</code></pre></td></tr></table>
 </div>
 </div><p>顺着 <code>lookupKeyWrite</code> 找下去</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -366,59 +368,59 @@
 </span><span class="lnt">52
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// src/db.c line 158
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">robj</span> <span class="o">*</span><span class="nf">lookupKeyWrite</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">lookupKeyWriteWithFlags</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">LOOKUP_NONE</span><span class="p">);</span> <span class="c1">// 继续跳转
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// src/db.c line 154
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">robj</span> <span class="o">*</span><span class="nf">lookupKeyWriteWithFlags</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">lookupKey</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">flags</span> <span class="o">|</span> <span class="n">LOOKUP_WRITE</span><span class="p">);</span> <span class="c1">// 继续跳转
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// src/db.c line 81
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">robj</span> <span class="o">*</span><span class="nf">lookupKey</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="n">dictEntry</span> <span class="o">*</span><span class="n">de</span> <span class="o">=</span> <span class="n">dictFind</span><span class="p">(</span><span class="n">db</span><span class="o">-&gt;</span><span class="n">dict</span><span class="p">,</span><span class="n">key</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">    <span class="n">robj</span> <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="n">val</span> <span class="o">=</span> <span class="n">dictGetVal</span><span class="p">(</span><span class="n">de</span><span class="p">);</span>
-</span></span><span class="line"><span class="cl">        <span class="cm">/* Forcing deletion of expired keys on a replica makes the replica
-</span></span></span><span class="line"><span class="cl"><span class="cm">         * inconsistent with the master. We forbid it on readonly replicas, but
-</span></span></span><span class="line"><span class="cl"><span class="cm">         * we have to allow it on writable replicas to make write commands
-</span></span></span><span class="line"><span class="cl"><span class="cm">         * behave consistently.
-</span></span></span><span class="line"><span class="cl"><span class="cm">         *
-</span></span></span><span class="line"><span class="cl"><span class="cm">         * It&#39;s possible that the WRITE flag is set even during a readonly
-</span></span></span><span class="line"><span class="cl"><span class="cm">         * command, since the command may trigger events that cause modules to
-</span></span></span><span class="line"><span class="cl"><span class="cm">         * perform additional writes. */</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">is_ro_replica</span> <span class="o">=</span> <span class="n">server</span><span class="p">.</span><span class="n">masterhost</span> <span class="o">&amp;&amp;</span> <span class="n">server</span><span class="p">.</span><span class="n">repl_slave_ro</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="kt">int</span> <span class="n">force_delete_expired</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">&amp;</span> <span class="n">LOOKUP_WRITE</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">is_ro_replica</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">        <span class="c1">// 这里开始判断是否过期
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">expireIfNeeded</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">force_delete_expired</span><span class="p">))</span> <span class="p">{</span>  
-</span></span><span class="line"><span class="cl">            <span class="cm">/* The key is no longer valid. */</span>
-</span></span><span class="line"><span class="cl">            <span class="n">val</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"><span class="c1">// src/db.c line 1666
-</span></span></span><span class="line"><span class="cl"><span class="c1">// 判断逻辑
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">expireIfNeeded</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">force_delete_expired</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">keyIsExpired</span><span class="p">(</span><span class="n">db</span><span class="p">,</span><span class="n">key</span><span class="p">))</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">masterhost</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">current_client</span> <span class="o">==</span> <span class="n">server</span><span class="p">.</span><span class="n">master</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">force_delete_expired</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">checkClientPauseTimeoutAndReturnIfPaused</span><span class="p">())</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">    <span class="cm">/* Delete the key */</span>
-</span></span><span class="line"><span class="cl">    <span class="n">deleteExpiredKeyAndPropagate</span><span class="p">(</span><span class="n">db</span><span class="p">,</span><span class="n">key</span><span class="p">);</span> 
-</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
-</span></span><span class="line"><span class="cl"><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="c1">// src/db.c line 158
+</span><span class="c1"></span><span class="n">robj</span> <span class="o">*</span><span class="nf">lookupKeyWrite</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">lookupKeyWriteWithFlags</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">LOOKUP_NONE</span><span class="p">);</span> <span class="c1">// 继续跳转
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// src/db.c line 154
+</span><span class="c1"></span><span class="n">robj</span> <span class="o">*</span><span class="nf">lookupKeyWriteWithFlags</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">return</span> <span class="n">lookupKey</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">flags</span> <span class="o">|</span> <span class="n">LOOKUP_WRITE</span><span class="p">);</span> <span class="c1">// 继续跳转
+</span><span class="c1"></span><span class="p">}</span>
+
+<span class="c1">// src/db.c line 81
+</span><span class="c1"></span><span class="n">robj</span> <span class="o">*</span><span class="nf">lookupKey</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">flags</span><span class="p">)</span> <span class="p">{</span>
+    <span class="n">dictEntry</span> <span class="o">*</span><span class="n">de</span> <span class="o">=</span> <span class="n">dictFind</span><span class="p">(</span><span class="n">db</span><span class="o">-&gt;</span><span class="n">dict</span><span class="p">,</span><span class="n">key</span><span class="o">-&gt;</span><span class="n">ptr</span><span class="p">);</span>
+    <span class="n">robj</span> <span class="o">*</span><span class="n">val</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">de</span><span class="p">)</span> <span class="p">{</span>
+        <span class="n">val</span> <span class="o">=</span> <span class="n">dictGetVal</span><span class="p">(</span><span class="n">de</span><span class="p">);</span>
+        <span class="cm">/* Forcing deletion of expired keys on a replica makes the replica
+</span><span class="cm">         * inconsistent with the master. We forbid it on readonly replicas, but
+</span><span class="cm">         * we have to allow it on writable replicas to make write commands
+</span><span class="cm">         * behave consistently.
+</span><span class="cm">         *
+</span><span class="cm">         * It&#39;s possible that the WRITE flag is set even during a readonly
+</span><span class="cm">         * command, since the command may trigger events that cause modules to
+</span><span class="cm">         * perform additional writes. */</span>
+        <span class="kt">int</span> <span class="n">is_ro_replica</span> <span class="o">=</span> <span class="n">server</span><span class="p">.</span><span class="n">masterhost</span> <span class="o">&amp;&amp;</span> <span class="n">server</span><span class="p">.</span><span class="n">repl_slave_ro</span><span class="p">;</span>
+        <span class="kt">int</span> <span class="n">force_delete_expired</span> <span class="o">=</span> <span class="n">flags</span> <span class="o">&amp;</span> <span class="n">LOOKUP_WRITE</span> <span class="o">&amp;&amp;</span> <span class="o">!</span><span class="n">is_ro_replica</span><span class="p">;</span>
+
+        <span class="c1">// 这里开始判断是否过期
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">expireIfNeeded</span><span class="p">(</span><span class="n">db</span><span class="p">,</span> <span class="n">key</span><span class="p">,</span> <span class="n">force_delete_expired</span><span class="p">))</span> <span class="p">{</span>  
+            <span class="cm">/* The key is no longer valid. */</span>
+            <span class="n">val</span> <span class="o">=</span> <span class="nb">NULL</span><span class="p">;</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+<span class="p">}</span>
+
+<span class="c1">// src/db.c line 1666
+</span><span class="c1">// 判断逻辑
+</span><span class="c1"></span><span class="kt">int</span> <span class="nf">expireIfNeeded</span><span class="p">(</span><span class="n">redisDb</span> <span class="o">*</span><span class="n">db</span><span class="p">,</span> <span class="n">robj</span> <span class="o">*</span><span class="n">key</span><span class="p">,</span> <span class="kt">int</span> <span class="n">force_delete_expired</span><span class="p">)</span> <span class="p">{</span>
+    <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">keyIsExpired</span><span class="p">(</span><span class="n">db</span><span class="p">,</span><span class="n">key</span><span class="p">))</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">masterhost</span> <span class="o">!=</span> <span class="nb">NULL</span><span class="p">)</span> <span class="p">{</span>
+        <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">current_client</span> <span class="o">==</span> <span class="n">server</span><span class="p">.</span><span class="n">master</span><span class="p">)</span> <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="n">force_delete_expired</span><span class="p">)</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+    <span class="p">}</span>
+
+
+    <span class="k">if</span> <span class="p">(</span><span class="n">checkClientPauseTimeoutAndReturnIfPaused</span><span class="p">())</span> <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+
+    <span class="cm">/* Delete the key */</span>
+    <span class="n">deleteExpiredKeyAndPropagate</span><span class="p">(</span><span class="n">db</span><span class="p">,</span><span class="n">key</span><span class="p">);</span> 
+    <span class="k">return</span> <span class="mi">1</span><span class="p">;</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
 </div>
 </div><p><strong>定期删除</strong></p>
 <blockquote>
@@ -427,7 +429,7 @@ Redis 默认每秒进行10次过期扫描，此配置可以通过 <code>redis.co
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -441,23 +443,25 @@ Redis 默认每秒进行10次过期扫描，此配置可以通过 <code>redis.co
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
+</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-C" data-lang="C"><span class="line"><span class="cl"><span class="c1">// src/server.c line 971
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">databasesCron</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">    <span class="cm">/* Expire keys by random sampling. Not required for slaves
-</span></span></span><span class="line"><span class="cl"><span class="cm">     * as master will synthesize DELs for us. */</span>
-</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">active_expire_enabled</span><span class="p">)</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">      <span class="c1">// 区分主从
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">iAmMaster</span><span class="p">())</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">activeExpireCycle</span><span class="p">(</span><span class="n">ACTIVE_EXPIRE_CYCLE_SLOW</span><span class="p">);</span>  <span class="c1">// Master 节点开始处理过期键
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl">            <span class="n">expireSlaveKeys</span><span class="p">();</span>
-</span></span><span class="line"><span class="cl">        <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="p">}</span>
-</span></span><span class="line"><span class="cl">    <span class="c1">// 省略部分源码...
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-C" data-lang="C"><span class="c1">// src/server.c line 971
+</span><span class="c1"></span><span class="kt">void</span> <span class="nf">databasesCron</span><span class="p">(</span><span class="kt">void</span><span class="p">)</span> <span class="p">{</span>
+    <span class="cm">/* Expire keys by random sampling. Not required for slaves
+</span><span class="cm">     * as master will synthesize DELs for us. */</span>
+    <span class="k">if</span> <span class="p">(</span><span class="n">server</span><span class="p">.</span><span class="n">active_expire_enabled</span><span class="p">)</span> <span class="p">{</span>
+      <span class="c1">// 区分主从
+</span><span class="c1"></span>        <span class="k">if</span> <span class="p">(</span><span class="n">iAmMaster</span><span class="p">())</span> <span class="p">{</span>
+            <span class="n">activeExpireCycle</span><span class="p">(</span><span class="n">ACTIVE_EXPIRE_CYCLE_SLOW</span><span class="p">);</span>  <span class="c1">// Master 节点开始处理过期键
+</span><span class="c1"></span>        <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+            <span class="n">expireSlaveKeys</span><span class="p">();</span>
+        <span class="p">}</span>
+    <span class="p">}</span>
+    <span class="c1">// 省略部分源码...
+</span><span class="c1"></span><span class="p">}</span>
+
+</code></pre></td></tr></table>
 </div>
 </div><p>Redis使用使用的是<code>惰性删除</code>加<code>定期删除</code>的策略</p>
 <h3 id="二淘汰策略">二、淘汰策略</h3>
@@ -465,15 +469,15 @@ Redis 默认每秒进行10次过期扫描，此配置可以通过 <code>redis.co
 <p><strong>查看最大运行内存</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">127.0.0.1:6379&gt; config get maxmemory
-</span></span><span class="line"><span class="cl">1) &#34;maxmemory&#34;
-</span></span><span class="line"><span class="cl">2) &#34;0&#34;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">127.0.0.1:6379&gt; config get maxmemory
+1) &#34;maxmemory&#34;
+2) &#34;0&#34;
+</code></pre></td></tr></table>
 </div>
 </div><p>Redis在32位系统下默认阈值为3G（最大运行内存为4G，为保证系统正常运行，预留1G资源），64位系统下默认阈值为0，表示没有大小限制</p>
 <blockquote>
@@ -481,15 +485,15 @@ Redis 默认每秒进行10次过期扫描，此配置可以通过 <code>redis.co
 <p><strong>查看内存淘汰策略</strong></p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">127.0.0.1:6379&gt; config get maxmemory-policy
-</span></span><span class="line"><span class="cl">1) &#34;maxmemory-policy&#34;
-</span></span><span class="line"><span class="cl">2) &#34;noeviction&#34;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">127.0.0.1:6379&gt; config get maxmemory-policy
+1) &#34;maxmemory-policy&#34;
+2) &#34;noeviction&#34;
+</code></pre></td></tr></table>
 </div>
 </div><p><code>noeviction</code> 表示当运行内存超过最大设置内存时，不淘汰任何数据，但新增数据操作会报错</p>
 <p><strong>内存淘汰策略分类</strong></p>

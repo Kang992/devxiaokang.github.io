@@ -57,7 +57,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -282,7 +282,7 @@
 <p>一个典型的请求看起来就像这样：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -295,23 +295,23 @@
 </span><span class="lnt">11
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /mypage.html HTTP/1.0
-</span></span><span class="line"><span class="cl">User-Agent: NCSA_Mosaic/2.0 (Windows 3.1)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">200 OK
-</span></span><span class="line"><span class="cl">Date: Tue, 15 Nov 1994 08:12:31 GMT
-</span></span><span class="line"><span class="cl">Server: CERN/3.0 libwww/2.17
-</span></span><span class="line"><span class="cl">Content-Type: text/html
-</span></span><span class="line"><span class="cl">&lt;HTML&gt;
-</span></span><span class="line"><span class="cl">一个包含图片的页面
-</span></span><span class="line"><span class="cl">  &lt;IMG SRC=&#34;/myimage.gif&#34;&gt;
-</span></span><span class="line"><span class="cl">&lt;/HTML&gt;
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">GET /mypage.html HTTP/1.0
+User-Agent: NCSA_Mosaic/2.0 (Windows 3.1)
+
+200 OK
+Date: Tue, 15 Nov 1994 08:12:31 GMT
+Server: CERN/3.0 libwww/2.17
+Content-Type: text/html
+&lt;HTML&gt;
+一个包含图片的页面
+  &lt;IMG SRC=&#34;/myimage.gif&#34;&gt;
+&lt;/HTML&gt;
+</code></pre></td></tr></table>
 </div>
 </div><p>接下来是第二个请求：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt">1
+<pre class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -321,15 +321,15 @@
 </span><span class="lnt">8
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /myimage.gif HTTP/1.0
-</span></span><span class="line"><span class="cl">User-Agent: NCSA_Mosaic/2.0 (Windows 3.1)
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">200 OK
-</span></span><span class="line"><span class="cl">Date: Tue, 15 Nov 1994 08:12:32 GMT
-</span></span><span class="line"><span class="cl">Server: CERN/3.0 libwww/2.17
-</span></span><span class="line"><span class="cl">Content-Type: text/gif
-</span></span><span class="line"><span class="cl">(这里是图片内容)
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">GET /myimage.gif HTTP/1.0
+User-Agent: NCSA_Mosaic/2.0 (Windows 3.1)
+
+200 OK
+Date: Tue, 15 Nov 1994 08:12:32 GMT
+Server: CERN/3.0 libwww/2.17
+Content-Type: text/gif
+(这里是图片内容)
+</code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>在 1991-1995年，这些新扩展并没有被引入到标准中以促进下注工作，而仅仅作为一种尝试：服务器和浏览器天界这些新扩展功能，但出现了大量的互操作问题。知道 1996年11月，为了解决这些问题，一份新文档（RFC 1945） 被发表出来，泳衣描述如何操作实践这些新扩展功能，文档 RFC 1945 定义了 HTTP/1.0，但它是狭义的，并不是官方标准</p>
@@ -351,7 +351,7 @@
 <p>一个典型的请求流程， 所有请求都通过一个连接实现，看起来就像这样：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+<pre class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -374,28 +374,28 @@
 </span><span class="lnt">21
 </span></code></pre></td>
 <td class="lntd">
-<pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">GET /en-US/docs/Glossary/Simple_header HTTP/1.1
-</span></span><span class="line"><span class="cl">Host: developer.mozilla.org
-</span></span><span class="line"><span class="cl">User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
-</span></span><span class="line"><span class="cl">Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
-</span></span><span class="line"><span class="cl">Accept-Language: en-US,en;q=0.5
-</span></span><span class="line"><span class="cl">Accept-Encoding: gzip, deflate, br
-</span></span><span class="line"><span class="cl">Referer: https://developer.mozilla.org/en-US/docs/Glossary/Simple_header
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">200 OK
-</span></span><span class="line"><span class="cl">Connection: Keep-Alive
-</span></span><span class="line"><span class="cl">Content-Encoding: gzip
-</span></span><span class="line"><span class="cl">Content-Type: text/html; charset=utf-8
-</span></span><span class="line"><span class="cl">Date: Wed, 20 Jul 2016 10:55:30 GMT
-</span></span><span class="line"><span class="cl">Etag: &#34;547fa7e369ef56031dd3bff2ace9fc0832eb251a&#34;
-</span></span><span class="line"><span class="cl">Keep-Alive: timeout=5, max=1000
-</span></span><span class="line"><span class="cl">Last-Modified: Tue, 19 Jul 2016 00:59:33 GMT
-</span></span><span class="line"><span class="cl">Server: Apache
-</span></span><span class="line"><span class="cl">Transfer-Encoding: chunked
-</span></span><span class="line"><span class="cl">Vary: Cookie, Accept-Encoding
-</span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl">(content)
-</span></span></code></pre></td></tr></table>
+<pre class="chroma"><code class="language-fallback" data-lang="fallback">GET /en-US/docs/Glossary/Simple_header HTTP/1.1
+Host: developer.mozilla.org
+User-Agent: Mozilla/5.0 (Macintosh; Intel Mac OS X 10.9; rv:50.0) Gecko/20100101 Firefox/50.0
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate, br
+Referer: https://developer.mozilla.org/en-US/docs/Glossary/Simple_header
+
+200 OK
+Connection: Keep-Alive
+Content-Encoding: gzip
+Content-Type: text/html; charset=utf-8
+Date: Wed, 20 Jul 2016 10:55:30 GMT
+Etag: &#34;547fa7e369ef56031dd3bff2ace9fc0832eb251a&#34;
+Keep-Alive: timeout=5, max=1000
+Last-Modified: Tue, 19 Jul 2016 00:59:33 GMT
+Server: Apache
+Transfer-Encoding: chunked
+Vary: Cookie, Accept-Encoding
+
+(content)
+</code></pre></td></tr></table>
 </div>
 </div><p>HTTP/1.1 在 1997 年 1 月以 RFC 2068 文件发布。</p>
 <p><strong>HTTP 用于安全传输</strong></p>

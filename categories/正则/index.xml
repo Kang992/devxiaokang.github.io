@@ -92,7 +92,7 @@
 &lt;td&gt;反向否定预查，与正向否定预查类拟，只是方向相反。例如“(?&amp;lt;!95&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
-&lt;td&gt;&lt;code&gt;x|y&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;x\|y&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;匹配x或y。例如，“z&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
