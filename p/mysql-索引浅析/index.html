@@ -286,6 +286,196 @@
 <li>单列索引</li>
 <li>联合索引（符合索引，组合索引）</li>
 </ul>
+<h3 id="二根据数据结构分类">二、根据数据结构分类</h3>
+<p>MySQL按数据结构分类可分为：B+tree索引，Hash索引，Full-text索引</p>
+<div class="table-wrapper"><table>
+<thead>
+<tr>
+<th>-</th>
+<th>InnoDB</th>
+<th>MyIsam</th>
+<th>Memory</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>B+tree索引</td>
+<td>√</td>
+<td>√</td>
+<td>√</td>
+</tr>
+<tr>
+<td>Hash索引</td>
+<td>×</td>
+<td>×</td>
+<td>√</td>
+</tr>
+<tr>
+<td>B-tree索引</td>
+<td>√（MySQL5.6+）</td>
+<td>√</td>
+<td>×</td>
+</tr>
+</tbody>
+</table></div>
+<blockquote>
+<blockquote>
+<p>注：InnoDB 实际上也支持Hash索引，但是InnoDB中Hash索引的创建由存储引擎自动优化创建，不能人为干预
+是否为表创建Hash索引，</p>
+</blockquote>
+</blockquote>
+<p>B+tree是MySQL中被存储引擎采用最多的索引类型，B+tree中的B代表平衡（balance），而不是二叉（binary），因为B+tree是从最早的平衡二叉树演化而来的，下面演示B+tree数据结构与其他数据结构的对比。</p>
+<h4 id="1-btree-和-b-tree的对比">1. B+tree 和 B-tree的对比</h4>
+<p><img src="/images/mysql-index/B-tree-01.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="B-tree"
+	
+	
+>
+[网络图片] B-tree示意图</p>
+<ul>
+<li>B+tree非叶子结点只存储键值信息，数据记录都存放在叶子节点中，而B-tree的非叶子节点也存储数据，B+tree单个节点的存储量更小，在相同的磁盘IO情况下可以查到更多节点数据。</li>
+<li>B+tree 所有叶子结点之间都采用单链表连接，适合MySQL中常见的基于范围的顺序检索场景，而B-tree无法做到这一点。</li>
+</ul>
+<p><img src="/images/mysql-index/B&#43;tree-01.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="B&#43;tree"
+	
+	
+>
+[网络图片] B+tree示意图</p>
+<h4 id="2-btree-和-红黑树的对比">2. B+tree 和 红黑树的对比</h4>
+<p><img src="/images/mysql-index/red-black-tree.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="red-black-tree"
+	
+	
+>
+[网络图片] 红黑树示意图</p>
+<p><strong>红黑树</strong>是一种<strong>弱平衡二叉查找树</strong>，通过任何一条从根到叶子的路径上各个节点着色方式的限制，<strong>红黑树确保没有一条路径会比其他路径长出两倍</strong></p>
+<p>对于有N个节点的B+tree，其搜索的时间复杂度为O(logdN)，其中**d(Degree)**为B+tree的度，表示节点允许的最大子节点数为d个，在实际应用当中，d值一般是大于100的，即使数据量达到千万级别时B+tree的高度依然维持在3-4左右，保证了3-4次磁盘I/O操作就能查询到目标数据。</p>
+<p><strong>红黑树</strong>是二叉树，节点子节点个数为两个，意味着其搜索的算法时间复杂度为 O(logN)，树的高度也会比 B+tree 高出不少，因此红黑树检索到目标数据所需经历的磁盘I/O次数更多。</p>
+<h4 id="3-btree-和-hash的对比">3. B+tree 和 Hash的对比</h4>
+<p>Hash 索引结构的特殊性，其检索效率非常高，索引的检索可以一次定位，不像B-Tree 索引需要从根节点到枝节点，最后才能访问到页节点这样多次的IO访问，所以 Hash 索引的查询效率要远高于 B-Tree 索引。虽然 Hash 索引效率高，但是 Hash 索引本身由于其特殊性也带来了很多限制和弊端，主要有以下这些。</p>
+<ul>
+<li>Hash 索引仅仅能满足 = , IN 和 &lt;=&gt;(表示NULL安全的等价) 查询，不能使用范围查询</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>由于 Hash 索引比较的是进行 Hash 运算之后的 Hash值，所以它只能用于等值的过滤，不能用于基于范围的过滤，因为经过相应的 Hash算法处理之后的 Hash 值的大小关系，并不能保证和Hash运算前完全一样</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Hash 索引无法适用数据的排序操作</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>由于 Hash 索引中存放的是经过 Hash 计算之后的 Hash值，而且Hash值的大小关系并不一定和 Hash运算前的键值完全一样，所以数据库无法利用索引的数据来避免任何排序运算；</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Hash 索引不能利用部分索引键查询</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>对于组合索引，Hash 索引在计算 Hash 值的时候是组合索引键合并后再一起计算 Hash 值，而不是单独计算 Hash值，所以通过组合索引的前面一个或几个索引键进行查询的时候，Hash 索引也无法被利用</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Hash 索引依然需要回表扫描</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>Hash 索引是将索引键通过 Hash 运算之后，将 Hash运算结果的 Hash值和所对应的行指针信息存放于一个 Hash 表中，由于不同索引键可能存在相同 Hash 值，所以即使取满足某个 Hash 键值的数据的记录条数，也无法从 Hash索引中直接完成查询，还是要通过访问表中的实际数据进行相应的比较，并得到相应的结果。</p>
+</blockquote>
+</blockquote>
+<ul>
+<li>Hash索引遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高</li>
+</ul>
+<blockquote>
+<blockquote>
+<p>选择性比较低的索引键，如果创建 Hash 索引，那么将会存在大量记录指针信息存于同一个Hash值相关联。这样要定位某一条记录时就会非常麻烦，会浪费多次表数据的访问，而造成整体性能低下</p>
+</blockquote>
+</blockquote>
+<p><strong>由于范围查询是MySQL数据库查询中常见的场景，Hash表不适合做范围查询，它更适合做等值查询。另外Hash表还存在Hash函数选择和Hash值冲突等问题。因此，B+tree索引要比Hash表索引有更广的适用场景</strong></p>
+<h3 id="三根据物理存储分类">三、根据物理存储分类</h3>
+<p>MySQL根据叶子节点是否存储的是完整数据将索引分为：聚簇索引，二级索引（辅助索引）。</p>
+<h4 id="1聚簇索引">1.聚簇索引</h4>
+<p><strong>聚簇索引</strong>的每个叶子节点都存储了一行完整的表数据，叶子节点之间按照id列升序连接，可以方便的进行顺序检索。
+<img src="/images/mysql-index/clustering-index.jpg"
+	
+	
+	
+	loading="lazy"
+	
+		alt="clustering-index"
+	
+	
+>
+[网络图片]
+MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字段上建立聚簇索引，在没有主键的情况下，数据表的第一个非空唯一索引将被建立为聚簇索引，
+在前两者都没有的情况下，InnoDB将自动生成一个隐式的自增id列，并在此列上建立聚簇索引。</p>
+<p>MyISAM存储引擎不存在聚簇索引，主键索引和非主键索引的结构是一样的，索引的叶子节点不存储表数据，存放的是表数据的地址，所以MyISAM存储引擎的表可以没有主键。MyISAM表的索引和数据是分开存储的，</p>
+<h4 id="2二级索引">2.二级索引</h4>
+<p><img src="/images/mysql-index/second-index-01.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="second-index-01"
+	
+	
+>
+[网络图片]</p>
+<p>二级索引的叶子节点并不存储一行完整的数据，而是存储了聚簇索引所在的列。</p>
+<p>回表查询：由于二级索引的叶子节点不存储完整的表数据，索引当通过二级索引查询聚簇索引列值后，还需要回到聚簇索引也就是表本身进一步获取数据
+<img src="/images/mysql-index/second-index-02.png"
+	
+	
+	
+	loading="lazy"
+	
+		alt="second-index-02"
+	
+	
+>
+[网络图片]</p>
+<p>回表查询需要额外的B+tree搜索过程，必然增加查询消耗,
+需要注意的是，通过二级索引查询时，回表不是必须的过程，当select 的所有字段在单个二级索引中都能找到时，就不需要回表，MySQL称此时的二级索引为覆盖索引或者触发了索引覆盖。
+可以用explain 命令查看SQL语句的执行计划，执行计划的extra字段中若出现Using index，表示查询触发了索引覆盖。</p>
+<h3 id="四按字段特性分类">四、按字段特性分类</h3>
+<p>MySQL索引按照字段特性可以分为：<strong>主键索引，普通索引，前缀索引</strong></p>
+<ul>
+<li>
+<p>主键索引
+建立在主键上的索引称为<strong>主键索引</strong>，一张数据表只能有一个主键索引，索引列值不允许有空值，通常在创建表时一起创建。</p>
+</li>
+<li>
+<p>唯一索引
+建立在 Unique字段上的索引称为<strong>唯一索引</strong>，一张表可以有多个唯一索引，索引列值允许为空，列值中出现多个空值不会出现重复冲突。</p>
+</li>
+<li>
+<p>普通索引
+建立在普通字段上的索引被称为<strong>普通索引</strong></p>
+</li>
+<li>
+<p>前缀索引
+<strong>前缀索引</strong>是指对字符类型字段的前几个字符或对二进制类型字段的前几个bytes建立的索引，而不是在整个字段上建索引。前缀索引可以建立在类型为char、varchar、binary、varbinary的列上，可以大大减少索引占用的存储空间，也能提升索引的查询效率</p>
+</li>
+</ul>
 </section>
 
 
@@ -344,6 +534,28 @@
     
 
     
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/docker-%E9%83%A8%E7%BD%B2mysql%E9%9B%86%E7%BE%A4-replication/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">docker 部署Mysql集群--replication</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
 
      
     
@@ -524,6 +736,20 @@
             <li><a href="#4根据字段个数可分为">4、根据字段个数可分为</a></li>
           </ol>
         </li>
+        <li><a href="#二根据数据结构分类">二、根据数据结构分类</a>
+          <ol>
+            <li><a href="#1-btree-和-b-tree的对比">1. B+tree 和 B-tree的对比</a></li>
+            <li><a href="#2-btree-和-红黑树的对比">2. B+tree 和 红黑树的对比</a></li>
+            <li><a href="#3-btree-和-hash的对比">3. B+tree 和 Hash的对比</a></li>
+          </ol>
+        </li>
+        <li><a href="#三根据物理存储分类">三、根据物理存储分类</a>
+          <ol>
+            <li><a href="#1聚簇索引">1.聚簇索引</a></li>
+            <li><a href="#2二级索引">2.二级索引</a></li>
+          </ol>
+        </li>
+        <li><a href="#四按字段特性分类">四、按字段特性分类</a></li>
       </ol>
     </li>
   </ol>
