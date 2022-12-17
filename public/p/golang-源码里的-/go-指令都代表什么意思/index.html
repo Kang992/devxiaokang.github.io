@@ -1,0 +1,1011 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='golang源码里的//go:代表的含义'><title>Golang 源码里的 //go: 指令，都代表什么意思？</title>
+
+<link rel='canonical' href='https://x-xkang.com/p/golang-%E6%BA%90%E7%A0%81%E9%87%8C%E7%9A%84-/go-%E6%8C%87%E4%BB%A4%E9%83%BD%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/'>
+
+<link rel="stylesheet" href="/scss/style.min.5a8e892f6fa14515e9065eee1f5d2e05302606ec7f11750b2fb95198f9cdcbfd.css"><meta property='og:title' content='Golang 源码里的 //go: 指令，都代表什么意思？'>
+<meta property='og:description' content='golang源码里的//go:代表的含义'>
+<meta property='og:url' content='https://x-xkang.com/p/golang-%E6%BA%90%E7%A0%81%E9%87%8C%E7%9A%84-/go-%E6%8C%87%E4%BB%A4%E9%83%BD%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/'>
+<meta property='og:site_name' content='Hello, It&#39;s me'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='golang' /><meta property='article:published_time' content='2021-12-16T09:35:02&#43;08:00'/><meta property='article:modified_time' content='2021-12-16T09:35:02&#43;08:00'/>
+<meta name="twitter:title" content="Golang 源码里的 //go: 指令，都代表什么意思？">
+<meta name="twitter:description" content="golang源码里的//go:代表的含义">
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">Hello, It&#39;s me</a></h1>
+            <h2 class="site-description">Lorem ipsum dolor sit amet, consectetur adipiscing elit.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/devxiaokang'
+                        target="_blank"
+                        title="GitHub"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+
+        <li >
+            <a href='/about/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-user" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="7" r="4" />
+  <path d="M6 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+</svg>
+
+
+
+                
+                <span>About</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+ -->
+
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#bfbfc0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <line x1="9" y1="6" x2="20" y2="6" />
+  <line x1="9" y1="12" x2="20" y2="12" />
+  <line x1="9" y1="18" x2="20" y2="18" />
+  <line x1="5" y1="6" x2="5" y2="6.01" />
+  <line x1="5" y1="12" x2="5" y2="12.01" />
+  <line x1="5" y1="18" x2="5" y2="18.01" />
+</svg>
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+<main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/golang/" >
+                golang
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/golang-%E6%BA%90%E7%A0%81%E9%87%8C%E7%9A%84-/go-%E6%8C%87%E4%BB%A4%E9%83%BD%E4%BB%A3%E8%A1%A8%E4%BB%80%E4%B9%88%E6%84%8F%E6%80%9D/">Golang 源码里的 //go: 指令，都代表什么意思？</a>
+        </h2>
+    
+        
+        <h3 class="article-subtitle">
+            golang源码里的//go:代表的含义
+        </h3>
+        
+    </div>
+
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Dec 16, 2021</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    3 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+</header>
+
+    <section class="article-content">
+    
+    
+    <h3 id="gobuild">go:build</h3>
+<h3 id="golinkname">go:linkname</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:linkname localname importpath.name
+</span></code></pre></td></tr></table>
+</div>
+</div><blockquote>
+<p>该指令指示编译器使用 <code>importpath.name</code> 作为源码中声明为 <code>localname</code> 的变量的或函数的目标文件符号名称，但是由于这个伪指令可以破坏类型系统和包模块化，只有引用了 <code>unsafe</code> 包才可以使用。
+简单来讲，就是 <code>importpath.name</code> 是 <code>localname</code> 的符号别名，编译器实际上会调用 <code>localname</code>，使用的前提是引入了 <code>unsafe</code> 包才能使用。</p>
+</blockquote>
+<h4 id="例如">例如</h4>
+<p>time/time.go</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// Provided by package runtime.
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">now</span><span class="p">()</span> <span class="p">(</span><span class="nx">sec</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">nsec</span> <span class="kt">int32</span><span class="p">,</span> <span class="nx">mono</span> <span class="kt">int64</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>runtime/timestub.go</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="kn">import</span> <span class="nx">_</span> <span class="s">&#34;unsafe&#34;</span> <span class="c1">// for go:linkname
+</span><span class="c1"></span>
+<span class="c1">//go:linkname time_now time.now
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">time_now</span><span class="p">()</span> <span class="p">(</span><span class="nx">sec</span> <span class="kt">int64</span><span class="p">,</span> <span class="nx">nsec</span> <span class="kt">int32</span><span class="p">,</span> <span class="nx">mono</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
+  <span class="nx">sec</span><span class="p">,</span> <span class="nx">nsec</span> <span class="p">=</span> <span class="nf">walltime</span><span class="p">()</span>
+  <span class="k">return</span> <span class="nx">sec</span><span class="p">,</span> <span class="nx">nsec</span><span class="p">,</span> <span class="nf">nanotime</span><span class="p">()</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>now 方法并没有具体实现，注释上也描述具体实现由 <code>runtime</code> 包完成，看一下 <code>runtime</code> 包中的代码，先引入了 <code>unsafe</code> 包，再定义了 <code>//go:lickname time_now time.now</code>。</p>
+<p>第一个参数<code>time_now</code> 代表本地变量或方法，第二个参数<code>time.now</code>标识需要建立链接的变量、方法路径。也就是说，<code>//go:lickname</code> 是可以跨包使用的。</p>
+<p>另外 <code>go build</code> 是无法编译 <code>go:linkname</code>的，必须使用单独的 <code>compile</code> 命令进行编译，因为 <code>go build</code> 会加上 <code>-complete</code> 参数，这个参数会检查到没有方法体的方法，并且不通过。</p>
+<hr>
+<h3 id="gonoscape">go:noscape</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:noscape
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令指定下一个有声明但没有主体（意味着实现有可能不是 Go）的函数，不允许编译器对其做逃逸分析。</p>
+<p>一般情况下，该指令用于内存分配优化。编译器默认会进行逃逸分析，会通过规则判定一个变量是分配到堆上还是栈上。</p>
+<p>但凡事有意外，一些函数虽然逃逸分析其是存放到堆上。但是对于我们来说，它是特别的。我们就可以使用 <code>go:noescape</code> 指令强制要求编译器将其分配到函数栈上。</p>
+<h4 id="例如-1">例如</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// memmove copies n bytes from &#34;from&#34; to &#34;to&#34;.
+</span><span class="c1">// in memmove_*.s
+</span><span class="c1">//go:noescape
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">memmove</span><span class="p">(</span><span class="nx">to</span><span class="p">,</span> <span class="nx">from</span> <span class="nx">unsafe</span><span class="p">.</span><span class="nx">Pointer</span><span class="p">,</span> <span class="nx">n</span> <span class="kt">uintptr</span><span class="p">)</span>
+</code></pre></td></tr></table>
+</div>
+</div><p>我们观察一下这个案例，它满足了该指令的常见特性。如下：</p>
+<p>memmove_*.s: 只有声明，没有主体，其主体是由底层汇编实现的。</p>
+<p>memmove: 函数功能，在栈上处理性能会更好。</p>
+<hr>
+<h3 id="gonoslip">go:noslip</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:noslip
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令指定文件中声明的下一个函数不得包含堆栈溢出检查。</p>
+<p>简单来讲，就是这个函数跳过堆栈溢出的检查。</p>
+<h4 id="例如-2">例如</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:nosplit
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">key32</span><span class="p">(</span><span class="nx">p</span> <span class="o">*</span><span class="kt">uintptr</span><span class="p">)</span> <span class="o">*</span><span class="kt">uint32</span> <span class="p">{</span>
+ <span class="k">return</span> <span class="p">(</span><span class="o">*</span><span class="kt">uint32</span><span class="p">)(</span><span class="nx">unsafe</span><span class="p">.</span><span class="nf">Pointer</span><span class="p">(</span><span class="nx">p</span><span class="p">))</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="gonowritebarrierrec">go:nowritebarrierrec</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:nowritebarrierrec
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令表示编译器遇到写屏障时就会产生一个错误，并且允许递归。也就是这个函数调用的其他函数如果有写屏障也会报错。</p>
+<p>简单来讲，就是针对写屏障的处理，防止其死循环。</p>
+<h4 id="例如-3">例如</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:nowritebarrierrec
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">gcFlushBgCredit</span><span class="p">(</span><span class="nx">scanWork</span> <span class="kt">int64</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="goyeswritebarrierrec">go:yeswritebarrierrec</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:yeswritebarrierrec
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令与 <code>go:nowritebarrierrec</code> 相对，在标注 <code>go:nowritebarrierrec</code> 指令的函数上，遇到写屏障会产生错误。</p>
+<p>而当编译器遇到 <code>go:yeswritebarrierrec</code> 指令时将会停止。</p>
+<h4 id="例如-4">例如</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:yeswritebarrierrec
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">gchelper</span><span class="p">()</span> <span class="p">{</span>
+ <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="gonoinline">go:noinline</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:noinline
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令表示该函数禁止进行内联。</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:noinline
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">unexportedPanicForTesting</span><span class="p">(</span><span class="nx">b</span> <span class="p">[]</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">i</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">byte</span> <span class="p">{</span>
+ <span class="k">return</span> <span class="nx">b</span><span class="p">[</span><span class="nx">i</span><span class="p">]</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><h4 id="例如-5">例如</h4>
+<p>我们观察一下这个案例，是直接通过索引取值，逻辑比较简单。如果不加上 go:noinline 的话，就会出现编译器对其进行内联优化。</p>
+<p>显然，内联有好有坏。该指令就是提供这一特殊处理。</p>
+<hr>
+<h3 id="gonorace">go:norace</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:norace
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令表示禁止进行竞态检测。</p>
+<p>常见的形式就是在启动时执行 go run -race，能够检测应用程序中是否存在双向的数据竞争，非常有用。</p>
+<h4 id="例如-6">例如</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:norace
+</span><span class="c1"></span><span class="kd">func</span> <span class="nf">forkAndExecInChild</span><span class="p">(</span><span class="nx">argv0</span> <span class="o">*</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">argv</span><span class="p">,</span> <span class="nx">envv</span> <span class="p">[]</span><span class="o">*</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">chroot</span><span class="p">,</span> <span class="nx">dir</span> <span class="o">*</span><span class="kt">byte</span><span class="p">,</span> <span class="nx">attr</span> <span class="o">*</span><span class="nx">ProcAttr</span><span class="p">,</span> <span class="nx">sys</span> <span class="o">*</span><span class="nx">SysProcAttr</span><span class="p">,</span> <span class="nx">pipe</span> <span class="kt">int</span><span class="p">)</span> <span class="p">(</span><span class="nx">pid</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">err</span> <span class="nx">Errno</span><span class="p">)</span> <span class="p">{</span>
+    <span class="o">...</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="gonotinheap">go:notinheap</h3>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">//go:notinheap
+</span></code></pre></td></tr></table>
+</div>
+</div><p>该指令常用于类型声明，它表示这个类型不允许从 GC 堆上进行申请内存。</p>
+<p>在运行时中常用其来做较低层次的内部结构，避免调度器和内存分配中的写屏障，能够提高性能。</p>
+<h4 id="例如-7">例如</h4>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt">1
+</span><span class="lnt">2
+</span><span class="lnt">3
+</span><span class="lnt">4
+</span><span class="lnt">5
+</span><span class="lnt">6
+</span><span class="lnt">7
+</span><span class="lnt">8
+</span><span class="lnt">9
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang"><span class="c1">// notInHeap is off-heap memory allocated by a lower-level allocator
+</span><span class="c1">// like sysAlloc or persistentAlloc.
+</span><span class="c1">//
+</span><span class="c1">// In general, it&#39;s better to use real types marked as go:notinheap,
+</span><span class="c1">// but this serves as a generic type for situations where that isn&#39;t
+</span><span class="c1">// possible (like in the allocators).
+</span><span class="c1">//
+</span><span class="c1">//go:notinheap
+</span><span class="c1"></span><span class="kd">type</span> <span class="nx">notInHeap</span> <span class="kd">struct</span><span class="p">{}</span>
+</code></pre></td></tr></table>
+</div>
+</div><hr>
+<h3 id="每日一算">每日一算</h3>
+<h4 id="描述">描述</h4>
+<p>2个逆序的链表，要求从低位开始相加，得出结果也逆序输出，返回值是逆序结果链表的头结点</p>
+<h4 id="解题思路">解题思路</h4>
+<p>需要注意的是进位的问题，极端情况如下：</p>
+<blockquote>
+<p>Input: (9 -&gt; 9 -&gt; 9 -&gt; 9) + (1 -&gt; )
+Output  0 -&gt; 0 -&gt; 0 -&gt; 0 -&gt; 1</p>
+</blockquote>
+<p>为了处理方法统一，可以先建立一个虚拟头结点，这个虚拟头结点的Next指向真正的head，这样head不需要单独处理，直接wihle循环即可。另外判断循环终止的条件不用是 p.Next != nil，这样最后一位还需要额外计算，终止条件应该是 p != nil。</p>
+<p>代码如下：</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span></code></pre></td>
+<td class="lntd">
+<pre class="chroma"><code class="language-golang" data-lang="golang">
+<span class="kd">type</span> <span class="nx">ListNode</span> <span class="kd">struct</span> <span class="p">{</span>
+	<span class="nx">Val</span> <span class="kt">int</span>
+	<span class="nx">Next</span> <span class="o">*</span><span class="nx">ListNode</span>
+<span class="p">}</span>
+
+<span class="kd">func</span> <span class="nf">addTwoNumbers</span><span class="p">(</span><span class="nx">l1</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">,</span> <span class="nx">l2</span> <span class="o">*</span><span class="nx">ListNode</span><span class="p">)</span> <span class="o">*</span><span class="nx">ListNode</span> <span class="p">{</span>
+
+	<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span><span class="p">{</span>
+		<span class="k">return</span> <span class="kc">nil</span>
+	<span class="p">}</span>
+
+	<span class="c1">// 虚拟头结点
+</span><span class="c1"></span>	<span class="nx">head</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span>
+		<span class="nx">Val</span><span class="p">:</span> <span class="mi">0</span><span class="p">,</span>
+		<span class="nx">Next</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+	<span class="p">}</span>
+
+	<span class="nx">current</span> <span class="o">:=</span> <span class="nx">head</span>
+	<span class="nx">carry</span> <span class="o">:=</span> <span class="mi">0</span>	<span class="c1">// 是否需要进位
+</span><span class="c1"></span>
+	<span class="c1">// 遍历
+</span><span class="c1"></span>	<span class="k">for</span> <span class="nx">l1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="o">||</span> <span class="nx">l2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+		<span class="kd">var</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span> <span class="kt">int</span>
+		<span class="k">if</span> <span class="nx">l1</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">x</span> <span class="p">=</span> <span class="mi">0</span>
+		<span class="p">}</span><span class="k">else</span><span class="p">{</span>
+			<span class="nx">x</span> <span class="p">=</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Val</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="nx">l2</span> <span class="o">==</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">y</span> <span class="p">=</span> <span class="mi">0</span>
+		<span class="p">}</span><span class="k">else</span> <span class="p">{</span>
+			<span class="nx">y</span> <span class="p">=</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Val</span>
+		<span class="p">}</span>
+
+		<span class="nx">current</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span>
+			<span class="nx">Val</span><span class="p">:</span> <span class="p">(</span><span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="nx">carry</span><span class="p">)</span> <span class="o">%</span> <span class="mi">10</span><span class="p">,</span>
+			<span class="nx">Next</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+		<span class="p">}</span>
+
+		<span class="nx">current</span> <span class="p">=</span> <span class="nx">current</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="nx">carry</span> <span class="p">=</span> <span class="p">(</span><span class="nx">x</span><span class="o">+</span><span class="nx">y</span><span class="o">+</span><span class="nx">carry</span><span class="p">)</span> <span class="o">/</span> <span class="mi">10</span>
+
+		<span class="k">if</span> <span class="nx">l1</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">l1</span> <span class="p">=</span> <span class="nx">l1</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="p">}</span>
+
+		<span class="k">if</span> <span class="nx">l2</span> <span class="o">!=</span> <span class="kc">nil</span> <span class="p">{</span>
+			<span class="nx">l2</span> <span class="p">=</span> <span class="nx">l2</span><span class="p">.</span><span class="nx">Next</span>
+		<span class="p">}</span>
+
+		<span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;carry:&#34;</span><span class="p">,</span> <span class="nx">carry</span><span class="p">)</span>
+	<span class="p">}</span>
+
+	<span class="k">if</span> <span class="nx">carry</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span>	<span class="c1">// 最后一位相加又进位，要在尾结点再加一个结点
+</span><span class="c1"></span>		<span class="nx">current</span><span class="p">.</span><span class="nx">Next</span> <span class="p">=</span> <span class="o">&amp;</span><span class="nx">ListNode</span><span class="p">{</span>
+			<span class="nx">Val</span><span class="p">:</span> <span class="nx">carry</span> <span class="o">%</span> <span class="mi">10</span><span class="p">,</span>
+			<span class="nx">Next</span><span class="p">:</span> <span class="kc">nil</span><span class="p">,</span>
+		<span class="p">}</span>
+	<span class="p">}</span>
+	<span class="k">return</span> <span class="nx">head</span><span class="p">.</span><span class="nx">Next</span>
+<span class="p">}</span>
+</code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/golang/">golang</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/golang-%E5%B8%B8%E7%94%A8%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E8%BD%AC%E6%8D%A2/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Golang 常用数据类型转换</h2>
+        </div>
+    </a>
+</article>
+
+            
+                
+<article class="">
+    <a href="/p/golang-slice%E5%88%87%E7%89%87%E5%88%86%E6%9E%90/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">Golang Slice切片分析</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="devxiaokang/blog"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy;
+        
+        2019 -
+        
+        2022 Hello, It&#39;s me
+    </section>
+
+    <section class="powerby">
+        
+        皖ICP备20014602号 <br />
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
+                data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
+</script>
+
+
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li>
+      <ol>
+        <li><a href="#gobuild">go:build</a></li>
+        <li><a href="#golinkname">go:linkname</a>
+          <ol>
+            <li><a href="#例如">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#gonoscape">go:noscape</a>
+          <ol>
+            <li><a href="#例如-1">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#gonoslip">go:noslip</a>
+          <ol>
+            <li><a href="#例如-2">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#gonowritebarrierrec">go:nowritebarrierrec</a>
+          <ol>
+            <li><a href="#例如-3">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#goyeswritebarrierrec">go:yeswritebarrierrec</a>
+          <ol>
+            <li><a href="#例如-4">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#gonoinline">go:noinline</a>
+          <ol>
+            <li><a href="#例如-5">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#gonorace">go:norace</a>
+          <ol>
+            <li><a href="#例如-6">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#gonotinheap">go:notinheap</a>
+          <ol>
+            <li><a href="#例如-7">例如</a></li>
+          </ol>
+        </li>
+        <li><a href="#每日一算">每日一算</a>
+          <ol>
+            <li><a href="#描述">描述</a></li>
+            <li><a href="#解题思路">解题思路</a></li>
+          </ol>
+        </li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+
+
+
+</script>
+
+    </body>
+</html>

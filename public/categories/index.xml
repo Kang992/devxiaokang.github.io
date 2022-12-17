@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Categories on Hello, It&#39;s me</title>
+        <link>https://x-xkang.com/categories/</link>
+        <description>Recent content in Categories on Hello, It&#39;s me</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Sat, 26 Nov 2022 11:17:45 +0800</lastBuildDate><atom:link href="https://x-xkang.com/categories/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>mysql</title>
+        <link>https://x-xkang.com/categories/mysql/</link>
+        <pubDate>Sat, 26 Nov 2022 11:17:45 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/mysql/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Code</title>
+        <link>https://x-xkang.com/categories/code/</link>
+        <pubDate>Mon, 05 Sep 2022 09:01:56 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/code/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>golang</title>
+        <link>https://x-xkang.com/categories/golang/</link>
+        <pubDate>Mon, 05 Sep 2022 09:01:56 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/golang/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>Database</title>
+        <link>https://x-xkang.com/categories/database/</link>
+        <pubDate>Wed, 29 Jun 2022 15:34:24 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/database/</guid>
+        <description>&lt;img src="https://x-xkang.com/categories/database/hutomo-abrianto-l2jk-uxb1BY-unsplash.jpg" alt="Featured image of post Database" /&gt;</description>
+        </item>
+        <item>
+        <title>http</title>
+        <link>https://x-xkang.com/categories/http/</link>
+        <pubDate>Fri, 17 Jun 2022 10:09:23 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/http/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>dns</title>
+        <link>https://x-xkang.com/categories/dns/</link>
+        <pubDate>Thu, 16 Jun 2022 17:00:53 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/dns/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>network</title>
+        <link>https://x-xkang.com/categories/network/</link>
+        <pubDate>Wed, 15 Jun 2022 15:57:49 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/network/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>正则</title>
+        <link>https://x-xkang.com/categories/%E6%AD%A3%E5%88%99/</link>
+        <pubDate>Tue, 11 Jan 2022 09:29:51 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/%E6%AD%A3%E5%88%99/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>programming</title>
+        <link>https://x-xkang.com/categories/programming/</link>
+        <pubDate>Thu, 02 Dec 2021 09:31:17 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/programming/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>计算机网络</title>
+        <link>https://x-xkang.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</link>
+        <pubDate>Thu, 04 Feb 2021 13:35:56 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>C&#43;&#43;</title>
+        <link>https://x-xkang.com/categories/c&#43;&#43;/</link>
+        <pubDate>Thu, 16 Apr 2020 16:29:28 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/c&#43;&#43;/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>shell</title>
+        <link>https://x-xkang.com/categories/shell/</link>
+        <pubDate>Mon, 06 Jan 2020 09:42:51 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/shell/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>vim</title>
+        <link>https://x-xkang.com/categories/vim/</link>
+        <pubDate>Mon, 06 Jan 2020 09:42:51 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/categories/vim/</guid>
+        <description></description>
+        </item>
+        <item>
+        <title>dcoker</title>
+        <link>https://x-xkang.com/categories/dcoker/</link>
+        <pubDate>Wed, 18 Sep 2019 02:01:58 +0530</pubDate>
+        
+        <guid>https://x-xkang.com/categories/dcoker/</guid>
+        <description></description>
+        </item>
+        
+    </channel>
+</rss>

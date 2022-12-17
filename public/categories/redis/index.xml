@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>redis on 基层码农~</title>
+    <link>http://x-xkang.com/categories/redis/</link>
+    <description>Recent content in redis on 基层码农~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Thu, 30 Jun 2022 10:01:40 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/redis/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Redis 的过期删除策略以及淘汰策略</title>
+      <link>http://x-xkang.com/redis-%E7%9A%84%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5%E4%BB%A5%E5%8F%8A%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</link>
+      <pubDate>Thu, 30 Jun 2022 10:01:40 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/redis-%E7%9A%84%E8%BF%87%E6%9C%9F%E5%88%A0%E9%99%A4%E7%AD%96%E7%95%A5%E4%BB%A5%E5%8F%8A%E6%B7%98%E6%B1%B0%E7%AD%96%E7%95%A5/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

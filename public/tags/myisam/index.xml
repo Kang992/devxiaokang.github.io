@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>myisam on 基层码农康师糊~</title>
+    <link>http://x-xkang.com/tags/myisam/</link>
+    <description>Recent content in myisam on 基层码农康师糊~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Tue, 25 Aug 2020 15:18:25 +0800</lastBuildDate><atom:link href="http://x-xkang.com/tags/myisam/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Mysql 索引浅析</title>
+      <link>http://x-xkang.com/post/mysql-index/</link>
+      <pubDate>Tue, 25 Aug 2020 15:18:25 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/post/mysql-index/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

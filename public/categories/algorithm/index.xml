@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>algorithm on 基层码农康师糊~</title>
+    <link>http://x-xkang.com/categories/algorithm/</link>
+    <description>Recent content in algorithm on 基层码农康师糊~</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en</language>
+    <copyright>皖ICP备20014602号</copyright>
+    <lastBuildDate>Mon, 22 Mar 2021 19:11:16 +0800</lastBuildDate><atom:link href="http://x-xkang.com/categories/algorithm/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>算法练习</title>
+      <link>http://x-xkang.com/post/algorithm-01/</link>
+      <pubDate>Mon, 22 Mar 2021 19:11:16 +0800</pubDate>
+      
+      <guid>http://x-xkang.com/post/algorithm-01/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
