@@ -37,7 +37,7 @@
 &lt;blockquote&gt;
 &lt;p&gt;数据丢失多&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- **aof(--fix) ls -l --block-size=M**是什么？ --&gt;
 &lt;blockquote&gt;
 &lt;p&gt;原理是将Redis的操作日志以追加的方式写入文件，读操作是不记录的&lt;/p&gt;
 &lt;/blockquote&gt;

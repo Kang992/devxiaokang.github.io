@@ -275,7 +275,7 @@
 &lt;li&gt;索引上的范围查询（唯一索引），会访问到不满足条件的第一个值为止。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;注意：间隙锁的唯一目的是防止其他事务插入间隙，间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上使用间隙锁 &lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;注意：间隙锁的唯一目的是防止其他事务插入间隙，间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上使用间隙锁 &lt;/span&gt;&lt;/p&gt;</description>
         </item>
         <item>
         <title>docker 部署Mysql集群--replication</title>

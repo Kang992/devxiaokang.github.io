@@ -12,8 +12,16 @@
         <pubDate>Tue, 11 Jan 2022 09:29:51 +0800</pubDate>
         
         <guid>https://x-xkang.com/p/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
-        <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+        <description>&lt;style&gt;
+body {
+  text-align: center;
+}
+
+table th:first-of-type {
+  width: 15%;
+  margin: auto;
+}
+&lt;/style&gt;
 &lt;h4 id=&#34;常用正则表达式&#34;&gt;常用正则表达式&lt;/h4&gt;
 &lt;table&gt;
 &lt;thead&gt;

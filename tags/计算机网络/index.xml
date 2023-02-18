@@ -1095,7 +1095,7 @@
 &lt;hr&gt;
 &lt;h2 id=&#34;二数据通信基础知识&#34;&gt;二、数据通信基础知识&lt;/h2&gt;
 &lt;h3 id=&#34;1典型的数据通信模型&#34;&gt;1、典型的数据通信模型&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- 数据通信模型 --&gt;
 &lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/computer-network/data-comunication-model.jpg&#34;
 	
 	
@@ -1133,7 +1133,7 @@
 &lt;p&gt;&lt;strong&gt;串行传输&lt;/strong&gt;：速度慢、费用低、适合远距离&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;并行传输&lt;/strong&gt;：速度快、费用高、适合近距离&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- 数据传输方式 --&gt;
 &lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/computer-network/data-transmission-mode.jpg&#34;
 	
 	

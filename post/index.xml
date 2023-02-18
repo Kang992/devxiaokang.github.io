@@ -6,7 +6,25 @@
         <description>Recent content in Posts on Hello, It&#39;s me</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Fri, 16 Dec 2022 17:54:33 +0800</lastBuildDate><atom:link href="https://x-xkang.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sun, 01 Jan 2023 10:48:07 +0800</lastBuildDate><atom:link href="https://x-xkang.com/post/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mysql Innodb</title>
+        <link>https://x-xkang.com/p/mysql-innodb/</link>
+        <pubDate>Sun, 01 Jan 2023 10:48:07 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-innodb/</guid>
+        <description>&lt;p&gt;逻辑存储结构：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/innodb/storage-structrue.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;111&#34;
+	
+	
+&gt;&lt;/p&gt;</description>
+        </item>
+        <item>
         <title>Mysql 锁分析</title>
         <link>https://x-xkang.com/p/mysql-%E9%94%81%E5%88%86%E6%9E%90/</link>
         <pubDate>Fri, 16 Dec 2022 17:54:33 +0800</pubDate>
@@ -275,7 +293,7 @@
 &lt;li&gt;索引上的范围查询（唯一索引），会访问到不满足条件的第一个值为止。&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/blockquote&gt;
-&lt;p&gt;&lt;!-- raw HTML omitted --&gt;注意：间隙锁的唯一目的是防止其他事务插入间隙，间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上使用间隙锁 &lt;!-- raw HTML omitted --&gt;&lt;/p&gt;</description>
+&lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;注意：间隙锁的唯一目的是防止其他事务插入间隙，间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上使用间隙锁 &lt;/span&gt;&lt;/p&gt;</description>
         </item>
         <item>
         <title>docker 部署Mysql集群--replication</title>
@@ -1042,7 +1060,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 &gt;&lt;/p&gt;
 &lt;h3 id=&#34;创建切片&#34;&gt;创建切片&lt;/h3&gt;
 &lt;h4 id=&#34;创建方式&#34;&gt;创建方式&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- KANGji19920123. --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
@@ -1087,7 +1105,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
 &lt;h4 id=&#34;创建逻辑&#34;&gt;创建逻辑&lt;/h4&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- 本文主要聊一下通过 `make` 关键字创建切片的过程  --&gt;
 &lt;p&gt;&lt;a class=&#34;link&#34; href=&#34;https://github.com/golang/go/blob/master/src/runtime/slice.go#L88&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
     &gt;src/runtime/slice.go#L88&lt;/a&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -1322,7 +1340,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 &lt;blockquote&gt;
 &lt;p&gt;数据丢失多&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- **aof(--fix) ls -l --block-size=M**是什么？ --&gt;
 &lt;blockquote&gt;
 &lt;p&gt;原理是将Redis的操作日志以追加的方式写入文件，读操作是不记录的&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -1673,10 +1691,45 @@ Vary: Cookie, Accept-Encoding
         
         <guid>https://x-xkang.com/p/osi-%E4%B8%83%E5%B1%82%E7%BD%91%E7%BB%9C%E6%A8%A1%E5%9E%8B/</guid>
         <description>&lt;p&gt;OSI七层模型与TCP/IP四层模型对比&lt;/p&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;table style=&#34;border:1&#34;&gt;
+  &lt;tr&gt;
+  &lt;td&gt; OSI 七层模型 &lt;/td&gt;
+  &lt;td&gt; TCP/IP 四层模型 &lt;/td&gt;
+  &lt;td&gt; 对应网络协议 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;应用层&lt;/td&gt;
+    &lt;td rowspan=&#34;3&#34;&gt;应用层&lt;/td&gt;
+    &lt;td&gt;HTTP、TFTP, FTP, NFS, WAIS、SMTP&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;表示层&lt;/td&gt;
+    &lt;td&gt;Telnet, Rlogin, SNMP, Gopher&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;会话层&lt;/td&gt;
+    &lt;td&gt;SMTP, DNS&lt;/td&gt;
+  &lt;/tr&gt;
+   &lt;tr&gt;
+    &lt;td&gt;传输层&lt;/td&gt;
+    &lt;td &gt;传输层&lt;/td&gt;
+    &lt;td&gt;TCP, UDP&lt;/td&gt;
+  &lt;/tr&gt;
+     &lt;tr&gt;
+    &lt;td&gt;网络层&lt;/td&gt;
+    &lt;td &gt;网络层&lt;/td&gt;
+    &lt;td&gt;IP, ICMP, ARP, RARP, AKP, UUCP&lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+    &lt;td&gt;数据链路层&lt;/td&gt;
+    &lt;td rowspan=&#34;2&#34; &gt;数据链路层&lt;/td&gt;
+    &lt;td&gt;FDDI, Ethernet, Arpanet, PDN, SLIP, PPP&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;tr&gt;
+    &lt;td&gt;物理层&lt;/td&gt;
+    &lt;td&gt;IEEE 802.1A, IEEE 802.2到IEEE 802.11&lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/table&gt;
 &lt;hr&gt;
 &lt;p&gt;&lt;strong&gt;应用层&lt;/strong&gt;：为应用程序或用户请求提供请求服务。OSI参考模型最高层，也是最靠近用户的一层，为计算机用户、各种应用程序以及网络提供端口，也为用户直接提供各种网络服务。&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;表示层&lt;/strong&gt;：数据编码、格式转换、数据加密。提供各种用于应用层的编码和转换功能，确保一个系统的应用层发送的数据能被另一个系统的应用层识别。如果必要，该层可提供一种标准表示形式，用于讲计算机内部的各种数据格式转换成通信中采用的标准表示形式。数据压缩和加密也是表示层可提供的转换功能之一。&lt;/p&gt;
@@ -2057,8 +2110,16 @@ Vary: Cookie, Accept-Encoding
         <pubDate>Tue, 11 Jan 2022 09:29:51 +0800</pubDate>
         
         <guid>https://x-xkang.com/p/%E5%B8%B8%E7%94%A8%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F/</guid>
-        <description>&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+        <description>&lt;style&gt;
+body {
+  text-align: center;
+}
+
+table th:first-of-type {
+  width: 15%;
+  margin: auto;
+}
+&lt;/style&gt;
 &lt;h4 id=&#34;常用正则表达式&#34;&gt;常用正则表达式&lt;/h4&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -4682,7 +4743,7 @@ Output  0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 1&lt;/p&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;二数据通信基础知识&#34;&gt;二、数据通信基础知识&lt;/h2&gt;
 &lt;h3 id=&#34;1典型的数据通信模型&#34;&gt;1、典型的数据通信模型&lt;/h3&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- 数据通信模型 --&gt;
 &lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/computer-network/data-comunication-model.jpg&#34;
 	
 	
@@ -4720,7 +4781,7 @@ Output  0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 1&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;串行传输&lt;/strong&gt;：速度慢、费用低、适合远距离&lt;/p&gt;
 &lt;p&gt;&lt;strong&gt;并行传输&lt;/strong&gt;：速度快、费用高、适合近距离&lt;/p&gt;
 &lt;/blockquote&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- 数据传输方式 --&gt;
 &lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/computer-network/data-transmission-mode.jpg&#34;
 	
 	
@@ -4986,8 +5047,11 @@ Output  0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 1&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;三命令模式&#34;&gt;三、命令模式&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;style&gt;
+table th:first-of-type {
+  width: 25%
+}
+&lt;/style&gt;
 &lt;h3 id=&#34;1移动光标&#34;&gt;1、移动光标&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -5229,19 +5293,19 @@ Output  0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 0 -&amp;gt; 1&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;i&lt;/code&gt;, &lt;code&gt;I&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入输入模式(Insert mode)： &lt;!-- raw HTML omitted --&gt; &lt;code&gt;i&lt;/code&gt; 为『从目前光标所在处输入』， &lt;!-- raw HTML omitted --&gt; &lt;code&gt;I&lt;/code&gt; 为『在目前所在行的第一个非空格符处开始输入』。 (常用)&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： &lt;br&gt; &lt;code&gt;i&lt;/code&gt; 为『从目前光标所在处输入』， &lt;br&gt; &lt;code&gt;I&lt;/code&gt; 为『在目前所在行的第一个非空格符处开始输入』。 (常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;a&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入输入模式(Insert mode)： &lt;!-- raw HTML omitted --&gt; &lt;code&gt;a&lt;/code&gt; 为『从目前光标所在的下一个字符处开始输入』， &lt;!-- raw HTML omitted --&gt; &lt;code&gt;A&lt;/code&gt; 为『从光标所在行的最后一个字符处开始输入』。(常用)&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： &lt;br&gt; &lt;code&gt;a&lt;/code&gt; 为『从目前光标所在的下一个字符处开始输入』， &lt;br&gt; &lt;code&gt;A&lt;/code&gt; 为『从光标所在行的最后一个字符处开始输入』。(常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;o&lt;/code&gt;, &lt;code&gt;O&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入输入模式(Insert mode)： &lt;!-- raw HTML omitted --&gt; 这是英文字母 &lt;code&gt;o&lt;/code&gt; 的大小写。&lt;code&gt;o&lt;/code&gt; 为『在目前光标所在的下一行处输入新的一行』； &lt;!-- raw HTML omitted --&gt; &lt;code&gt;O &lt;/code&gt;为在目前光标所在处的上一行输入新的一行！(常用)&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： &lt;br&gt; 这是英文字母 &lt;code&gt;o&lt;/code&gt; 的大小写。&lt;code&gt;o&lt;/code&gt; 为『在目前光标所在的下一行处输入新的一行』； &lt;br&gt; &lt;code&gt;O &lt;/code&gt;为在目前光标所在处的上一行输入新的一行！(常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;r&lt;/code&gt;, &lt;code&gt;R&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入取代模式(Replace mode)： &lt;!-- raw HTML omitted --&gt; &lt;code&gt;r&lt;/code&gt; 只会取代光标所在的那一个字符一次； &lt;!-- raw HTML omitted --&gt; &lt;code&gt;R&lt;/code&gt; 会一直取代光标所在的文字，直到按下 &lt;code&gt;ESC&lt;/code&gt; 为止；(常用)&lt;/td&gt;
+&lt;td&gt;进入取代模式(Replace mode)： &lt;br&gt; &lt;code&gt;r&lt;/code&gt; 只会取代光标所在的那一个字符一次； &lt;br&gt; &lt;code&gt;R&lt;/code&gt; 会一直取代光标所在的文字，直到按下 &lt;code&gt;ESC&lt;/code&gt; 为止；(常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;[&lt;code&gt;Esc&lt;/code&gt;]&lt;/td&gt;

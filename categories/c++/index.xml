@@ -311,7 +311,7 @@ Hello, World!&lt;/p&gt;
 &lt;li&gt;定义一个类，本质上是定义一个数据类型的蓝图，实际上并没有定义任何数据，但它定义了类的名称的意义是什么，也就是说，它定义了类的对象包括了什么，以及可以在这个对象上执行的哪些操作&lt;/li&gt;
 &lt;li&gt;定义类是以关键字 class 开头，后面跟上类的名称，类的主体是包含在一对花括号中，类定义后必须跟着一个分号或一个声明列表，例如，我们使用关键字 class 定义 Bog 数据类型，如下所示：&lt;/li&gt;
 &lt;/ul&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;!-- ![类的定义](/images/cpp-learning/class-01.jpg) --&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
 &lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1

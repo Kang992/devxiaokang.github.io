@@ -63,8 +63,11 @@
 &lt;/blockquote&gt;
 &lt;hr&gt;
 &lt;h2 id=&#34;三命令模式&#34;&gt;三、命令模式&lt;/h2&gt;
-&lt;!-- raw HTML omitted --&gt;
-&lt;!-- raw HTML omitted --&gt;
+&lt;style&gt;
+table th:first-of-type {
+  width: 25%
+}
+&lt;/style&gt;
 &lt;h3 id=&#34;1移动光标&#34;&gt;1、移动光标&lt;/h3&gt;
 &lt;table&gt;
 &lt;thead&gt;
@@ -306,19 +309,19 @@
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;i&lt;/code&gt;, &lt;code&gt;I&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入输入模式(Insert mode)： &lt;!-- raw HTML omitted --&gt; &lt;code&gt;i&lt;/code&gt; 为『从目前光标所在处输入』， &lt;!-- raw HTML omitted --&gt; &lt;code&gt;I&lt;/code&gt; 为『在目前所在行的第一个非空格符处开始输入』。 (常用)&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： &lt;br&gt; &lt;code&gt;i&lt;/code&gt; 为『从目前光标所在处输入』， &lt;br&gt; &lt;code&gt;I&lt;/code&gt; 为『在目前所在行的第一个非空格符处开始输入』。 (常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;a&lt;/code&gt;, &lt;code&gt;A&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入输入模式(Insert mode)： &lt;!-- raw HTML omitted --&gt; &lt;code&gt;a&lt;/code&gt; 为『从目前光标所在的下一个字符处开始输入』， &lt;!-- raw HTML omitted --&gt; &lt;code&gt;A&lt;/code&gt; 为『从光标所在行的最后一个字符处开始输入』。(常用)&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： &lt;br&gt; &lt;code&gt;a&lt;/code&gt; 为『从目前光标所在的下一个字符处开始输入』， &lt;br&gt; &lt;code&gt;A&lt;/code&gt; 为『从光标所在行的最后一个字符处开始输入』。(常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;o&lt;/code&gt;, &lt;code&gt;O&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入输入模式(Insert mode)： &lt;!-- raw HTML omitted --&gt; 这是英文字母 &lt;code&gt;o&lt;/code&gt; 的大小写。&lt;code&gt;o&lt;/code&gt; 为『在目前光标所在的下一行处输入新的一行』； &lt;!-- raw HTML omitted --&gt; &lt;code&gt;O &lt;/code&gt;为在目前光标所在处的上一行输入新的一行！(常用)&lt;/td&gt;
+&lt;td&gt;进入输入模式(Insert mode)： &lt;br&gt; 这是英文字母 &lt;code&gt;o&lt;/code&gt; 的大小写。&lt;code&gt;o&lt;/code&gt; 为『在目前光标所在的下一行处输入新的一行』； &lt;br&gt; &lt;code&gt;O &lt;/code&gt;为在目前光标所在处的上一行输入新的一行！(常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;&lt;code&gt;r&lt;/code&gt;, &lt;code&gt;R&lt;/code&gt;&lt;/td&gt;
-&lt;td&gt;进入取代模式(Replace mode)： &lt;!-- raw HTML omitted --&gt; &lt;code&gt;r&lt;/code&gt; 只会取代光标所在的那一个字符一次； &lt;!-- raw HTML omitted --&gt; &lt;code&gt;R&lt;/code&gt; 会一直取代光标所在的文字，直到按下 &lt;code&gt;ESC&lt;/code&gt; 为止；(常用)&lt;/td&gt;
+&lt;td&gt;进入取代模式(Replace mode)： &lt;br&gt; &lt;code&gt;r&lt;/code&gt; 只会取代光标所在的那一个字符一次； &lt;br&gt; &lt;code&gt;R&lt;/code&gt; 会一直取代光标所在的文字，直到按下 &lt;code&gt;ESC&lt;/code&gt; 为止；(常用)&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;td&gt;[&lt;code&gt;Esc&lt;/code&gt;]&lt;/td&gt;
