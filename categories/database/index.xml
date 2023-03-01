@@ -6,7 +6,1494 @@
         <description>Recent content in Database on Hello, It&#39;s me</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Wed, 29 Jun 2022 15:34:24 +0800</lastBuildDate><atom:link href="https://x-xkang.com/categories/database/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Tue, 28 Feb 2023 10:29:46 +0800</lastBuildDate><atom:link href="https://x-xkang.com/categories/database/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Mysql -- 索引性能分析</title>
+        <link>https://x-xkang.com/p/mysql-%E7%B4%A2%E5%BC%95%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</link>
+        <pubDate>Tue, 28 Feb 2023 10:29:46 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-%E7%B4%A2%E5%BC%95%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;查看sql执行频率&#34;&gt;查看SQL执行频率&lt;/h3&gt;
+&lt;p&gt;MySQL 客户端连接成功后，通过show[session|global] status 命令可以提供服务器状态信息。通过如下指令可以查看当前数据库的&lt;code&gt;INSERT&lt;/code&gt;、&lt;code&gt;UPDATE&lt;/code&gt;、&lt;code&gt;DELETE&lt;/code&gt;、&lt;code&gt;SELECT&lt;/code&gt;的访问频次：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SHOW&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;GLOBAL&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;STATUS&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;LIKE&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;Com_______&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;一个&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;_&amp;#39;&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;代表一个字符&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;结果如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;mysql&amp;gt; show global status like &amp;#39;Com_______&amp;#39;;
++---------------+-------+
+| Variable_name | Value |
++---------------+-------+
+| Com_binlog    | 0     |
+| Com_commit    | 0     |
+| Com_delete    | 0     |
+| Com_import    | 0     |
+| Com_insert    | 0     |
+| Com_repair    | 0     |
+| Com_revoke    | 0     |
+| Com_select    | 8     |
+| Com_signal    | 0     |
+| Com_update    | 0     |
+| Com_xa_end    | 0     |
++---------------+-------+
+11 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;查询慢日志&#34;&gt;查询慢日志&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;慢查询日志记录了所有执行时间超过指定参数（long_query_time，单位：秒，默认10秒）的所有SQL语句的日志。MySQL的慢查询日志默认没有开启，执行一下SQL查看慢日志开启状态：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SHOW&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;VARIABLES&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;LIKE&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;slow_query_log&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;/blockquote&gt;
+&lt;p&gt;需要在MySQL的配置文件（/etc/my.cnf）中配置如下信息：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;c1&#34;&gt;# 开启MySQL慢日志查询开关&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;slow_query_log&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;1&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;# 设置慢日志的时间为2秒，SQL语句执行时间炒锅2秒就会视为慢查询，记录慢查询日志&lt;/span&gt;
+&lt;span class=&#34;nv&#34;&gt;long_query_time&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;2&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;重启MySQL服务，本机环境为win10的WSL2，直接执行以下命令：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;sudo service mysql restart
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;profile详情&#34;&gt;profile详情&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;show profiles&lt;/code&gt; 能够在做SQL优化时帮助我们了解时间都耗费到哪去了。通过&lt;code&gt;have_profiling&lt;/code&gt;参数，能够看到当前MySQL是否支持profile操作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;查看是否支持&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;@@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;have_profiling&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;默认&lt;code&gt;profiling&lt;/code&gt;是关闭的，可以通过&lt;code&gt;set&lt;/code&gt;语句在&lt;code&gt;session&lt;/code&gt;/&lt;code&gt;global&lt;/code&gt;级别开启&lt;code&gt;profiling&lt;/code&gt;:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;查看开关状态&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;@@&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;profiling&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;设置开关状态&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;SET&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;profiling&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行完查询语句后再执行&lt;code&gt;show profiles&lt;/code&gt;，结果如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;9
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;+----------+------------+------------------------+
+| Query_ID | Duration   | Query                  |
++----------+------------+------------------------+
+|        1 | 0.00025800 | select @@profiling     |
+|        2 | 0.00125875 | show tables            |
+|        3 | 0.00014975 | select * form user     |
+|        4 | 0.01059300 | select * from user     |
+|        5 | 0.00152175 | select * from user_log |
++----------+------------+------------------------+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;explain-执行计划&#34;&gt;explain 执行计划&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;EXPLAIN&lt;/code&gt; 或者 &lt;code&gt;DESC&lt;/code&gt; 命令获取MySQL如何执行SELECT语句的信息，包括在SELECT语句执行过程中表如何连接和连接的顺序。语法如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;直接在&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;select语句之前加上关键字&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;explain&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;desc&lt;/span&gt;
+
+&lt;span class=&#34;k&#34;&gt;EXPLAIN&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表名&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;结果如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;mysql&amp;gt; explain select * from user;
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+| id | select_type | table | partitions | type | possible_keys | key  | key_len | ref  | rows | filtered | Extra |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+|  1 | SIMPLE      | user  | NULL       | ALL  | NULL          | NULL | NULL    | NULL |    1 |   100.00 | NULL  |
++----+-------------+-------+------------+------+---------------+------+---------+------+------+----------+-------+
+1 row in set, 1 warning (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;code&gt;EXPLAIN&lt;/code&gt; 输出列如下：&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Column&lt;/th&gt;
+&lt;th&gt;JSON Name&lt;/th&gt;
+&lt;th&gt;Meaning&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#id&#34; &gt;id&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;select_id&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SELECT&lt;/code&gt; 标识符&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#select_type&#34; &gt;select_type&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;None&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SELECT&lt;/code&gt; 类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#table&#34; &gt;table&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;table_name&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;输出行table&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#partitions&#34; &gt;partitions&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;partitions&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;匹配的分区&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#type&#34; &gt;type&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;access_type&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;连接类型&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#possible_keys&#34; &gt;possible_keys&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;possible_keys&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;可能的索引选择&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#key&#34; &gt;key&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;key&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;实际选择的索引&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#key_len&#34; &gt;key_len&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;key_length&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;所选键的长度&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#ref&#34; &gt;ref&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;ref&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;与索引比较的列&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#rows&#34; &gt;rows&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;rows&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;估计要检查的行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#filtered&#34; &gt;filtered&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;filtered&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;按table条件过滤的行百分比&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;a class=&#34;link&#34; href=&#34;#Extra&#34; &gt;Extra&lt;/a&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;None&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;扩展信息&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;p&gt;😀 Note
+详细解释可参考 &lt;a class=&#34;link&#34; href=&#34;https://dev.mysql.com/doc/refman/8.0/en/explain-output.html&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;[官方文档]&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;id&#34;&gt;&lt;code&gt;id&lt;/code&gt;&lt;/span&gt;
+行标识，如果没有子查询或者联合查询，这个值是1，id列值越大越先执行，如果一样大，那么就从上往下依次执行&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;select_type&#34;&gt;&lt;code&gt;select_type&lt;/code&gt;&lt;/span&gt;
+查询的类型，可以是下表的任何一种类型&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;select_type&lt;/th&gt;
+&lt;th&gt;类型说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SIMPLE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;简单&lt;code&gt;SELECT&lt;/code&gt;（不使用&lt;code&gt;UNION&lt;/code&gt;或子查询）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;PROMARY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;最外层的&lt;code&gt;SELECT&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UNION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;UNION&lt;/code&gt;中第二个或之后的&lt;code&gt;SELECT&lt;/code&gt;语句&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DEPENDENT UNION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;UNION&lt;/code&gt;中第二个或之后的&lt;code&gt;SELECT&lt;/code&gt;语句取决于外面的查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UNION RESULT&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;UNION&lt;/code&gt;的结果&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SUBQUERY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;子查询中的第一个&lt;code&gt;SELECT&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DEPENDENT SUBQUERY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;子查询中的第一个&lt;code&gt;SELECT&lt;/code&gt;，取决于外面的查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;DERIVED&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;衍生表（FROM自居中的子查询）&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;MATERIALIZED&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;物化子查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UNCACHEABLE SUBQUERY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;结果集无法缓存的子查询，必须重新评估外部查询的每一行&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;UNCACHEABLE UNION&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;UNION&lt;/code&gt;中第二个或之后的&lt;code&gt;SELECT&lt;/code&gt;，属于无法缓存的子查询&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;p&gt;⭐ &lt;code&gt;DEPENDENT&lt;/code&gt; 意味着使用了关联子查询&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;table&#34;&gt;&lt;code&gt;table&lt;/code&gt;&lt;/span&gt;：输出行所引用表的名称，也可以是以下值之一：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&amp;lt;unionM,N&amp;gt;: 引用id为M和N UNION之后的结果。&lt;/li&gt;
+&lt;li&gt;&lt;derivedN&gt;: 引用id为N的结果派生出的表，派生表可以是一个结果集，例如派生自FROM中子查询的结果。&lt;/li&gt;
+&lt;li&gt;&lt;subqueryN&gt;: 引用id为N的子查询结果物化得到的表，即生成一个临时表保存子查询的结果。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;partitions&#34;&gt;&lt;code&gt;partitions&lt;/code&gt;&lt;/span&gt;：v5.7之前该项是&lt;code&gt;explain partitions&lt;/code&gt;显示的选项，v5.7之后成为了默认选项，该列显示的为分区表中的分区情况，非分区表该字段为空（null）。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;type&#34;&gt;type&lt;/span&gt;( &lt;strong&gt;重要&lt;/strong&gt; )：连接类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;system&lt;/code&gt;
+表中只有一行数据或者是空表，这是const类型的一个特例，且只能用于&lt;code&gt;MyISAM&lt;/code&gt;和&lt;code&gt;Memory&lt;/code&gt;表，如果是&lt;code&gt;InnoDB&lt;/code&gt;引擎表，&lt;code&gt;type&lt;/code&gt;列在这个情况通常都是&lt;code&gt;all&lt;/code&gt;或者&lt;code&gt;index&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;const&lt;/code&gt;
+最多只有一行记录匹配。当联合主键或唯一索引的所有字段跟常量值比较时，&lt;code&gt;join&lt;/code&gt;类型为&lt;code&gt;const&lt;/code&gt;。其他数据库也叫做唯一索引扫描&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;eq_ref&lt;/code&gt;
+多表&lt;code&gt;join&lt;/code&gt;时，对于来自前面表的每一行，在当前表中只能找到一行，这可能是除了&lt;code&gt;system&lt;/code&gt;和&lt;code&gt;const&lt;/code&gt;之外最好的类型，当主键或唯一非NULL索引的所有字段都被当做&lt;code&gt;join&lt;/code&gt;连接时会出现此类型。
+&lt;code&gt;eq_ref&lt;/code&gt;可用于使用&#39;=&amp;lsquo;操作符作比较的索引列，比较的值可以是常量，也可以是使用此表之前读取的表的列表达式。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ref&lt;/code&gt;
+对于来自前面表的每一行，在此表的索引中可以匹配到多行，若连接只用到索引的最左前缀或索引不是主键或唯一索引时，使用 &lt;code&gt;ref&lt;/code&gt; 类型（也就是说，此类型能够匹配到多行连接）。
+&lt;code&gt;ref&lt;/code&gt; 可用于使用 &lt;code&gt;=&lt;/code&gt; 或 &lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; 操作符作比较的索引列。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;fulltext&lt;/code&gt;
+用于全文索引的时候是这个类型，要注意，&lt;strong&gt;全文索引的优先级很高&lt;/strong&gt;，若全文索引和普通索引同时存在，mysql不管代价，优先选择使用全文索引&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;ref_or_null&lt;/code&gt;
+类似于&lt;code&gt;ref&lt;/code&gt;类型，只是增加了&lt;code&gt;null&lt;/code&gt;值得比较，实际用的不多&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;index_merge&lt;/code&gt;
+此类型表示查询使用两个以上索引，最后取交集或者并集，常见 &lt;code&gt;and&lt;/code&gt;, &lt;code&gt;or&lt;/code&gt;的条件使用了不同的索引，官方排序这个在&lt;code&gt;ref_or_null&lt;/code&gt;之后，但是实际上由于要读取多个索引，性能可能大部分时间都不如&lt;code&gt;range&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;unique_subquery&lt;/code&gt;
+用于&lt;code&gt;WHERE&lt;/code&gt;中的 &lt;code&gt;IN&lt;/code&gt; 形式子查询，子查询返回不重复值唯一值，可以完全替换子查询，效率更高。
+该类型替换了下面形式的 &lt;code&gt;IN&lt;/code&gt; 子查询的 &lt;code&gt;ref&lt;/code&gt;:
+&lt;code&gt;value IN (select primary_key FROM single_table WHERE some_expr)&lt;/code&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;index_subquery&lt;/code&gt;
+该连接类型类似于&lt;code&gt;unique_subquery&lt;/code&gt;。适用于非唯一索引，可以返回重复值&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;range&lt;/code&gt;
+索引范围查询，常见于使用&lt;code&gt;=&lt;/code&gt; &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;gt;=&lt;/code&gt; &lt;code&gt;&amp;lt;&lt;/code&gt; &lt;code&gt;&amp;lt;=&lt;/code&gt; &lt;code&gt;IS NULL&lt;/code&gt; &lt;code&gt;&amp;lt;=&amp;gt;&lt;/code&gt; &lt;code&gt;BETWEEN&lt;/code&gt; &lt;code&gt;IN&lt;/code&gt; 或者 &lt;code&gt;LIKE&lt;/code&gt; 等运算符的查询中。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;index&lt;/code&gt;
+索引全表扫描，把索引从头到尾扫一遍。这里包含两种情况：
+一种是查询使用了覆盖索引，那么它只需要扫描索引就可以获得数据，这个效率要比全表扫描要快，因为索引通常比数据表小，而且还能避免二次查询。在 &lt;code&gt;extra&lt;/code&gt; 中显示 &lt;code&gt;Using index&lt;/code&gt;，反之，如果在索引上进行全表扫描，没有 &lt;code&gt;Using index&lt;/code&gt;的提示。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;code&gt;all&lt;/code&gt;
+全表扫描，性能较差&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;possible_keys&#34;&gt;possible_keys&lt;/span&gt;：查询可能用到的索引，如果此列是 &lt;code&gt;NULL&lt;/code&gt;，则没有用到索引。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;key&#34;&gt;key&lt;/span&gt;：表示MySQL实际决定使用的索引，如果MySQL决定使用其中一个 &lt;code&gt;possible_keys&lt;/code&gt; 索引来查找行，则该索引将作为键值列出。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;key_length&#34;&gt;key_length&lt;/span&gt;：查询用到的索引长度（字节），
+如果是单列索引，那就整个索引长度算进去，如果是多列索引，那么查询不一定都能使用到所有的列，用多少算多少。例如组合索引为&lt;code&gt;idx_username_create_time&lt;/code&gt;，当查询语句为 &lt;code&gt;select * from user where username=&#39;qqq&#39;&lt;/code&gt;时，只用到了&lt;code&gt;username&lt;/code&gt;字段，那么&lt;code&gt;key_len&lt;/code&gt;只会计算&lt;code&gt;username&lt;/code&gt;字段占用的字节数，假如&lt;code&gt;username&lt;/code&gt;字段类型为&lt;code&gt;varchar(50)&lt;/code&gt; NOT NULL，字符编码为&lt;code&gt;utf8mb3&lt;/code&gt;（utf8编码一个字符占用3个字节，gbk编码一个字符占2字节），记录字符串长度占用2字节，记录字段不为空占用1字节（若没有&lt;code&gt;NOT NULL&lt;/code&gt;限制则不占用这1个字节）那么&lt;code&gt;key_len&lt;/code&gt;为 50 * 3 + 2 + 1 = 153字节&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;ref&#34;&gt;ref&lt;/span&gt;：如果使用的是常数等值查询，这里会显示&lt;code&gt;const&lt;/code&gt;，如果是连接查询，被驱动表的执行计划这里会显示驱动表的关联字段，如果是条件使用了表达式或者函数，或者条件列表发生了内部隐式转换，这里可能显示为&lt;code&gt;func&lt;/code&gt;。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;rows&#34;&gt;rows&lt;/span&gt;( &lt;strong&gt;重要&lt;/strong&gt; ):&lt;code&gt;rows&lt;/code&gt;也是一个重要的字段，这是MySQL估算的需要扫描的行数（不是精确值）。这个值非常直观显示SQL的效率好坏，原则上&lt;code&gt;rows&lt;/code&gt;越少越好。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;filtered&#34;&gt;filtered&lt;/span&gt;：该字段表示存储引擎返回的数据在server层过滤后，剩下多少满足查询的记录数量的比例，注意是百分比，不是具体记录数。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;span id=&#34;Extra&#34;&gt;Extra&lt;/span&gt;( &lt;strong&gt;重要&lt;/strong&gt; )：&lt;code&gt;EXPLAIN&lt;/code&gt;中很多额外的信息会在&lt;code&gt;Extra&lt;/code&gt;字段显示，常见的有以下：&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;distinct&lt;/code&gt;&lt;/strong&gt;: 在&lt;code&gt;select&lt;/code&gt;部分使用了&lt;code&gt;distinct&lt;/code&gt;关键字&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;Using filesort&lt;/code&gt;&lt;/strong&gt;: 当&lt;code&gt;Extra&lt;/code&gt;中有&lt;code&gt;Using filesort&lt;/code&gt;时，表示MySQL需额外的排序操作，不能通过索引顺序到达排序效果，一般有 &lt;code&gt;Using filesort&lt;/code&gt; 都建议优化去掉，因为这样的查询CPU资源消耗较大。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;Using index&lt;/code&gt;&lt;/strong&gt;: “覆盖索引扫描”，表示查询在索引树种就可查找所需数据，不用扫描表数据文件，往往说明性能不错。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&lt;code&gt;Using temporary&lt;/code&gt;&lt;/strong&gt;: 查询有使用临时表，一般出现于排序，分组和多表join的情况，查询效率不高，建议优化。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- 以上即是`EXPLAIN`执行计划返回的结果集中个字段的含义。 --&gt;</description>
+        </item>
+        <item>
+        <title>Mysql -- 约束</title>
+        <link>https://x-xkang.com/p/mysql-%E7%BA%A6%E6%9D%9F/</link>
+        <pubDate>Tue, 28 Feb 2023 10:24:41 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-%E7%BA%A6%E6%9D%9F/</guid>
+        <description>&lt;h3 id=&#34;概念&#34;&gt;概念&lt;/h3&gt;
+&lt;p&gt;约束是作用于表中字段行的规则，用于限制存储在表中的数据&lt;/p&gt;
+&lt;h3 id=&#34;目的&#34;&gt;目的&lt;/h3&gt;
+&lt;p&gt;保证数据库中数据的正确性、有效性和完整性&lt;/p&gt;
+&lt;h3 id=&#34;分类&#34;&gt;分类&lt;/h3&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;约束&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;th&gt;关键字&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;非空约束&lt;/td&gt;
+&lt;td&gt;限制该字段的数据不能为null&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;NOT NULL&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;唯一约束&lt;/td&gt;
+&lt;td&gt;保证该字段的所有数据都是唯一、不重复的&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;UNIQUE&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;主键约束&lt;/td&gt;
+&lt;td&gt;主键是一行数据的唯一标识，要求非空且唯一&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;PRIMARY KEY&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;默认约束&lt;/td&gt;
+&lt;td&gt;保存数据时，如果未指定该字段的值，则采用默认值&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;DEFAULT&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;检查约束（v8.0.16之后）&lt;/td&gt;
+&lt;td&gt;保证字段值满足某一个条件&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;CHECK&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;外键约束&lt;/td&gt;
+&lt;td&gt;用来让两张表的数据之间建立连接，保证数据的一致性和完整性&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;FOREIGN KEY&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;h3 id=&#34;演示&#34;&gt;演示&lt;/h3&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;create&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;table&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;user_info&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;11&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;primary&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;key&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;auto_increment&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;comment&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;主键ID&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;非空约束和主键约束&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;phone&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;varchar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;32&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;not&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;null&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;unique&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;default&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;comment&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;手机号码&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;非空约束和唯一约束&lt;/span&gt;
+  &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;nickname&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;varchar&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;255&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;default&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;user&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;comment&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;昵称&amp;#39;&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;默认约束&lt;/span&gt;
+&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Mysql -- 多表查询</title>
+        <link>https://x-xkang.com/p/mysql-%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/</link>
+        <pubDate>Tue, 28 Feb 2023 10:12:34 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-%E5%A4%9A%E8%A1%A8%E6%9F%A5%E8%AF%A2/</guid>
+        <description>&lt;h3 id=&#34;内连接&#34;&gt;内连接&lt;/h3&gt;
+&lt;p&gt;内连接查询的是两张表交集的部分&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;隐式内连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;查询条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;显式内连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;INNER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;连接条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;  
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;外连接&#34;&gt;外连接&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;左外连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;相当于查询表1（左表）的所有数据包含表1和表2交集部分的数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;LEFT&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;OUTER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;右外连接&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;相当于查询表2（右表）的所有数据 包含 表1和表2交集部分的数据&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;自连接&#34;&gt;自连接&lt;/h3&gt;
+&lt;p&gt;自连接查询，可以是内连接查询，也可以是外连接查询。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;别名&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;别名&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;联合查询-union-union-all&#34;&gt;联合查询-union, union all&lt;/h3&gt;
+&lt;p&gt;对于union查询，就是把多次查询的结果并起来，形成一个新的查询结果集。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;UNION&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ALL&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;子查询&#34;&gt;子查询&lt;/h3&gt;
+&lt;p&gt;SQL语句中嵌套SELECT语句，称为嵌套查询，又称子查询。&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;子查询外部的语句可以是 INSERT / UPDATE / DELETE / SELECT 的任何一个。&lt;/p&gt;
+&lt;p&gt;根据子查询结果不同，分为：&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;标量子查询（子查询结果为单个值）&lt;/li&gt;
+&lt;li&gt;列子查询（子查询结果为一列）&lt;/li&gt;
+&lt;li&gt;行子查询（子查询结果为一行）&lt;/li&gt;
+&lt;li&gt;表子查询（子查询结果为多行多列）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;根据子查询位置，分为：WHERE之后、FROM之后、SELECT之后。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;子查询----标量子查询&#34;&gt;子查询 &amp;ndash; 标量子查询&lt;/h4&gt;
+&lt;p&gt;标量子查询返回的结果是单个值（数字、字符串、日期等），最简单的形式，这种子查询称为标量子查询。
+常用的操作符： &lt;code&gt;=&lt;/code&gt; &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;gt;&lt;/code&gt; &lt;code&gt;&amp;gt;=&lt;/code&gt; &lt;code&gt;&amp;lt;&lt;/code&gt; &lt;code&gt;&amp;lt;=&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h4 id=&#34;子查询----列子查询&#34;&gt;子查询 &amp;ndash; 列子查询&lt;/h4&gt;
+&lt;p&gt;子查询返回的结果是一列（可以是多行），这种子查询称为列子查询。
+常用的操作符：&lt;code&gt;IN&lt;/code&gt; &lt;code&gt;NOT IN&lt;/code&gt; &lt;code&gt;ANY&lt;/code&gt; &lt;code&gt;SOME&lt;/code&gt; &lt;code&gt;ALL&lt;/code&gt;&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;操作符&lt;/th&gt;
+&lt;th&gt;描述&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;IN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;在指定的集合范围之内，多选一&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;NOT IN&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;不在指定的集合范围内&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ANY&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;子查询返回列表中，有任意一个满足即可&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;SOME&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;与&lt;code&gt;ANY&lt;/code&gt;等同，使用&lt;code&gt;SOME&lt;/code&gt;的地方都可以使用&lt;code&gt;ANY&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;ALL&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;子查询返回列表的所有值都必须满足&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;IN&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt; 
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h4 id=&#34;子查询----行子查询&#34;&gt;子查询 &amp;ndash; 行子查询&lt;/h4&gt;
+&lt;p&gt;子查询返回的结果是一行（可以是多列），这种查询称为行子查询。&lt;/p&gt;
+&lt;p&gt;常用的操作符：&lt;code&gt;=&lt;/code&gt; &lt;code&gt;&amp;lt;&amp;gt;&lt;/code&gt; &lt;code&gt;IN&lt;/code&gt; &lt;code&gt;NOT IN&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;子查询返回一行数据，可以有多个字段&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h4 id=&#34;子查询----表子查询&#34;&gt;子查询 &amp;ndash; 表子查询&lt;/h4&gt;
+&lt;p&gt;子查询返回的结果是多行多列，这种子查询称为表子查询。
+常用的操作符：&lt;code&gt;IN&lt;/code&gt;&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;子查询返回的是多行多列数据，字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;和字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;分别匹配子查询结果各行中的字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;和字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;WHERE&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;IN&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;，&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;字段&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;4&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;);&lt;/span&gt;
+
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+        </item>
+        <item>
+        <title>Mysql -- 锁分析</title>
+        <link>https://x-xkang.com/p/mysql-%E9%94%81%E5%88%86%E6%9E%90/</link>
+        <pubDate>Fri, 16 Dec 2022 17:54:33 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-%E9%94%81%E5%88%86%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;一全局锁&#34;&gt;一、全局锁&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;对整个数据库实例加锁，加锁后整个数据库实例处于只读状态，后续的DML的写语句，DDL语句已经更新操作的事务提交语句都将阻塞。&lt;/li&gt;
+&lt;li&gt;其典型的使用场景是做全库的逻辑备份，对所有的表进行锁定，从而获取一致性的视图，保证数据的完整性。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;加锁操作：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 加锁
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;flush&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tables&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;with&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;read&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;lock&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;-- TODO. 逻辑备份
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysqldump&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;uroot&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;-&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;p123456&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;dbname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;dbname&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;sql&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;-- TODO. 中间穿插的 insert/update/delete 语句将阻塞
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;update&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;user&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;set&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;password&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;654321&amp;#39;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;where&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;`&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;id&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;`&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;-- 释放锁
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unlock&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tables&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;特点：&lt;/p&gt;
+&lt;p&gt;数据库中加全局锁是比较重的操作，存在一下问题&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如果在主库上备份，那么在备份期间都不能执行更新，业务基本上就得停摆。&lt;/li&gt;
+&lt;li&gt;如果在从库上备份，那么在备份期间从库不能执行从主库同步过来的二进制文件(binlog)，会导致主从延迟。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;在Innodb存储引擎中，我们可以再备份时加上参数 &amp;ndash;single-transaction 参数来完成不加锁的一致性数据备份&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysqldump&lt;/span&gt; &lt;span class=&#34;c1&#34;&gt;--single-transaction -uroot -p123456 [dbname] &amp;gt; dbname.sql
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h3 id=&#34;二表级锁&#34;&gt;二、表级锁&lt;/h3&gt;
+&lt;p&gt;介绍
+每次操作锁住整张表，锁定力度大，发生锁冲突的概率最高，并发度最低。应用在Innodb,MyIsam，BDB等存储引擎中。&lt;/p&gt;
+&lt;p&gt;表级锁主要分为以下几类：&lt;/p&gt;
+&lt;h4 id=&#34;1-表锁&#34;&gt;1. 表锁&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;表共享读锁&lt;/li&gt;
+&lt;li&gt;表独占写锁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;操作如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;c1&#34;&gt;-- 加锁
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;lock&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tables&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;table_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;read&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;write&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;c1&#34;&gt;-- 释放锁
+&lt;/span&gt;&lt;span class=&#34;c1&#34;&gt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;unlock&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;tables&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;读锁不会阻塞其他客户端的读操作，但是会阻塞写操作。&lt;/li&gt;
+&lt;li&gt;写锁既会阻塞其他客户端的读，也会阻塞其他客户端的写。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;2-元数据锁meta-data-lock-mdl&#34;&gt;2. 元数据锁(meta data lock, mdl)&lt;/h4&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;MDL&lt;/code&gt;加锁过程是系统自动控制的，无需显式使用，在访问一张表的时候会自动加上，主要作用是维护表元数据的数据一致性，在表上有活动事务的时候，不可以对元数据进行写操作，为了避免MDL和DDL的冲突，保证读写的正确性&lt;/li&gt;
+&lt;li&gt;在MySQL5.5中加入了MDL，当对一张表进行增删改查的时候，加MDL读锁（共享锁），当对表结构进行修改的时候，加MDL写锁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;查看元数据锁&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_duration&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;performance_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;metadata_locks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;对应SQL&lt;/th&gt;
+&lt;th&gt;锁类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;lock tables [t_name] read/write&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SHARED_READ_ONLY&lt;/code&gt; / &lt;code&gt;SHARED_NO_READ_WRITE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;select、select &amp;hellip; lock in share mode&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SHARED_READ&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;与&lt;code&gt;SHARED_READ&lt;/code&gt;/&lt;code&gt;SHARED_WRITE&lt;/code&gt;兼容，与&lt;code&gt;EXCLUSIVE&lt;/code&gt; 互斥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;insert、update、delete、select &amp;hellip; for update&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;SHARED_WRITE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;与&lt;code&gt;SHARE_READ&lt;/code&gt;/ &lt;code&gt;SHARED_WRITE&lt;/code&gt;兼容，与&lt;code&gt;EXCLUSIVE&lt;/code&gt; 互斥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;alter table &amp;hellip;&lt;/td&gt;
+&lt;td&gt;&lt;code&gt;EXCLUSIVE&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;与其他的 &lt;code&gt;MDL&lt;/code&gt; 都互斥&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;3-意向锁&#34;&gt;3. 意向锁&lt;/h4&gt;
+&lt;p&gt;为了避免&lt;code&gt;MDL&lt;/code&gt;在执行时，加的表锁与行锁冲突，在InnoDB中引入了意向锁，使得表锁不用检查每行数据是否加锁，使用意向锁来减少表锁的检查。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;意向共享锁（IS）：由语句 select &amp;hellip; lock in share mode 添加，与表锁共享锁（read）兼容，与表锁排它锁（write）互斥。&lt;/li&gt;
+&lt;li&gt;意向排它锁（IX）：由语句 insert、update、delete、select &amp;hellip; for update 添加，与表锁共享锁（read）和表锁互斥锁（write）都互斥。意向锁之间不会互斥。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;查看意向锁：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_mode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_data&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;performance_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data_locks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h3 id=&#34;三行级锁&#34;&gt;三、行级锁&lt;/h3&gt;
+&lt;p&gt;每次操作锁住对应的数据行。锁定粒度最小，发生锁冲突的概率最低，并发度最高。应用在Innodb存储引擎中。&lt;/p&gt;
+&lt;p&gt;Innodb的数据是鲫鱼索引组织的，行锁是通过对索引上的索引项加锁来实现的，而不是对记录加的锁，对于行级锁，主要分为以下三类：&lt;/p&gt;
+&lt;h4 id=&#34;1-行锁&#34;&gt;1. 行锁&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Record Lock&lt;/code&gt;：锁定单个记录的锁，防止其他事务对此进行update和delete，在 RC 和 RR 隔离级别下都支持。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Innodb实现了以下两种类型的行锁：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;共享锁（S）：允许一个事务去读一行，阻止其他事务获得相同数据集的排它锁。&lt;/li&gt;
+&lt;li&gt;排它锁（X）：允许获取排它锁的事务更新数据，阻止其他事务获得相同数据集的共享锁和排它锁。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;当前锁类型 \ 请求锁类型&lt;/th&gt;
+&lt;th&gt;S（共享锁）&lt;/th&gt;
+&lt;th&gt;X（排它锁）&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;S （共享锁）&lt;/td&gt;
+&lt;td&gt;兼容&lt;/td&gt;
+&lt;td&gt;冲突&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;X （排它锁）&lt;/td&gt;
+&lt;td&gt;冲突&lt;/td&gt;
+&lt;td&gt;冲突&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;不同的SQL使用的锁类型：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;SQL&lt;/th&gt;
+&lt;th&gt;行锁类型&lt;/th&gt;
+&lt;th&gt;说明&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;INSERT &amp;hellip;&lt;/td&gt;
+&lt;td&gt;排它锁&lt;/td&gt;
+&lt;td&gt;自动加锁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;UPDATE &amp;hellip;&lt;/td&gt;
+&lt;td&gt;排它锁&lt;/td&gt;
+&lt;td&gt;自动加锁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;DELETE &amp;hellip;&lt;/td&gt;
+&lt;td&gt;排它锁&lt;/td&gt;
+&lt;td&gt;自动加锁&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SELECT（正常）&lt;/td&gt;
+&lt;td&gt;不加任何锁&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SELECT &amp;hellip; LOCK IN SHARE MODE&lt;/td&gt;
+&lt;td&gt;共享锁&lt;/td&gt;
+&lt;td&gt;需要手动在 &lt;code&gt;SELECT&lt;/code&gt; 之后加 &lt;code&gt;LOCK IN SHARE MODE&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;SELECT &amp;hellip; FOR UPDATE&lt;/td&gt;
+&lt;td&gt;排它锁&lt;/td&gt;
+&lt;td&gt;需要手动在 &lt;code&gt;SELECT&lt;/code&gt; 之后加 &lt;code&gt;FOR UPDATE&lt;/code&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;ul&gt;
+&lt;li&gt;行锁-演示：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;默认情况下，InnoDB在REPEATABLE READ 事务隔离界别运行，InnoDB 使用next key 锁进行搜索和索引扫描，以防止幻读。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;针对唯一索引进行检索时，对已存在的记录进行等值匹配时，将会自动优化为行锁。&lt;/li&gt;
+&lt;li&gt;InnoDB的行锁是针对于索引加的锁不通过索引条件检索数据，那么InnoDB将对表中的所有数据进行加锁，此时就会&lt;strong&gt;升级为表锁&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;可以通过一下SQL，查看意向锁以及行锁的加锁情况：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;object_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;index_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_type&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_mode&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lock_data&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;performance_schema&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;data_locks&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;hr&gt;
+&lt;h4 id=&#34;2-间隙锁&#34;&gt;2. 间隙锁&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Gap Lock&lt;/code&gt;: 锁定索引记录间隙（不包含该记录），确保索引记录间隙不变，防止其他事务在这个间隙进行insert，产生幻读，在RR隔离级别下都支持。&lt;/p&gt;
+&lt;hr&gt;
+&lt;h4 id=&#34;3-临键锁&#34;&gt;3. 临键锁&lt;/h4&gt;
+&lt;p&gt;&lt;code&gt;Next-Key Lock&lt;/code&gt;: 行锁和间隙锁组合，同时锁住数据，并锁住数据前面的间隙Gap。在RR隔离级别下支持。&lt;/p&gt;
+&lt;h4 id=&#34;4-间隙锁临键锁-演示&#34;&gt;4. 间隙锁/临键锁 演示&lt;/h4&gt;
+&lt;p&gt;默认情况下，InnoDB在Repeatable read 事务隔离级别运行，InnoDB使用 Next-key 锁进行搜索和索引扫描，以防止幻读。&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;ol&gt;
+&lt;li&gt;索引上的等值查询（唯一索引），给不存在的记录加锁时优化为间隙锁。&lt;/li&gt;
+&lt;li&gt;索引上的等值查询（普通索引），向右遍历时最后一个值不满足查询需求时，next-key lock 退化为间隙锁。&lt;/li&gt;
+&lt;li&gt;索引上的范围查询（唯一索引），会访问到不满足条件的第一个值为止。&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;span style=&#34;color:red&#34;&gt;注意：间隙锁的唯一目的是防止其他事务插入间隙，间隙锁可以共存，一个事务采用的间隙锁不会阻止另一个事务在同一间隙上使用间隙锁 &lt;/span&gt;&lt;/p&gt;</description>
+        </item>
+        <item>
+        <title>Mysql -- docker部署集群之主从复制方案</title>
+        <link>https://x-xkang.com/p/mysql-docker%E9%83%A8%E7%BD%B2%E9%9B%86%E7%BE%A4%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%96%B9%E6%A1%88/</link>
+        <pubDate>Fri, 02 Dec 2022 11:52:10 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-docker%E9%83%A8%E7%BD%B2%E9%9B%86%E7%BE%A4%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%96%B9%E6%A1%88/</guid>
+        <description>&lt;h3 id=&#34;一环境准备&#34;&gt;一、环境准备&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;OS: win10&lt;/li&gt;
+&lt;li&gt;docker engine: v20.10.14&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二创建mysql服务容器&#34;&gt;二、创建MySQL服务容器&lt;/h3&gt;
+&lt;h4 id=&#34;1创建-master-节点服务&#34;&gt;1.创建 master 节点服务&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;编辑数据库配置文件，将配置文件以及数据存储目录挂载到宿主机上&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;master节点配置文件&lt;code&gt;mysql-master.cnf&lt;/code&gt;如下：&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt; 1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 8
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt; 9
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;10
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;11
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;12
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;13
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;14
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;15
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;16
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;17
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;18
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;19
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;[mysqld]
+# 定义服务id 
+server-id=1
+
+#启用二进制日志
+log-bin=mysql-bin
+
+# 设置不要复制的数据库(可设置多个)
+# binlog-ignore-db=information_schema
+
+# 设置需要复制的数据库 需要复制的主数据库名字
+binlog-do-db=testdb
+
+#设置logbin格式
+binlog_format=STATEMENT
+
+# 开启gtid
+enforce-gtid-consistency=on
+gtid-mode=on
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;创建&lt;code&gt;master&lt;/code&gt;节点服务的容器&lt;code&gt;mysql-master&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker run -d -p 3310:3306 -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;aster&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql-master.cnf:/etc/mysql/conf.d/mysql-master.cnf -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;aster&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata:/var/lib/mysql  -e &lt;span class=&#34;nv&#34;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;123456&lt;/span&gt;  --name mysql-master mysql:5.7
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;2-创建-slave-节点服务&#34;&gt;2. 创建 slave 节点服务&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;创建配置文件 &lt;code&gt;mysql-slave-1.cnf&lt;/code&gt; 如下：&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;8
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;[mysqld]
+# 设置 server-id 注意不要与 master 节点重复
+server-id=2
+binlog-format=STATEMENT
+relay-log=mysql-relay
+gtid-mode=ON
+enforce-gtid-consistency=true
+read-only=1
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;创建 &lt;code&gt;slave&lt;/code&gt; 节点服务&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;docker run -d -p 3311:3306 -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;lave-1&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql-slave-1.cnf:/etc/mysql/conf.d/mysql-slave-1.cnf -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;lave-1&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/var/lib/mysql  -e &lt;span class=&#34;nv&#34;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;123456&lt;/span&gt;  --name mysql-slave-1 mysql:5.7
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;h4 id=&#34;3-创建同步数据使用的用户&#34;&gt;3. 创建同步数据使用的用户&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;进入&lt;code&gt;master&lt;/code&gt;节点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -it mysql-master mysql -uroot -p123456
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;创建用户，记住此时创建的用户密码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;k&#34;&gt;CREATE&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;USER&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;slave&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;BY&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;123456&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;GRANT&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;REPLICATION&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;SLAVE&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;slave&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;ul&gt;
+&lt;li&gt;查看 &lt;code&gt;master&lt;/code&gt; 节点状态，在master 节点执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;show&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;master&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;File&lt;/th&gt;
+&lt;th&gt;Position&lt;/th&gt;
+&lt;th&gt;Binlog_Do_DB&lt;/th&gt;
+&lt;th&gt;Binlog_Ignore_DB&lt;/th&gt;
+&lt;th&gt;Executed_Gtid_Set&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;mysql-bin.000002&lt;/td&gt;
+&lt;td&gt;157&lt;/td&gt;
+&lt;td&gt;testdb&lt;/td&gt;
+&lt;td&gt;mysql,information_schema&lt;/td&gt;
+&lt;td&gt;&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;记住File和Position，后面关联主从节点的时候会用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查看 &lt;code&gt;master&lt;/code&gt; 节点的IP地址，关联主从节点的时候要用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker inspect mysql-master
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-cluster-docker/master-ip.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;master-ip&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;进入 &lt;code&gt;slave&lt;/code&gt; 节点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;docker &lt;span class=&#34;nb&#34;&gt;exec&lt;/span&gt; -it mysql-slave-1 mysql -uroot -p123456
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;执行SQL关联主从复制节点&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;6
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;7
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CHANGE&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;MASTER&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;TO&lt;/span&gt; 
+  &lt;span class=&#34;n&#34;&gt;MASTER_HOST&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;172.17.0.2&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;master&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;节点&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;IP&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;MASTER_PORT&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;3306&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;master&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;节点端口&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;MASTER_USER&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;slave&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;  &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;上面创建的主从同步用户&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;MASTER_PASSWORD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;123456&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;用户密码&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;MASTER_LOG_FILE&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;mysql-bin.000003&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;   &lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;master&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;节点的日志文件&lt;/span&gt;
+  &lt;span class=&#34;n&#34;&gt;MASTER_LOG_POS&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;   
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;开启 &lt;code&gt;slave&lt;/code&gt;，&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;start&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slave&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;span class=&#34;n&#34;&gt;Query&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;OK&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;rows&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;affected&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;warning&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;03&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sec&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;查看 &lt;code&gt;slave&lt;/code&gt;开启状态&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;n&#34;&gt;mysql&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;show&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;slave&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;status&lt;/span&gt;&lt;span class=&#34;err&#34;&gt;\&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;G&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-cluster-docker/slave-status.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;slave-status&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;h3 id=&#34;三创建连接用户并授权&#34;&gt;三、创建连接用户并授权&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;进入 &lt;code&gt;master&lt;/code&gt; 节点，执行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;2
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;3
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;4
+&lt;/span&gt;&lt;span class=&#34;lnt&#34;&gt;5
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;创建用户&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;CREATE&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;USER&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;IDENTIFIED&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;BY&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;123456&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+
+&lt;span class=&#34;o&#34;&gt;#&lt;/span&gt; &lt;span class=&#34;err&#34;&gt;授权&lt;/span&gt;
+&lt;span class=&#34;k&#34;&gt;grant&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;select&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;insert&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;update&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;delete&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;on&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;testdb&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;to&lt;/span&gt; &lt;span class=&#34;s1&#34;&gt;&amp;#39;test&amp;#39;&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;@&lt;/span&gt;&lt;span class=&#34;s1&#34;&gt;&amp;#39;%&amp;#39;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;[注]测试过程中不要使用root账号测试从库的&lt;code&gt;read-only&lt;/code&gt;权限，因为拥有 super 权限的账号会忽略限制&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在 &lt;code&gt;master&lt;/code&gt; 节点上的&lt;code&gt;testdb&lt;/code&gt; 库新建数据表 &lt;code&gt;user&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-cluster-docker/master-connection.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;master-connection&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-cluster-docker/master-t1.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;master-t1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;查看 &lt;code&gt;slave&lt;/code&gt; 节点数据库，&lt;code&gt;user&lt;/code&gt; 已经同步成功，至此mysql 的主从架构集群就已经部署完成，如果想增加 slave节点的话，重复&lt;a class=&#34;link&#34; href=&#34;#2-%e5%88%9b%e5%bb%ba-slave-%e8%8a%82%e7%82%b9%e6%9c%8d%e5%8a%a1&#34; &gt;2.2&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-cluster-docker/slave-t1.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;slave-t1&#34;
+	
+	
+&gt;&lt;/p&gt;
+&lt;p&gt;[注意]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;关联主从节点时，确保IP和端口是通的，不然在从节点执行 &lt;code&gt;start slave&lt;/code&gt; 时，查看结果 &lt;code&gt;show slave status&lt;/code&gt; 连接结果是失败的;&lt;/li&gt;
+&lt;li&gt;测试账号不要用 &lt;code&gt;root&lt;/code&gt; 权限，会忽略从节点的读写限制，从节点也一样可以插入、更新、删除数据;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;slave&lt;/code&gt; 节点服务一定要将 &lt;code&gt;read_only&lt;/code&gt; 设置成1，可以在&lt;code&gt;.cnf&lt;/code&gt;配置文件中配置，也可以在&lt;code&gt;mysql&lt;/code&gt;终端中设置&lt;code&gt;set global read_only=1;&lt;/code&gt;不然有写权限的账号在 &lt;code&gt;slave&lt;/code&gt; 节点也一样可以插入或更新数据;&lt;/li&gt;
+&lt;/ul&gt;</description>
+        </item>
+        <item>
+        <title>Mysql -- 索引浅析</title>
+        <link>https://x-xkang.com/p/mysql-%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/</link>
+        <pubDate>Sat, 26 Nov 2022 11:17:45 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/mysql-%E7%B4%A2%E5%BC%95%E6%B5%85%E6%9E%90/</guid>
+        <description>&lt;h3 id=&#34;一索引的分类&#34;&gt;一、索引的分类&lt;/h3&gt;
+&lt;h4 id=&#34;1根据数据结构可分为&#34;&gt;1、根据数据结构可分为&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;Btree索引（B+tree, b-tree）&lt;/li&gt;
+&lt;li&gt;哈希索引&lt;/li&gt;
+&lt;li&gt;full-text 全文索引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;2根据物理存储可分为&#34;&gt;2、根据物理存储可分为&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;聚簇索引&lt;/li&gt;
+&lt;li&gt;二级索引(辅助索引)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;3根据字段特性可分为&#34;&gt;3、根据字段特性可分为&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;主键索引&lt;/li&gt;
+&lt;li&gt;普通索引&lt;/li&gt;
+&lt;li&gt;前缀索引&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;4根据字段个数可分为&#34;&gt;4、根据字段个数可分为&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;单列索引&lt;/li&gt;
+&lt;li&gt;联合索引（符合索引，组合索引）&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;二根据数据结构分类&#34;&gt;二、根据数据结构分类&lt;/h3&gt;
+&lt;p&gt;MySQL按数据结构分类可分为：B+tree索引，Hash索引，Full-text索引&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;-&lt;/th&gt;
+&lt;th&gt;InnoDB&lt;/th&gt;
+&lt;th&gt;MyIsam&lt;/th&gt;
+&lt;th&gt;Memory&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;B+tree索引&lt;/td&gt;
+&lt;td&gt;√&lt;/td&gt;
+&lt;td&gt;√&lt;/td&gt;
+&lt;td&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Hash索引&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;td&gt;√&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;B-tree索引&lt;/td&gt;
+&lt;td&gt;√（MySQL5.6+）&lt;/td&gt;
+&lt;td&gt;√&lt;/td&gt;
+&lt;td&gt;×&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;注：InnoDB 实际上也支持Hash索引，但是InnoDB中Hash索引的创建由存储引擎自动优化创建，不能人为干预
+是否为表创建Hash索引，&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;B+tree是MySQL中被存储引擎采用最多的索引类型，B+tree中的B代表平衡（balance），而不是二叉（binary），因为B+tree是从最早的平衡二叉树演化而来的，下面演示B+tree数据结构与其他数据结构的对比。&lt;/p&gt;
+&lt;h4 id=&#34;1-btree-和-b-tree的对比&#34;&gt;1. B+tree 和 B-tree的对比&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-index/B-tree-01.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;B-tree&#34;
+	
+	
+&gt;
+[网络图片] B-tree示意图&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;B+tree非叶子结点只存储键值信息，数据记录都存放在叶子节点中，而B-tree的非叶子节点也存储数据，B+tree单个节点的存储量更小，在相同的磁盘IO情况下可以查到更多节点数据。&lt;/li&gt;
+&lt;li&gt;B+tree 所有叶子结点之间都采用单链表连接，适合MySQL中常见的基于范围的顺序检索场景，而B-tree无法做到这一点。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-index/B&amp;#43;tree-01.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;B&amp;#43;tree&#34;
+	
+	
+&gt;
+[网络图片] B+tree示意图&lt;/p&gt;
+&lt;h4 id=&#34;2-btree-和-红黑树的对比&#34;&gt;2. B+tree 和 红黑树的对比&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-index/red-black-tree.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;red-black-tree&#34;
+	
+	
+&gt;
+[网络图片] 红黑树示意图&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;红黑树&lt;/strong&gt;是一种&lt;strong&gt;弱平衡二叉查找树&lt;/strong&gt;，通过任何一条从根到叶子的路径上各个节点着色方式的限制，&lt;strong&gt;红黑树确保没有一条路径会比其他路径长出两倍&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;对于有N个节点的B+tree，其搜索的时间复杂度为O(logdN)，其中**d(Degree)**为B+tree的度，表示节点允许的最大子节点数为d个，在实际应用当中，d值一般是大于100的，即使数据量达到千万级别时B+tree的高度依然维持在3-4左右，保证了3-4次磁盘I/O操作就能查询到目标数据。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;红黑树&lt;/strong&gt;是二叉树，节点子节点个数为两个，意味着其搜索的算法时间复杂度为 O(logN)，树的高度也会比 B+tree 高出不少，因此红黑树检索到目标数据所需经历的磁盘I/O次数更多。&lt;/p&gt;
+&lt;h4 id=&#34;3-btree-和-hash的对比&#34;&gt;3. B+tree 和 Hash的对比&lt;/h4&gt;
+&lt;p&gt;Hash 索引结构的特殊性，其检索效率非常高，索引的检索可以一次定位，不像B-Tree 索引需要从根节点到枝节点，最后才能访问到页节点这样多次的IO访问，所以 Hash 索引的查询效率要远高于 B-Tree 索引。虽然 Hash 索引效率高，但是 Hash 索引本身由于其特殊性也带来了很多限制和弊端，主要有以下这些。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Hash 索引仅仅能满足 = , IN 和 &amp;lt;=&amp;gt;(表示NULL安全的等价) 查询，不能使用范围查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于 Hash 索引比较的是进行 Hash 运算之后的 Hash值，所以它只能用于等值的过滤，不能用于基于范围的过滤，因为经过相应的 Hash算法处理之后的 Hash 值的大小关系，并不能保证和Hash运算前完全一样&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Hash 索引无法适用数据的排序操作&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;由于 Hash 索引中存放的是经过 Hash 计算之后的 Hash值，而且Hash值的大小关系并不一定和 Hash运算前的键值完全一样，所以数据库无法利用索引的数据来避免任何排序运算；&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Hash 索引不能利用部分索引键查询&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;对于组合索引，Hash 索引在计算 Hash 值的时候是组合索引键合并后再一起计算 Hash 值，而不是单独计算 Hash值，所以通过组合索引的前面一个或几个索引键进行查询的时候，Hash 索引也无法被利用&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Hash 索引依然需要回表扫描&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Hash 索引是将索引键通过 Hash 运算之后，将 Hash运算结果的 Hash值和所对应的行指针信息存放于一个 Hash 表中，由于不同索引键可能存在相同 Hash 值，所以即使取满足某个 Hash 键值的数据的记录条数，也无法从 Hash索引中直接完成查询，还是要通过访问表中的实际数据进行相应的比较，并得到相应的结果。&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;ul&gt;
+&lt;li&gt;Hash索引遇到大量Hash值相等的情况后性能并不一定就会比B-Tree索引高&lt;/li&gt;
+&lt;/ul&gt;
+&lt;blockquote&gt;
+&lt;blockquote&gt;
+&lt;p&gt;选择性比较低的索引键，如果创建 Hash 索引，那么将会存在大量记录指针信息存于同一个Hash值相关联。这样要定位某一条记录时就会非常麻烦，会浪费多次表数据的访问，而造成整体性能低下&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;&lt;strong&gt;由于范围查询是MySQL数据库查询中常见的场景，Hash表不适合做范围查询，它更适合做等值查询。另外Hash表还存在Hash函数选择和Hash值冲突等问题。因此，B+tree索引要比Hash表索引有更广的适用场景&lt;/strong&gt;&lt;/p&gt;
+&lt;h3 id=&#34;三根据物理存储分类&#34;&gt;三、根据物理存储分类&lt;/h3&gt;
+&lt;p&gt;MySQL根据叶子节点是否存储的是完整数据将索引分为：聚簇索引，二级索引（辅助索引）。&lt;/p&gt;
+&lt;h4 id=&#34;1聚簇索引&#34;&gt;1.聚簇索引&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;聚簇索引&lt;/strong&gt;的每个叶子节点都存储了一行完整的表数据，叶子节点之间按照id列升序连接，可以方便的进行顺序检索。
+&lt;img src=&#34;https://x-xkang.com/images/mysql-index/clustering-index.jpg&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;clustering-index&#34;
+	
+	
+&gt;
+[网络图片]
+MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字段上建立聚簇索引，在没有主键的情况下，数据表的第一个非空唯一索引将被建立为聚簇索引，
+在前两者都没有的情况下，InnoDB将自动生成一个隐式的自增id列，并在此列上建立聚簇索引。&lt;/p&gt;
+&lt;p&gt;MyISAM存储引擎不存在聚簇索引，主键索引和非主键索引的结构是一样的，索引的叶子节点不存储表数据，存放的是表数据的地址，所以MyISAM存储引擎的表可以没有主键。MyISAM表的索引和数据是分开存储的，&lt;/p&gt;
+&lt;h4 id=&#34;2二级索引&#34;&gt;2.二级索引&lt;/h4&gt;
+&lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-index/second-index-01.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;second-index-01&#34;
+	
+	
+&gt;
+[网络图片]&lt;/p&gt;
+&lt;p&gt;二级索引的叶子节点并不存储一行完整的数据，而是存储了聚簇索引所在的列。&lt;/p&gt;
+&lt;p&gt;回表查询：由于二级索引的叶子节点不存储完整的表数据，索引当通过二级索引查询聚簇索引列值后，还需要回到聚簇索引也就是表本身进一步获取数据
+&lt;img src=&#34;https://x-xkang.com/images/mysql-index/second-index-02.png&#34;
+	
+	
+	
+	loading=&#34;lazy&#34;
+	
+		alt=&#34;second-index-02&#34;
+	
+	
+&gt;
+[网络图片]&lt;/p&gt;
+&lt;p&gt;回表查询需要额外的B+tree搜索过程，必然增加查询消耗,
+需要注意的是，通过二级索引查询时，回表不是必须的过程，当select 的所有字段在单个二级索引中都能找到时，就不需要回表，MySQL称此时的二级索引为覆盖索引或者触发了索引覆盖。
+可以用explain 命令查看SQL语句的执行计划，执行计划的extra字段中若出现Using index，表示查询触发了索引覆盖。&lt;/p&gt;
+&lt;h3 id=&#34;四按字段特性分类&#34;&gt;四、按字段特性分类&lt;/h3&gt;
+&lt;p&gt;MySQL索引按照字段特性可以分为：&lt;strong&gt;主键索引，普通索引，前缀索引&lt;/strong&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;主键索引
+建立在主键上的索引称为&lt;strong&gt;主键索引&lt;/strong&gt;，一张数据表只能有一个主键索引，索引列值不允许有空值，通常在创建表时一起创建。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;唯一索引
+建立在 Unique字段上的索引称为&lt;strong&gt;唯一索引&lt;/strong&gt;，一张表可以有多个唯一索引，索引列值允许为空，列值中出现多个空值不会出现重复冲突。&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;普通索引
+建立在普通字段上的索引被称为&lt;strong&gt;普通索引&lt;/strong&gt;&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;前缀索引
+&lt;strong&gt;前缀索引&lt;/strong&gt;是指对字符类型字段的前几个字符或对二进制类型字段的前几个bytes建立的索引，而不是在整个字段上建索引。前缀索引可以建立在类型为char、varchar、binary、varbinary的列上，可以大大减少索引占用的存储空间，也能提升索引的查询效率&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+        </item>
+        <item>
         <title>Redis 持久化策略</title>
         <link>https://x-xkang.com/p/redis-%E6%8C%81%E4%B9%85%E5%8C%96%E7%AD%96%E7%95%A5/</link>
         <pubDate>Wed, 29 Jun 2022 15:34:24 +0800</pubDate>
@@ -178,7 +1665,7 @@ everysec: 表示每秒同步一次（默认值，很快，但可能会丢失1秒
 &lt;p&gt;解决方案也比较简单，先查出主键ID，使用主键ID再更新记录，因为使用主键ID直接加锁的话，锁粒度更小，及时同时更新一条记录，也不会出现同时等待对方将锁释放的场景。问题描述的比较简单，但在排查过程中还是走了不少弯路的。&lt;/p&gt;</description>
         </item>
         <item>
-        <title>Mysql 关键字的执行顺序</title>
+        <title>Mysql -- 关键字的执行顺序</title>
         <link>https://x-xkang.com/p/mysql-%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E6%89%A7%E8%A1%8C%E9%A1%BA%E5%BA%8F/</link>
         <pubDate>Sat, 25 Sep 2021 17:18:01 +0800</pubDate>
         
@@ -223,7 +1710,7 @@ everysec: 表示每秒同步一次（默认值，很快，但可能会丢失1秒
 &lt;/ul&gt;</description>
         </item>
         <item>
-        <title>Mysql 事务浅析</title>
+        <title>Mysql -- 事务浅析</title>
         <link>https://x-xkang.com/p/mysql-%E4%BA%8B%E5%8A%A1%E6%B5%85%E6%9E%90/</link>
         <pubDate>Wed, 24 Mar 2021 11:18:58 +0800</pubDate>
         
