@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='C&#43;&#43; 面向对象学习笔记'><title>C&#43;&#43; 面向对象学习笔记-1</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='C&#43;&#43; 面向对象学习笔记'>
+<meta name="keywords" content="C&#43;&#43;, C, 面向对象"><title>C&#43;&#43; 面向对象学习笔记-1</title>
 
 <link rel='canonical' href='https://x-xkang.com/cpp-oo/'>
 
-<link rel="stylesheet" href="/scss/style.min.5a8e892f6fa14515e9065eee1f5d2e05302606ec7f11750b2fb95198f9cdcbfd.css"><meta property='og:title' content='C&#43;&#43; 面向对象学习笔记-1'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='C&#43;&#43; 面向对象学习笔记-1'>
 <meta property='og:description' content='C&#43;&#43; 面向对象学习笔记'>
 <meta property='og:url' content='https://x-xkang.com/cpp-oo/'>
-<meta property='og:site_name' content='Hello, It&#39;s me'>
+<meta property='og:site_name' content='不积跬步无以至千里'>
 <meta property='og:type' content='article'><meta property='article:section' content='' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:published_time' content='2020-02-11T16:52:03&#43;08:00'/><meta property='article:modified_time' content='2020-02-11T16:52:03&#43;08:00'/>
 <meta name="twitter:title" content="C&#43;&#43; 面向对象学习笔记-1">
 <meta name="twitter:description" content="C&#43;&#43; 面向对象学习笔记">
@@ -57,7 +58,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -70,7 +71,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Hello, It&#39;s me</a></h1>
+            <h1 class="site-name"><a href="/">不积跬步无以至千里</a></h1>
             <h2 class="site-description">Good good study.</h2>
         </div>
     </header><ol class="social-menu">
@@ -80,6 +81,7 @@
                         href='https://github.com/devxiaokang'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -98,9 +100,8 @@
         
         
         
-
         <li >
-            <a href='/' >
+            <a href='/' target="_blank">
                 
                 
                 
@@ -119,7 +120,6 @@
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -149,7 +149,6 @@
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -195,7 +194,52 @@
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一类的定义">一、类的定义</a></li>
+    <li><a href="#二c对象">二、C++对象</a></li>
+    <li><a href="#三访问数据成员">三、访问数据成员</a></li>
+    <li><a href="#四类成员函数">四、类成员函数</a></li>
+    <li><a href="#五类访问修饰符">五、类访问修饰符</a>
+      <ol>
+        <li><a href="#51共有public成员">5.1、共有（public）成员</a></li>
+        <li><a href="#52私有private成员">5.2、私有（private）成员</a></li>
+        <li><a href="#53受保护protected成员">5.3、受保护（protected）成员</a></li>
+        <li><a href="#54继承中的特点">5.4、继承中的特点</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -222,6 +266,9 @@
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -259,6 +306,7 @@
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -275,7 +323,7 @@
 <!-- ![类的定义](/images/cpp-learning/class-01.jpg) -->
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -287,17 +335,17 @@
 </span><span class="lnt">10
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">string</span> <span class="n">name</span><span class="p">;</span>  <span class="c1">// string: 类成员属性的属性， name: 类成员属性名称
-</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">weight</span><span class="p">;</span>
-
-  <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">){</span> <span class="c1">// `bool`（类成员方法的返回值）`setName`(类成员方法的名称)(`string` （参数类型） `n`（参数名称）)
-</span><span class="c1"></span>      <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
-      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="n">name</span><span class="p">;</span>  <span class="c1">// string: 类成员属性的属性， name: 类成员属性名称
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">weight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">){</span> <span class="c1">// `bool`（类成员方法的返回值）`setName`(类成员方法的名称)(`string` （参数类型） `n`（参数名称）)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>关键字 public 确定管理类成员的访问属性，在类对象作用域内，公共成员在类的外部是可访问的，您也可以指定类的成员为 private（私有的）和 protecred（受保护的）</p>
@@ -310,13 +358,13 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="n">Dog</span> <span class="n">dog1</span><span class="p">;</span>
-<span class="n">Dog</span> <span class="n">dog2</span><span class="p">;</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="n">Dog</span> <span class="n">dog1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">Dog</span> <span class="n">dog2</span><span class="p">;</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><ul>
 <li>对象 dog1 和 dog2 都有他们各自的数据成员</li>
@@ -329,7 +377,7 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -374,50 +422,50 @@
 </span><span class="lnt">43
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
-
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
-  <span class="kt">int</span> <span class="n">weight</span><span class="p">;</span>
-
-  <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">){</span>
-      <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
-      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="kt">bool</span> <span class="nf">setWeight</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-      <span class="n">weight</span> <span class="o">=</span>  <span class="n">w</span><span class="p">;</span>
-      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="n">string</span> <span class="nf">getName</span><span class="p">(){</span>
-      <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
-  <span class="p">}</span>
-
-  <span class="kt">int</span> <span class="nf">getWeight</span><span class="p">(){</span>
-      <span class="k">return</span> <span class="n">weight</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-
-<span class="c1">// 主函数
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-    <span class="n">Dog</span> <span class="n">dog1</span><span class="p">;</span>
-    <span class="n">dog1</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;哈士奇&#34;</span><span class="p">);</span>
-    <span class="n">dog1</span><span class="p">.</span><span class="n">setWeight</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog1</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; / 体重是：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog1</span><span class="p">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-    <span class="n">Dog</span> <span class="n">dog2</span><span class="p">;</span>
-    <span class="n">dog2</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;小金毛&#34;</span><span class="p">);</span>
-    <span class="n">dog2</span><span class="p">.</span><span class="n">setWeight</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
-    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog2</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; / 体重是：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog2</span><span class="p">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="n">weight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setWeight</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">      <span class="n">weight</span> <span class="o">=</span>  <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="nf">getName</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="kt">int</span> <span class="nf">getWeight</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">      <span class="k">return</span> <span class="n">weight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="n">Dog</span> <span class="n">dog1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dog1</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;哈士奇&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dog1</span><span class="p">.</span><span class="n">setWeight</span><span class="p">(</span><span class="mi">30</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog1</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; / 体重是：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog1</span><span class="p">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="n">Dog</span> <span class="n">dog2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dog2</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;小金毛&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">dog2</span><span class="p">.</span><span class="n">setWeight</span><span class="p">(</span><span class="mi">40</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog2</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="s">&#34; / 体重是：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog2</span><span class="p">.</span><span class="n">getWeight</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>上面代码被编译和执行时，会产生下列结果：</p>
@@ -434,7 +482,7 @@
 </blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -450,27 +498,27 @@
 </span><span class="lnt">14
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
-
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">string</span> <span class="n">dName</span><span class="p">;</span>    <span class="c1">// 名字
-</span><span class="c1"></span>  <span class="kt">int</span> <span class="n">dWeight</span><span class="p">;</span>     <span class="c1">// 体重
-</span><span class="c1"></span>
-  <span class="n">string</span> <span class="nf">getName</span><span class="p">(){</span> <span class="c1">// 获取名字
-</span><span class="c1"></span>      <span class="k">return</span> <span class="n">dName</span><span class="p">;</span>
-  <span class="p">}</span>
-<span class="p">};</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="n">dName</span><span class="p">;</span>    <span class="c1">// 名字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="kt">int</span> <span class="n">dWeight</span><span class="p">;</span>     <span class="c1">// 体重
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="nf">getName</span><span class="p">(){</span> <span class="c1">// 获取名字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="k">return</span> <span class="n">dName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><blockquote>
 <p>也可以在类外面使用 <strong>范围解析运算符::</strong> 定义该函数，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -487,35 +535,35 @@
 </span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
-
-<span class="k">public</span><span class="o">:</span>
- <span class="n">string</span> <span class="n">dName</span><span class="p">;</span>     <span class="c1">// 名字
-</span><span class="c1"></span> <span class="kt">int</span> <span class="n">dWeight</span><span class="p">;</span>      <span class="c1">// 体重
-</span><span class="c1"></span> <span class="n">string</span> <span class="nf">getName</span><span class="p">()</span>  <span class="c1">// 获取名字
-</span><span class="c1"></span><span class="p">};</span>
-
-<span class="n">string</span> <span class="n">Dog</span><span class="o">::</span><span class="n">getName</span><span class="p">(){</span>
- <span class="k">return</span> <span class="n">Dog</span><span class="o">::</span><span class="n">dName</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl"> <span class="n">string</span> <span class="n">dName</span><span class="p">;</span>     <span class="c1">// 名字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="kt">int</span> <span class="n">dWeight</span><span class="p">;</span>      <span class="c1">// 体重
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="n">string</span> <span class="nf">getName</span><span class="p">()</span>  <span class="c1">// 获取名字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">Dog</span><span class="o">::</span><span class="n">getName</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="n">Dog</span><span class="o">::</span><span class="n">dName</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <blockquote>
 <p>【注】在<code>::</code>运算符前必须使用类名，调用成员函数是在对象上使用运算符(.),这样它就能操作该对象相关的数据，如下所示：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="n">Dog</span> <span class="n">dog</span><span class="p">;</span>
-<span class="n">dog</span><span class="p">.</span><span class="n">getWeight</span><span class="p">();</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="n">Dog</span> <span class="n">dog</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="n">dog</span><span class="p">.</span><span class="n">getWeight</span><span class="p">();</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <hr>
@@ -525,7 +573,7 @@
 一个类可以有多个 public、private、protected 标记区域，每个标识区域在下一个标识区域开始之前或者在遇到类主题结束右括号之前都是有效的。成员和类的默认访问修饰符是 private。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -539,25 +587,23 @@
 </span><span class="lnt">12
 </span><span class="lnt">13
 </span><span class="lnt">14
-</span><span class="lnt">15
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">class</span> <span class="nc">Base</span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-  <span class="c1">// 共有成员
-</span><span class="c1"></span>
-<span class="k">protected</span><span class="o">:</span>
-  <span class="c1">// 受保护成员
-</span><span class="c1"></span>
-<span class="k">private</span><span class="o">:</span>
-  <span class="c1">// 私有成员
-</span><span class="c1"></span><span class="p">}</span>
-
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Base</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 共有成员
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 受保护成员
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 私有成员
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <h3 id="51共有public成员">5.1、共有（public）成员</h3>
@@ -565,7 +611,7 @@
 <p>共有成员在类的外部是可访问的，可以不使用任何成员函数来设置和获取共有变量的值，如下所示:</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -601,41 +647,41 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
-</span><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
-</span><span class="cp"></span>
-<span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-  <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
-  <span class="n">string</span> <span class="nf">getName</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-  <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
-
-<span class="p">};</span>
-
-<span class="kt">bool</span> <span class="n">Dog</span><span class="o">::</span><span class="n">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">){</span>
-  <span class="n">Dog</span><span class="o">::</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
-  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">string</span> <span class="n">Dog</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="p">{</span>
-  <span class="k">return</span> <span class="n">Dog</span><span class="o">::</span><span class="n">name</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="c1">// 主函数
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-
-  <span class="n">Dog</span> <span class="n">dog1</span><span class="p">;</span>
-  <span class="n">dog1</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;哈士奇&#34;</span><span class="p">);</span>
-  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog1</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-  <span class="n">Dog</span> <span class="n">dog2</span><span class="p">;</span>
-  <span class="n">dog2</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;小金毛&#34;</span><span class="p">);</span>
-  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog2</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;string&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;stdlib.h&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">string</span> <span class="nf">getName</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">bool</span> <span class="n">Dog</span><span class="o">::</span><span class="n">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Dog</span><span class="o">::</span><span class="n">name</span> <span class="o">=</span> <span class="n">n</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="nb">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">Dog</span><span class="o">::</span><span class="n">getName</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">Dog</span><span class="o">::</span><span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Dog</span> <span class="n">dog1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">dog1</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;哈士奇&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog1</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="n">Dog</span> <span class="n">dog2</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">dog2</span><span class="p">.</span><span class="n">setName</span><span class="p">(</span><span class="s">&#34;小金毛&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">  <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;狗狗的名字：&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">dog2</span><span class="p">.</span><span class="n">getName</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <h3 id="52私有private成员">5.2、私有（private）成员</h3>
@@ -644,7 +690,7 @@
 默认情况下，类的所有成员都是私有的，例如在下面的类中，width 是一个私有成员，这意味着，如果您没有使用任何访问修饰符，类的成员将被假定为私有成员：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt">1
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
 </span><span class="lnt">2
 </span><span class="lnt">3
 </span><span class="lnt">4
@@ -653,14 +699,14 @@
 </span><span class="lnt">7
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
-<span class="n">string</span> <span class="n">name</span><span class="p">;</span>
-<span class="k">public</span><span class="o">:</span>
-   <span class="kt">int</span> <span class="n">weight</span><span class="p">;</span>
-   <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">);</span>
-   <span class="n">string</span> <span class="nf">getName</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Dog</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="n">string</span> <span class="n">name</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">int</span> <span class="n">weight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">bool</span> <span class="nf">setName</span><span class="p">(</span><span class="n">string</span> <span class="n">n</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="n">string</span> <span class="nf">getName</span><span class="p">(</span><span class="kt">void</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <h3 id="53受保护protected成员">5.3、受保护（protected）成员</h3>
@@ -682,7 +728,7 @@
 </ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -718,41 +764,41 @@
 </span><span class="lnt">34
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="k">class</span> <span class="nc">Shape</span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-   <span class="kt">void</span> <span class="n">setWidth</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
-       <span class="n">width</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
-   <span class="p">}</span>
-
-   <span class="kt">void</span> <span class="nf">setHeight</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">){</span>
-       <span class="n">height</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
-   <span class="p">}</span>
-
-<span class="k">protected</span><span class="o">:</span>
-   <span class="kt">int</span> <span class="n">width</span><span class="p">;</span>
-   <span class="kt">int</span> <span class="n">height</span><span class="p">;</span>
-<span class="p">};</span>
-
-<span class="c1">// 派生类
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">Rectangle</span><span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span><span class="p">{</span>
-   <span class="k">public</span><span class="o">:</span>
-   <span class="kt">int</span> <span class="n">getArea</span><span class="p">(){</span>
-       <span class="k">return</span> <span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="p">);</span>
-   <span class="p">}</span>
-<span class="p">};</span>
-
-
-<span class="c1">// 主函数
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-
-   <span class="n">Rectangle</span> <span class="n">Rect</span><span class="p">;</span>
-   <span class="n">Rect</span><span class="p">.</span><span class="n">setWidth</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
-   <span class="n">Rect</span><span class="p">.</span><span class="n">setHeight</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
-   <span class="c1">// 输出面积
-</span><span class="c1"></span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Total Area:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">Rect</span><span class="p">.</span><span class="n">getArea</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Shape</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">void</span> <span class="n">setWidth</span><span class="p">(</span><span class="kt">int</span> <span class="n">w</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">       <span class="n">width</span> <span class="o">=</span> <span class="n">w</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="kt">void</span> <span class="nf">setHeight</span><span class="p">(</span><span class="kt">int</span> <span class="n">h</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">       <span class="n">height</span> <span class="o">=</span> <span class="n">h</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">protected</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">int</span> <span class="n">width</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">int</span> <span class="n">height</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 派生类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">Rectangle</span><span class="o">:</span> <span class="k">public</span> <span class="n">Shape</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">int</span> <span class="n">getArea</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">       <span class="k">return</span> <span class="p">(</span><span class="n">width</span> <span class="o">*</span> <span class="n">height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="n">Rectangle</span> <span class="n">Rect</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Rect</span><span class="p">.</span><span class="n">setWidth</span><span class="p">(</span><span class="mi">5</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Rect</span><span class="p">.</span><span class="n">setHeight</span><span class="p">(</span><span class="mi">7</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 输出面积
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Total Area:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">Rect</span><span class="p">.</span><span class="n">getArea</span><span class="p">()</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div></blockquote>
 <p>执行结果为：</p>
@@ -806,7 +852,8 @@
                 { left: "$", right: "$", display: false },
                 { left: "\\(", right: "\\)", display: false },
                 { left: "\\[", right: "\\]", display: true }
-            ]
+            ],
+            ignoredClasses: ["gist"]
         });})
 </script>
     
@@ -857,6 +904,8 @@
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -872,10 +921,14 @@
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -885,25 +938,20 @@
 
     <footer class="site-footer">
     <section class="copyright">
-        &copy;
+        &copy; 
         
-        2019 -
+            2019 - 
         
-        2023 Hello, It&#39;s me
+        2023 不积跬步无以至千里
     </section>
-
+    
     <section class="powerby">
         
-        皖ICP备20014602号 <br />
+            皖ICP备20014602号 <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
-                data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-
 
 
     
@@ -985,50 +1033,6 @@
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#一类的定义">一、类的定义</a></li>
-    <li><a href="#二c对象">二、C++对象</a></li>
-    <li><a href="#三访问数据成员">三、访问数据成员</a></li>
-    <li><a href="#四类成员函数">四、类成员函数</a></li>
-    <li><a href="#五类访问修饰符">五、类访问修饰符</a>
-      <ol>
-        <li><a href="#51共有public成员">5.1、共有（public）成员</a></li>
-        <li><a href="#52私有private成员">5.2、私有（private）成员</a></li>
-        <li><a href="#53受保护protected成员">5.3、受保护（protected）成员</a></li>
-        <li><a href="#54继承中的特点">5.4、继承中的特点</a></li>
-      </ol>
-    </li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -1045,9 +1049,6 @@
 
         document.head.appendChild(customFont);
     }());
-
-
-
 </script>
 
     </body>

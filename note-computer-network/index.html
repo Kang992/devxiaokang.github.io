@@ -1,32 +1,30 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=' Content distribution networks CDN 内容分发网络
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='Content distribution networks CDN 内容分发网络
 jealous [形] 嫉妒的；妒忌的
-  [example] he is a jealous husband;
-  [example] She is jealous of our success;
-  [example] Monkeys tend to be jealous of each other;
- '><title></title>
+[example] he is a jealous husband;
+[example] She is jealous of our success;
+[example] Monkeys tend to be jealous of each other;'>
+<title></title>
 
 <link rel='canonical' href='https://x-xkang.com/note-computer-network/'>
 
-<link rel="stylesheet" href="/scss/style.min.5a8e892f6fa14515e9065eee1f5d2e05302606ec7f11750b2fb95198f9cdcbfd.css"><meta property='og:title' content=''>
-<meta property='og:description' content=' Content distribution networks CDN 内容分发网络
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content=''>
+<meta property='og:description' content='Content distribution networks CDN 内容分发网络
 jealous [形] 嫉妒的；妒忌的
-  [example] he is a jealous husband;
-  [example] She is jealous of our success;
-  [example] Monkeys tend to be jealous of each other;
- '>
+[example] he is a jealous husband;
+[example] She is jealous of our success;
+[example] Monkeys tend to be jealous of each other;'>
 <meta property='og:url' content='https://x-xkang.com/note-computer-network/'>
-<meta property='og:site_name' content='Hello, It&#39;s me'>
+<meta property='og:site_name' content='不积跬步无以至千里'>
 <meta property='og:type' content='article'><meta property='article:section' content='' />
 <meta name="twitter:title" content="">
-<meta name="twitter:description" content=" Content distribution networks CDN 内容分发网络
+<meta name="twitter:description" content="Content distribution networks CDN 内容分发网络
 jealous [形] 嫉妒的；妒忌的
-  [example] he is a jealous husband;
-  [example] She is jealous of our success;
-  [example] Monkeys tend to be jealous of each other;
- ">
+[example] he is a jealous husband;
+[example] She is jealous of our success;
+[example] Monkeys tend to be jealous of each other;">
     <link rel="shortcut icon" href="favicon.ico" />
 
     </head>
@@ -72,7 +70,7 @@ jealous [形] 嫉妒的；妒忌的
                     
                     
                         
-                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -85,7 +83,7 @@ jealous [形] 嫉妒的；妒忌的
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Hello, It&#39;s me</a></h1>
+            <h1 class="site-name"><a href="/">不积跬步无以至千里</a></h1>
             <h2 class="site-description">Good good study.</h2>
         </div>
     </header><ol class="social-menu">
@@ -95,6 +93,7 @@ jealous [形] 嫉妒的；妒忌的
                         href='https://github.com/devxiaokang'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -113,9 +112,8 @@ jealous [形] 嫉妒的；妒忌的
         
         
         
-
         <li >
-            <a href='/' >
+            <a href='/' target="_blank">
                 
                 
                 
@@ -134,7 +132,6 @@ jealous [形] 嫉妒的；妒忌的
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -164,7 +161,6 @@ jealous [形] 嫉妒的；妒忌的
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -210,7 +206,10 @@ jealous [形] 嫉妒的；妒忌的
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -225,6 +224,9 @@ jealous [形] 嫉妒的；妒忌的
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -249,6 +251,7 @@ jealous [形] 嫉妒的；妒忌的
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -312,7 +315,8 @@ jealous [形] 嫉妒的；妒忌的
                 { left: "$", right: "$", display: false },
                 { left: "\\(", right: "\\)", display: false },
                 { left: "\\[", right: "\\]", display: true }
-            ]
+            ],
+            ignoredClasses: ["gist"]
         });})
 </script>
     
@@ -341,6 +345,8 @@ jealous [形] 嫉妒的；妒忌的
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -356,10 +362,14 @@ jealous [形] 嫉妒的；妒忌的
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -369,25 +379,20 @@ jealous [形] 嫉妒的；妒忌的
 
     <footer class="site-footer">
     <section class="copyright">
-        &copy;
+        &copy; 
         
-        2019 -
+            2019 - 
         
-        2023 Hello, It&#39;s me
+        2023 不积跬步无以至千里
     </section>
-
+    
     <section class="powerby">
         
-        皖ICP备20014602号 <br />
+            皖ICP备20014602号 <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
-                data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-
 
 
     
@@ -469,8 +474,6 @@ jealous [形] 嫉妒的；妒忌的
             >
 
             </main>
-    
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -487,9 +490,6 @@ jealous [形] 嫉妒的；妒忌的
 
         document.head.appendChild(customFont);
     }());
-
-
-
 </script>
 
     </body>

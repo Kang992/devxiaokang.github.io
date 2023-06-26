@@ -1,14 +1,15 @@
 <!DOCTYPE html>
 <html lang="en-us" dir="ltr">
     <head><meta charset='utf-8'>
-<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='C&#43;&#43; 友元函数'><title>C&#43;&#43;学习--友元函数</title>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content='C&#43;&#43; 友元函数'>
+<meta name="keywords" content="C&#43;&#43;, cpp, CPP, 友元函数， 友元"><title>C&#43;&#43;学习--友元函数</title>
 
 <link rel='canonical' href='https://x-xkang.com/cpp-friend/'>
 
-<link rel="stylesheet" href="/scss/style.min.5a8e892f6fa14515e9065eee1f5d2e05302606ec7f11750b2fb95198f9cdcbfd.css"><meta property='og:title' content='C&#43;&#43;学习--友元函数'>
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='C&#43;&#43;学习--友元函数'>
 <meta property='og:description' content='C&#43;&#43; 友元函数'>
 <meta property='og:url' content='https://x-xkang.com/cpp-friend/'>
-<meta property='og:site_name' content='Hello, It&#39;s me'>
+<meta property='og:site_name' content='不积跬步无以至千里'>
 <meta property='og:type' content='article'><meta property='article:section' content='' /><meta property='article:tag' content='C&#43;&#43;' /><meta property='article:tag' content='友元函数' /><meta property='article:published_time' content='2020-04-16T16:29:28&#43;08:00'/><meta property='article:modified_time' content='2020-04-16T16:29:28&#43;08:00'/>
 <meta name="twitter:title" content="C&#43;&#43;学习--友元函数">
 <meta name="twitter:description" content="C&#43;&#43; 友元函数">
@@ -57,7 +58,7 @@
                     
                     
                         
-                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_2.png" width="300"
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
                             height="300" class="site-logo" loading="lazy" alt="Avatar">
                     
                 
@@ -70,7 +71,7 @@
         
         
         <div class="site-meta">
-            <h1 class="site-name"><a href="/">Hello, It&#39;s me</a></h1>
+            <h1 class="site-name"><a href="/">不积跬步无以至千里</a></h1>
             <h2 class="site-description">Good good study.</h2>
         </div>
     </header><ol class="social-menu">
@@ -80,6 +81,7 @@
                         href='https://github.com/devxiaokang'
                         target="_blank"
                         title="GitHub"
+                        rel="me"
                     >
                         
                         
@@ -98,9 +100,8 @@
         
         
         
-
         <li >
-            <a href='/' >
+            <a href='/' target="_blank">
                 
                 
                 
@@ -119,7 +120,6 @@
         </li>
         
         
-
         <li >
             <a href='/archives/' >
                 
@@ -149,7 +149,6 @@
         </li>
         
         
-
         <li >
             <a href='/search/' >
                 
@@ -195,7 +194,43 @@
         </div>
     </ol>
 </aside>
-<main class="main full-width">
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#一全局函数做友元">一、全局函数做友元</a></li>
+    <li><a href="#二类做友元">二、类做友元</a></li>
+    <li><a href="#三类成员函数做友元">三、类成员函数做友元</a></li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
     <article class="main-article">
     <header class="article-header">
 
@@ -222,6 +257,9 @@
         
     </div>
 
+    
+    
+    
     
     <footer class="article-time">
         
@@ -259,6 +297,7 @@
 
     
 </div>
+
 </header>
 
     <section class="article-content">
@@ -270,7 +309,7 @@
 <p>代码如下：</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -303,38 +342,38 @@
 </span><span class="lnt">31
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Person</span><span class="p">{</span>   <span class="c1">// 定义 Person 类
-</span><span class="c1"></span>   <span class="k">friend</span> <span class="kt">void</span> <span class="nf">printField</span><span class="p">(</span><span class="n">Person</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>  <span class="c1">// 定义友元函数，并在类外面实现
-</span><span class="c1"></span>
-<span class="k">public</span><span class="o">:</span>
-   <span class="n">Person</span><span class="p">(){</span>     <span class="c1">// 构造函数初始换成员值
-</span><span class="c1"></span>       <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;xiaokang&#34;</span><span class="p">;</span>
-       <span class="n">age</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span>
-   <span class="p">}</span>
-
-<span class="k">public</span><span class="o">:</span>
-   <span class="n">string</span> <span class="n">name</span><span class="p">;</span>  <span class="c1">// 名字
-</span><span class="c1"></span><span class="k">private</span><span class="o">:</span>
-   <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>    <span class="c1">// 年龄
-</span><span class="c1"></span><span class="p">};</span>
-
-<span class="c1">// 友元函数的实现
-</span><span class="c1"></span><span class="kt">void</span> <span class="nf">printField</span><span class="p">(</span><span class="n">Person</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span> 
-   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;name:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;age:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 友元函数打印 `Person` 类的私有属性 age
-</span><span class="c1"></span><span class="p">}</span>
-
-<span class="c1">// 主函数
-</span><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-   <span class="n">Person</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// 实例化Person类
-</span><span class="c1"></span>   <span class="n">printField</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Person</span><span class="p">{</span>   <span class="c1">// 定义 Person 类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">friend</span> <span class="kt">void</span> <span class="nf">printField</span><span class="p">(</span><span class="n">Person</span> <span class="o">*</span><span class="n">p</span><span class="p">);</span>  <span class="c1">// 定义友元函数，并在类外面实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Person</span><span class="p">(){</span>     <span class="c1">// 构造函数初始换成员值
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>       <span class="n">name</span> <span class="o">=</span> <span class="s">&#34;xiaokang&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">       <span class="n">age</span> <span class="o">=</span> <span class="mi">29</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">string</span> <span class="n">name</span><span class="p">;</span>  <span class="c1">// 名字
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">int</span> <span class="n">age</span><span class="p">;</span>    <span class="c1">// 年龄
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 友元函数的实现
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">void</span> <span class="nf">printField</span><span class="p">(</span><span class="n">Person</span> <span class="o">*</span><span class="n">p</span><span class="p">){</span> 
+</span></span><span class="line"><span class="cl">   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;name:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">name</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;age:&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">p</span><span class="o">-&gt;</span><span class="n">age</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span> <span class="c1">// 友元函数打印 `Person` 类的私有属性 age
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 主函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Person</span> <span class="n">p</span><span class="p">;</span> <span class="c1">// 实例化Person类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">printField</span><span class="p">(</span><span class="o">&amp;</span><span class="n">p</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印结果如下:</p>
 <p><code>name:xiaokang</code></p>
@@ -345,7 +384,7 @@
 <blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -391,51 +430,51 @@
 </span><span class="lnt">44
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Building</span><span class="p">;</span>  <span class="c1">// 定义建筑类
-</span><span class="c1"></span><span class="k">class</span> <span class="nc">GoodGay</span><span class="p">{</span>   <span class="c1">// 定义`好基友`类
-</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
-   <span class="n">Building</span> <span class="o">*</span><span class="n">building</span><span class="p">;</span>  <span class="c1">// 定义共有成员
-</span><span class="c1"></span>   <span class="n">GoodGay</span><span class="p">();</span>     <span class="c1">// 构造函数
-</span><span class="c1"></span>   <span class="kt">void</span> <span class="nf">visit</span><span class="p">();</span>  <span class="c1">// 定义访问成员方法
-</span><span class="c1"></span><span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">Building</span> <span class="p">{</span> <span class="c1">// 实现建筑类
-</span><span class="c1"></span>   <span class="k">friend</span> <span class="k">class</span> <span class="nc">GoodGay</span><span class="p">;</span>  <span class="c1">// 定义`好基友`类为`友元`类
-</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
-   <span class="n">Building</span><span class="p">();</span>  <span class="c1">// 构造方法
-</span><span class="c1"></span>   <span class="n">string</span> <span class="n">sittingRoom</span><span class="p">;</span> <span class="c1">// 客厅
-</span><span class="c1"></span><span class="k">private</span><span class="o">:</span>
-   <span class="n">string</span> <span class="n">bedRoom</span><span class="p">;</span> <span class="c1">//卧室
-</span><span class="c1"></span><span class="p">};</span>
-
-<span class="c1">// 实现 GoodGay 的构造函数
-</span><span class="c1"></span><span class="n">GoodGay</span><span class="o">::</span><span class="n">GoodGay</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 实现构造方法
-</span><span class="c1"></span>   <span class="n">building</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Building</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">GoodGay</span><span class="o">::</span><span class="n">visit</span><span class="p">(){</span>   <span class="c1">//  访问 building对象内部的私有属性
-</span><span class="c1"></span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;好基友当前访问的地方是：&#34;</span><span class="o">&lt;&lt;</span> <span class="n">building</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">Building</span><span class="o">::</span><span class="n">Building</span><span class="p">()</span> <span class="p">{</span>
-   <span class="k">this</span><span class="o">-&gt;</span><span class="n">sittingRoom</span> <span class="o">=</span> <span class="s">&#34;客厅&#34;</span><span class="p">;</span>
-   <span class="k">this</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">=</span> <span class="s">&#34;卧室&#34;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
-   <span class="n">GoodGay</span> <span class="n">gg</span><span class="p">;</span>
-   <span class="n">gg</span><span class="p">.</span><span class="n">visit</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-   <span class="n">test01</span><span class="p">();</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Building</span><span class="p">;</span>  <span class="c1">// 定义建筑类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">class</span> <span class="nc">GoodGay</span><span class="p">{</span>   <span class="c1">// 定义`好基友`类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Building</span> <span class="o">*</span><span class="n">building</span><span class="p">;</span>  <span class="c1">// 定义共有成员
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">GoodGay</span><span class="p">();</span>     <span class="c1">// 构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="kt">void</span> <span class="nf">visit</span><span class="p">();</span>  <span class="c1">// 定义访问成员方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Building</span> <span class="p">{</span> <span class="c1">// 实现建筑类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">friend</span> <span class="k">class</span> <span class="nc">GoodGay</span><span class="p">;</span>  <span class="c1">// 定义`好基友`类为`友元`类
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Building</span><span class="p">();</span>  <span class="c1">// 构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">string</span> <span class="n">sittingRoom</span><span class="p">;</span> <span class="c1">// 客厅
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">string</span> <span class="n">bedRoom</span><span class="p">;</span> <span class="c1">//卧室
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 实现 GoodGay 的构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">GoodGay</span><span class="o">::</span><span class="n">GoodGay</span><span class="p">()</span> <span class="p">{</span> <span class="c1">// 实现构造方法
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">building</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Building</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">GoodGay</span><span class="o">::</span><span class="n">visit</span><span class="p">(){</span>   <span class="c1">//  访问 building对象内部的私有属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;好基友当前访问的地方是：&#34;</span><span class="o">&lt;&lt;</span> <span class="n">building</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Building</span><span class="o">::</span><span class="n">Building</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">this</span><span class="o">-&gt;</span><span class="n">sittingRoom</span> <span class="o">=</span> <span class="s">&#34;客厅&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">this</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">=</span> <span class="s">&#34;卧室&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">   <span class="n">GoodGay</span> <span class="n">gg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">gg</span><span class="p">.</span><span class="n">visit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">test01</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印结果如下：</p>
 <p><code>好基友当前访问的地方是：卧室</code></p>
@@ -445,7 +484,7 @@
 <blockquote>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
-<pre class="chroma"><code><span class="lnt"> 1
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
 </span><span class="lnt"> 2
 </span><span class="lnt"> 3
 </span><span class="lnt"> 4
@@ -494,54 +533,54 @@
 </span><span class="lnt">47
 </span></code></pre></td>
 <td class="lntd">
-<pre class="chroma"><code class="language-C++" data-lang="C++"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
-</span><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
-
-<span class="k">class</span> <span class="nc">Building</span><span class="p">;</span>
-<span class="k">class</span> <span class="nc">GoodGay</span><span class="p">{</span>
-<span class="k">public</span><span class="o">:</span>
-   <span class="n">Building</span> <span class="o">*</span><span class="n">building</span><span class="p">;</span>
-   <span class="n">GoodGay</span><span class="p">();</span>
-   <span class="kt">void</span> <span class="nf">visit</span><span class="p">();</span>
-<span class="p">};</span>
-
-<span class="k">class</span> <span class="nc">Building</span> <span class="p">{</span>
-   <span class="k">friend</span> <span class="kt">void</span> <span class="n">GoodGay</span><span class="o">::</span><span class="n">visit</span><span class="p">();</span>  <span class="c1">// 将成员函数定义为友元
-</span><span class="c1"></span><span class="k">public</span><span class="o">:</span>
-   <span class="n">Building</span><span class="p">();</span>
-   <span class="n">string</span> <span class="n">sittingRoom</span><span class="p">;</span> <span class="c1">// 客厅
-</span><span class="c1"></span><span class="k">private</span><span class="o">:</span>
-   <span class="n">string</span> <span class="n">bedRoom</span><span class="p">;</span> <span class="c1">//卧室
-</span><span class="c1"></span><span class="p">};</span>
-
-<span class="c1">// 实现 GoodGay 的构造函数
-</span><span class="c1"></span><span class="n">GoodGay</span><span class="o">::</span><span class="n">GoodGay</span><span class="p">()</span> <span class="p">{</span>
-   <span class="n">building</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Building</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="n">GoodGay</span><span class="o">::</span><span class="n">visit</span><span class="p">(){</span>
-   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;好基友当前访问的地方是：&#34;</span><span class="o">&lt;&lt;</span> <span class="n">building</span><span class="o">-&gt;</span><span class="n">sittingRoom</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-
-   <span class="c1">//  访问 building对象内部的私有属性
-</span><span class="c1"></span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;好基友当前访问的地方是：&#34;</span><span class="o">&lt;&lt;</span> <span class="n">building</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="n">Building</span><span class="o">::</span><span class="n">Building</span><span class="p">()</span> <span class="p">{</span>
-   <span class="k">this</span><span class="o">-&gt;</span><span class="n">sittingRoom</span> <span class="o">=</span> <span class="s">&#34;客厅&#34;</span><span class="p">;</span>
-   <span class="k">this</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">=</span> <span class="s">&#34;卧室&#34;</span><span class="p">;</span>
-<span class="p">}</span>
-
-<span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
-   <span class="n">GoodGay</span> <span class="n">gg</span><span class="p">;</span>
-   <span class="n">gg</span><span class="p">.</span><span class="n">visit</span><span class="p">();</span>
-<span class="p">}</span>
-
-<span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-   <span class="n">test01</span><span class="p">();</span>
-   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
-   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
-<span class="p">}</span>
-</code></pre></td></tr></table>
+<pre tabindex="0" class="chroma"><code class="language-C++" data-lang="C++"><span class="line"><span class="cl"><span class="cp">#include</span> <span class="cpf">&lt;iostream&gt;</span><span class="cp">
+</span></span></span><span class="line"><span class="cl"><span class="cp"></span><span class="k">using</span> <span class="k">namespace</span> <span class="n">std</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Building</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">GoodGay</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl"><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Building</span> <span class="o">*</span><span class="n">building</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">GoodGay</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">   <span class="kt">void</span> <span class="nf">visit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">class</span> <span class="nc">Building</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">friend</span> <span class="kt">void</span> <span class="n">GoodGay</span><span class="o">::</span><span class="n">visit</span><span class="p">();</span>  <span class="c1">// 将成员函数定义为友元
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">public</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">Building</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">   <span class="n">string</span> <span class="n">sittingRoom</span><span class="p">;</span> <span class="c1">// 客厅
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="k">private</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">   <span class="n">string</span> <span class="n">bedRoom</span><span class="p">;</span> <span class="c1">//卧室
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 实现 GoodGay 的构造函数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="n">GoodGay</span><span class="o">::</span><span class="n">GoodGay</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">building</span> <span class="o">=</span> <span class="k">new</span> <span class="n">Building</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="n">GoodGay</span><span class="o">::</span><span class="n">visit</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;好基友当前访问的地方是：&#34;</span><span class="o">&lt;&lt;</span> <span class="n">building</span><span class="o">-&gt;</span><span class="n">sittingRoom</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="c1">//  访问 building对象内部的私有属性
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;好基友当前访问的地方是：&#34;</span><span class="o">&lt;&lt;</span> <span class="n">building</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">&lt;&lt;</span> <span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">Building</span><span class="o">::</span><span class="n">Building</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">this</span><span class="o">-&gt;</span><span class="n">sittingRoom</span> <span class="o">=</span> <span class="s">&#34;客厅&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">this</span><span class="o">-&gt;</span><span class="n">bedRoom</span> <span class="o">=</span> <span class="s">&#34;卧室&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">void</span> <span class="nf">test01</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">   <span class="n">GoodGay</span> <span class="n">gg</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="n">gg</span><span class="p">.</span><span class="n">visit</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kt">int</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="n">test01</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">   <span class="n">std</span><span class="o">::</span><span class="n">cout</span> <span class="o">&lt;&lt;</span> <span class="s">&#34;Hello, World!&#34;</span> <span class="o">&lt;&lt;</span> <span class="n">std</span><span class="o">::</span><span class="n">endl</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">   <span class="k">return</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
 </div><p>打印结果如下：
 好基友当前访问的地方是：客厅
@@ -597,7 +636,8 @@ Hello, World!</p>
                 { left: "$", right: "$", display: false },
                 { left: "\\(", right: "\\)", display: false },
                 { left: "\\[", right: "\\]", display: true }
-            ]
+            ],
+            ignoredClasses: ["gist"]
         });})
 </script>
     
@@ -648,6 +688,8 @@ Hello, World!</p>
 </style>
 
 <script>
+    let utterancesLoaded = false;
+
     function setUtterancesTheme(theme) {
         let utterances = document.querySelector('.utterances iframe');
         if (utterances) {
@@ -663,10 +705,14 @@ Hello, World!</p>
 
     addEventListener('message', event => {
         if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
         setUtterancesTheme(document.documentElement.dataset.scheme)
     });
 
     window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
         setUtterancesTheme(e.detail)
     })
 </script>
@@ -676,25 +722,20 @@ Hello, World!</p>
 
     <footer class="site-footer">
     <section class="copyright">
-        &copy;
+        &copy; 
         
-        2019 -
+            2019 - 
         
-        2023 Hello, It&#39;s me
+        2023 不积跬步无以至千里
     </section>
-
+    
     <section class="powerby">
         
-        皖ICP备20014602号 <br />
+            皖ICP备20014602号 <br/>
         Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
-        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener"
-                data-version="3.13.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
     </section>
 </footer>
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js">
-</script>
-
-
 
 
     
@@ -776,41 +817,6 @@ Hello, World!</p>
             >
 
             </main>
-    <aside class="sidebar right-sidebar sticky">
-        
-            
-                
-    <section class="widget archives">
-        <div class="widget-icon">
-            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
-  <path stroke="none" d="M0 0h24v24H0z"/>
-  <line x1="5" y1="9" x2="19" y2="9" />
-  <line x1="5" y1="15" x2="19" y2="15" />
-  <line x1="11" y1="4" x2="7" y2="20" />
-  <line x1="17" y1="4" x2="13" y2="20" />
-</svg>
-
-
-
-        </div>
-        <h2 class="widget-title section-title">Table of contents</h2>
-        
-        <div class="widget--toc">
-            <nav id="TableOfContents">
-  <ol>
-    <li><a href="#一全局函数做友元">一、全局函数做友元</a></li>
-    <li><a href="#二类做友元">二、类做友元</a></li>
-    <li><a href="#三类成员函数做友元">三、类成员函数做友元</a></li>
-  </ol>
-</nav>
-        </div>
-    </section>
-
-            
-        
-    </aside>
-
-
         </div>
         <script 
                 src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
@@ -827,9 +833,6 @@ Hello, World!</p>
 
         document.head.appendChild(customFont);
     }());
-
-
-
 </script>
 
     </body>
