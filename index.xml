@@ -9971,7 +9971,7 @@ table th:first-of-type {
         
         <guid>https://x-xkang.com/p/docker-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4/</guid>
         <description>&lt;hr&gt;
-&lt;h2 id=&#34;1构建镜像&#34;&gt;1、构建镜像&lt;/h2&gt;
+&lt;h2 id=&#34;构建镜像&#34;&gt;构建镜像&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;在项目根目录下新建 &lt;code&gt;Dockerfile&lt;/code&gt; 文件并编辑保存&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10053,7 +10053,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;2下载远端镜像&#34;&gt;2、下载远端镜像&lt;/h2&gt;
+&lt;h2 id=&#34;下载远端镜像&#34;&gt;下载远端镜像&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker pull 仓库名称&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10076,7 +10076,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;3推送本地镜像至远端仓库&#34;&gt;3、推送本地镜像至远端仓库&lt;/h2&gt;
+&lt;h2 id=&#34;推送本地镜像至远端仓库&#34;&gt;推送本地镜像至远端仓库&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;命令：&lt;/li&gt;
 &lt;/ul&gt;
@@ -10092,7 +10092,7 @@ table th:first-of-type {
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker push devxiaokang/go-docker:v1.0
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h2 id=&#34;4查看镜像列表&#34;&gt;4、查看镜像列表&lt;/h2&gt;
+&lt;/div&gt;&lt;h2 id=&#34;查看镜像列表&#34;&gt;查看镜像列表&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker image ls&lt;/code&gt; | &lt;code&gt;docker images&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10115,7 +10115,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;5删除本地镜像&#34;&gt;5、删除本地镜像&lt;/h2&gt;
+&lt;h2 id=&#34;删除本地镜像&#34;&gt;删除本地镜像&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：docker rmi 镜像标识|镜像名称:版本号&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10141,7 +10141,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;6生成容器&#34;&gt;6、生成容器&lt;/h2&gt;
+&lt;h2 id=&#34;生成容器&#34;&gt;生成容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令： &lt;code&gt;docker [container] run 镜像标识 /bin/bash&lt;/code&gt;（简单操作）| &lt;code&gt;docker [container] run -d -p 宿主机端口:容器端口 -it --name 容器名称  镜像标识  /bin/bash&lt;/code&gt; （常用操作）&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10177,7 +10177,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;7查看容器列表&#34;&gt;7、查看容器列表&lt;/h2&gt;
+&lt;h2 id=&#34;查看容器列表&#34;&gt;查看容器列表&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker ps -a[q]&lt;/code&gt;，
 &lt;code&gt;-a&lt;/code&gt; 表示显示所有容器（包括已停止的），&lt;code&gt;-q&lt;/code&gt; 列表值显示容器的唯一标识&lt;/p&gt;
@@ -10219,7 +10219,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;8进入容器&#34;&gt;8、进入容器&lt;/h2&gt;
+&lt;h2 id=&#34;进入容器&#34;&gt;进入容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker exec -it 容器ID|容器名称 /bin/bash&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10242,7 +10242,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;9启动容器&#34;&gt;9、启动容器&lt;/h2&gt;
+&lt;h2 id=&#34;启动容器&#34;&gt;启动容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker start 容器ID|容器名称&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10255,7 +10255,7 @@ table th:first-of-type {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;10重启容器&#34;&gt;10、重启容器&lt;/h2&gt;
+&lt;h2 id=&#34;重启容器&#34;&gt;重启容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker restart 容器ID|容器名称&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10268,7 +10268,7 @@ table th:first-of-type {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;11停止容器&#34;&gt;11、停止容器&lt;/h2&gt;
+&lt;h2 id=&#34;停止容器&#34;&gt;停止容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker stop 容器ID|容器名称&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10302,7 +10302,7 @@ table th:first-of-type {
 	
 &gt;&lt;/p&gt;
 &lt;hr&gt;
-&lt;h2 id=&#34;12删除容器&#34;&gt;12、删除容器&lt;/h2&gt;
+&lt;h2 id=&#34;删除容器&#34;&gt;删除容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;命令：&lt;code&gt;docker rm 容器ID|容器名称&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10339,7 +10339,7 @@ table th:first-of-type {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;13数据卷&#34;&gt;13、数据卷&lt;/h2&gt;
+&lt;h2 id=&#34;数据卷&#34;&gt;数据卷&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;数据卷：将宿主机的一个目录映射到容器的一个目录中，可以在宿主机中操作目录中的内容，那么容器内部映射的文件，也会跟着一起改变,创建数据卷之后，默认会存在一个目录下 &lt;code&gt;/var/lib/docker/volumes/数据卷名称/_data&lt;/code&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
@@ -10408,7 +10408,7 @@ table th:first-of-type {
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
 &lt;/div&gt;&lt;hr&gt;
-&lt;h2 id=&#34;14管理多容器&#34;&gt;14、管理多容器&lt;/h2&gt;
+&lt;h2 id=&#34;管理多容器&#34;&gt;管理多容器&lt;/h2&gt;
 &lt;blockquote&gt;
 &lt;p&gt;.yml文件以key: value 方式来指定配置信息，多个配置信息以换行+锁紧的方式来区分，在docker-compose文件中，不要使用制表符&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
