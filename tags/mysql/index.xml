@@ -2035,13 +2035,13 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
         <pubDate>Fri, 02 Dec 2022 11:52:10 +0800</pubDate>
         
         <guid>https://x-xkang.com/p/mysql--docker%E9%83%A8%E7%BD%B2%E9%9B%86%E7%BE%A4%E4%B9%8B%E4%B8%BB%E4%BB%8E%E5%A4%8D%E5%88%B6%E6%96%B9%E6%A1%88/</guid>
-        <description>&lt;h3 id=&#34;一环境准备&#34;&gt;一、环境准备&lt;/h3&gt;
+        <description>&lt;h2 id=&#34;环境准备&#34;&gt;环境准备&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;OS: win10&lt;/li&gt;
 &lt;li&gt;docker engine: v20.10.14&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;二创建mysql服务容器&#34;&gt;二、创建MySQL服务容器&lt;/h3&gt;
-&lt;h4 id=&#34;1创建-master-节点服务&#34;&gt;1.创建 master 节点服务&lt;/h4&gt;
+&lt;h2 id=&#34;创建mysql服务容器&#34;&gt;创建MySQL服务容器&lt;/h2&gt;
+&lt;h3 id=&#34;创建-master-节点服务&#34;&gt;创建 master 节点服务&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;编辑数据库配置文件，将配置文件以及数据存储目录挂载到宿主机上&lt;/li&gt;
 &lt;/ul&gt;
@@ -2101,7 +2101,7 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-shell&#34; data-lang=&#34;shell&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -d -p 3310:3306 -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;aster&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql-master.cnf:/etc/mysql/conf.d/mysql-master.cnf -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;aster&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata:/var/lib/mysql  -e &lt;span class=&#34;nv&#34;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;123456&lt;/span&gt;  --name mysql-master mysql:5.7
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;2-创建-slave-节点服务&#34;&gt;2. 创建 slave 节点服务&lt;/h4&gt;
+&lt;/div&gt;&lt;h3 id=&#34;创建-slave-节点服务&#34;&gt;创建 slave 节点服务&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;创建配置文件 &lt;code&gt;mysql-slave-1.cnf&lt;/code&gt; 如下：&lt;/li&gt;
 &lt;/ul&gt;
@@ -2138,7 +2138,7 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;docker run -d -p 3311:3306 -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;lave-1&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql-slave-1.cnf:/etc/mysql/conf.d/mysql-slave-1.cnf -v D:&lt;span class=&#34;se&#34;&gt;\w&lt;/span&gt;orkspace&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ocker-volumes&lt;span class=&#34;se&#34;&gt;\m&lt;/span&gt;ysql&lt;span class=&#34;se&#34;&gt;\s&lt;/span&gt;lave-1&lt;span class=&#34;se&#34;&gt;\d&lt;/span&gt;ata&lt;span class=&#34;se&#34;&gt;\:&lt;/span&gt;/var/lib/mysql  -e &lt;span class=&#34;nv&#34;&gt;MYSQL_ROOT_PASSWORD&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;m&#34;&gt;123456&lt;/span&gt;  --name mysql-slave-1 mysql:5.7
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;h4 id=&#34;3-创建同步数据使用的用户&#34;&gt;3. 创建同步数据使用的用户&lt;/h4&gt;
+&lt;/div&gt;&lt;h3 id=&#34;创建同步数据使用的用户&#34;&gt;创建同步数据使用的用户&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;进入&lt;code&gt;master&lt;/code&gt;节点&lt;/li&gt;
 &lt;/ul&gt;
@@ -2278,7 +2278,7 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 	
 	
 &gt;&lt;/p&gt;
-&lt;h3 id=&#34;三创建连接用户并授权&#34;&gt;三、创建连接用户并授权&lt;/h3&gt;
+&lt;h2 id=&#34;创建连接用户并授权&#34;&gt;创建连接用户并授权&lt;/h2&gt;
 &lt;ul&gt;
 &lt;li&gt;进入 &lt;code&gt;master&lt;/code&gt; 节点，执行&lt;/li&gt;
 &lt;/ul&gt;

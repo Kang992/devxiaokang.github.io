@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+    <channel>
+        <title>Programming Language on 不积跬步无以至千里</title>
+        <link>https://x-xkang.com/tags/programming-language/</link>
+        <description>Recent content in Programming Language on 不积跬步无以至千里</description>
+        <generator>Hugo -- gohugo.io</generator>
+        <language>en-us</language>
+        <lastBuildDate>Thu, 28 Sep 2023 11:02:54 +0800</lastBuildDate><atom:link href="https://x-xkang.com/tags/programming-language/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Rust学习（一）-- 基本了解</title>
+        <link>https://x-xkang.com/p/rust%E5%AD%A6%E4%B9%A0%E4%B8%80--%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3/</link>
+        <pubDate>Thu, 28 Sep 2023 11:02:54 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/rust%E5%AD%A6%E4%B9%A0%E4%B8%80--%E5%9F%BA%E6%9C%AC%E4%BA%86%E8%A7%A3/</guid>
+        <description>&lt;h2 id=&#34;为什么要用rust&#34;&gt;为什么要用Rust&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rust 是一种令人兴奋的新编程语言，他可以让每个人编写可靠且搞笑的软件。&lt;/li&gt;
+&lt;li&gt;它可以用来替换 C/C++,Rust 和它们具有同样的性能，但是很多常见的bug在编译时就可以被消灭&lt;/li&gt;
+&lt;li&gt;Rust是一种通用的编程语言，但是它们更善于以下场景：
+&lt;ul&gt;
+&lt;li&gt;需要运行时的速度&lt;/li&gt;
+&lt;li&gt;需要内存安全&lt;/li&gt;
+&lt;li&gt;更好的利用多核处理器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;与其他语言比较&#34;&gt;与其他语言比较&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;C/C++性能非常好，但类型系统和内存都不太安全。&lt;/li&gt;
+&lt;li&gt;Java/C#，拥有GC，能保证内存安全，也有很多优秀特性，但是性能不行。&lt;/li&gt;
+&lt;li&gt;Rust:
+&lt;ul&gt;
+&lt;li&gt;安全&lt;/li&gt;
+&lt;li&gt;无需GC&lt;/li&gt;
+&lt;li&gt;易于维护、调试、代码安全高效&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rust擅长的领域&#34;&gt;Rust擅长的领域&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;高性能 web-service&lt;/li&gt;
+&lt;li&gt;WebAssembly&lt;/li&gt;
+&lt;li&gt;命令行工具&lt;/li&gt;
+&lt;li&gt;网络编程&lt;/li&gt;
+&lt;li&gt;嵌入式设备&lt;/li&gt;
+&lt;li&gt;系统编程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rust-和firefox&#34;&gt;Rust 和Firefox&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Rust 最初是Mozilla公司的一个研究性项目。FIrefox是Rust产品应用的一个重要的例子。&lt;/li&gt;
+&lt;li&gt;Mozilla一直以来都在用Rust创建一个名为Servo的实验性浏览器引擎，其中的所有内容都是并行执行的。
+&lt;ul&gt;
+&lt;li&gt;目前Servo的部分功能已经被集成到Firefox里面了&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Firefox原来的量子版就包含了Serve的CSS渲染引擎
+&lt;ul&gt;
+&lt;li&gt;Rust使得Firefox在这方面得到了巨大的性能改进&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rust-的用户和案例&#34;&gt;Rust 的用户和案例&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Google：新操作系统Fuschia，其中Rust代码量大约占30%&lt;/li&gt;
+&lt;li&gt;Amazon: 基于Linux开发的直接可以在裸机、虚拟机上运行容器的操作系统&lt;/li&gt;
+&lt;li&gt;System76: 纯Rust开发了下一代安全操作系统Redox&lt;/li&gt;
+&lt;li&gt;蚂蚁金服：库操作系统Occlum&lt;/li&gt;
+&lt;li&gt;斯坦福和密歇根大学：嵌入式实时操作系统，应用于Google的加密产品&lt;/li&gt;
+&lt;li&gt;微软： 正在使用Rust重写Windows系统中的一些低级组件&lt;/li&gt;
+&lt;li&gt;微软：WinRT/Rust项目&lt;/li&gt;
+&lt;li&gt;Dropbox、Yelp、Coursera、LINE、Cloudflare、Atlassian、npm、Ceph、百度、华为、Sentry、Deno&amp;hellip;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rust-的优点&#34;&gt;Rust 的优点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;高性能&lt;/li&gt;
+&lt;li&gt;安全性&lt;/li&gt;
+&lt;li&gt;无所畏惧的并发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;rust-的缺点&#34;&gt;Rust 的缺点&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;学习曲线陡峭&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;【注意】&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Rust有很多独有的概念。它们和现在大多主流语言不同，所以学习Rust必须从基础概念一步一步学，否则会懵。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 id=&#34;安装rust&#34;&gt;安装Rust&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装：https://www.rust-lang.org/&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Linux or Mac:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;curl &lt;a class=&#34;link&#34; href=&#34;https://sh.rustup.rs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://sh.rustup.rs&lt;/a&gt; -sSf | sh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windows : 按官网指示操作&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windows Subsystem for Linux(WSL):&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;curl &amp;ndash;proto &amp;lsquo;=https&amp;rsquo; &amp;ndash;tlsv1.2 -sSf &lt;a class=&#34;link&#34; href=&#34;https://sh.rustup.rs&#34;  target=&#34;_blank&#34; rel=&#34;noopener&#34;
+    &gt;https://sh.rustup.rs&lt;/a&gt; | sh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+        </item>
+        
+    </channel>
+</rss>
