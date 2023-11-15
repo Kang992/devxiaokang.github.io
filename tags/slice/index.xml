@@ -7,11 +7,11 @@
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
         <lastBuildDate>Mon, 05 Sep 2022 09:01:56 +0800</lastBuildDate><atom:link href="https://x-xkang.com/tags/slice/index.xml" rel="self" type="application/rss+xml" /><item>
-        <title>Golang -- Slice</title>
-        <link>https://x-xkang.com/p/golang--slice/</link>
+        <title>Golang数据类型之 slice 源码实现</title>
+        <link>https://x-xkang.com/p/golang%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B-slice-%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0/</link>
         <pubDate>Mon, 05 Sep 2022 09:01:56 +0800</pubDate>
         
-        <guid>https://x-xkang.com/p/golang--slice/</guid>
+        <guid>https://x-xkang.com/p/golang%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8B-slice-%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0/</guid>
         <description>&lt;h3 id=&#34;slice的数据结构&#34;&gt;Slice的数据结构&lt;/h3&gt;
 &lt;p&gt;切片是对数组的一个连续片段的引用，所以切片是一个引用类型，一个长度可变的数组。
 源码中的数据结构定义如下：&lt;/p&gt;
