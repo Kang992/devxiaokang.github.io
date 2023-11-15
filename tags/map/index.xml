@@ -827,6 +827,8 @@
 &lt;p&gt;Go 中的 map 是无序的，这意味着在遍历 map 时，元素的顺序是不确定的。这是由于 map 的实现原理和设计选择所导致的。&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;哈希表实现&lt;/strong&gt;： &lt;code&gt;map&lt;/code&gt; 的底层实现是哈希表，它使用哈希函数将键映射到桶（buckets）中。在理想情况下，哈希函数将键均匀地分散到桶中，但由于哈希表的大小是有限的，而键的域可能是无限的，因此会出现哈希冲突。&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;冲突解决方法&lt;/strong&gt;：Go使用链地址发来解决哈希冲突，如果两个键映射到同一个bucket，他们将被链接成一个链表，当桶的链表较长时，可能会影响查找性能，但由于哈希表的大小是固定的，冲突是不可避免的&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;动态扩容&lt;/strong&gt;：为了保持较低的负载因子，&lt;code&gt;map&lt;/code&gt;在键值对数量达到一定阈值（负载因子达到0.75）时会自动进行扩容，这就导致了哈希表的重新排列，而这个重新排列会使得元素的顺序发生变化&lt;/li&gt;
 &lt;/ul&gt;</description>
         </item>
         
