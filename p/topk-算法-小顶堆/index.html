@@ -1,0 +1,937 @@
+<!DOCTYPE html>
+<html lang="en-us" dir="ltr">
+    <head><meta charset='utf-8'>
+<meta name='viewport' content='width=device-width, initial-scale=1'><meta name='description' content=''>
+<meta name="keywords" content="topK, 小顶堆"><title>TopK 算法 - 小顶堆</title>
+
+<link rel='canonical' href='https://x-xkang.com/p/topk-%E7%AE%97%E6%B3%95-%E5%B0%8F%E9%A1%B6%E5%A0%86/'>
+
+<link rel="stylesheet" href="/scss/style.min.ac77dcf8b111b51da39a92990f431923f210f3876d85798a2125667f96dc33a4.css"><meta property='og:title' content='TopK 算法 - 小顶堆'>
+<meta property='og:description' content=''>
+<meta property='og:url' content='https://x-xkang.com/p/topk-%E7%AE%97%E6%B3%95-%E5%B0%8F%E9%A1%B6%E5%A0%86/'>
+<meta property='og:site_name' content='不积跬步无以至千里'>
+<meta property='og:type' content='article'><meta property='article:section' content='Post' /><meta property='article:tag' content='算法' /><meta property='article:published_time' content='2024-10-10T14:55:15&#43;08:00'/><meta property='article:modified_time' content='2024-10-10T14:55:15&#43;08:00'/>
+<meta name="twitter:title" content="TopK 算法 - 小顶堆">
+<meta name="twitter:description" content="">
+    <link rel="shortcut icon" href="favicon.ico" />
+
+    </head>
+    <body class="
+    article-page
+    ">
+    <script>
+        (function() {
+            const colorSchemeKey = 'StackColorScheme';
+            if(!localStorage.getItem(colorSchemeKey)){
+                localStorage.setItem(colorSchemeKey, "auto");
+            }
+        })();
+    </script><script>
+    (function() {
+        const colorSchemeKey = 'StackColorScheme';
+        const colorSchemeItem = localStorage.getItem(colorSchemeKey);
+        const supportDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches === true;
+
+        if (colorSchemeItem == 'dark' || colorSchemeItem === 'auto' && supportDarkMode) {
+            
+
+            document.documentElement.dataset.scheme = 'dark';
+        } else {
+            document.documentElement.dataset.scheme = 'light';
+        }
+    })();
+</script>
+<div class="container main-container flex on-phone--column extended"><aside class="sidebar left-sidebar sticky ">
+    <button class="hamburger hamburger--spin" type="button" id="toggle-menu" aria-label="Toggle Menu">
+        <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+        </span>
+    </button>
+
+    <header>
+        
+            
+            <figure class="site-avatar">
+                <a href="/">
+                
+                    
+                    
+                    
+                        
+                        <img src="/img/avatar_hu3c3946a5e2dbcd463bda7dfc7c9c9efb_49773_300x0_resize_box_3.png" width="300"
+                            height="300" class="site-logo" loading="lazy" alt="Avatar">
+                    
+                
+                </a>
+                
+                    <span class="emoji">🍥</span>
+                
+            </figure>
+            
+        
+        
+        <div class="site-meta">
+            <h1 class="site-name"><a href="/">不积跬步无以至千里</a></h1>
+            <h2 class="site-description">拨云见日，否极泰来.</h2>
+        </div>
+    </header><ol class="social-menu">
+            
+                <li>
+                    <a 
+                        href='https://github.com/devxiaokang'
+                        target="_blank"
+                        title="GitHub"
+                        rel="me"
+                    >
+                        
+                        
+                            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-brand-github" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <path d="M9 19c-4.3 1.4 -4.3 -2.5 -6 -3m12 5v-3.5c0 -1 .1 -1.4 -.5 -2c2.8 -.3 5.5 -1.4 5.5 -6a4.6 4.6 0 0 0 -1.3 -3.2a4.2 4.2 0 0 0 -.1 -3.2s-1.1 -.3 -3.5 1.3a12.3 12.3 0 0 0 -6.2 0c-2.4 -1.6 -3.5 -1.3 -3.5 -1.3a4.2 4.2 0 0 0 -.1 3.2a4.6 4.6 0 0 0 -1.3 3.2c0 4.6 2.7 5.7 5.5 6c-.6 .6 -.6 1.2 -.5 2v3.5" />
+</svg>
+
+
+
+                        
+                    </a>
+                </li>
+            
+        </ol><ol class="menu" id="main-menu">
+        
+        
+        
+        <li >
+            <a href='/' target="_blank">
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-home" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <polyline points="5 12 3 12 12 3 21 12 19 12" />
+  <path d="M5 12v7a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-7" />
+  <path d="M9 21v-6a2 2 0 0 1 2 -2h2a2 2 0 0 1 2 2v6" />
+</svg>
+
+
+
+                
+                <span>Home</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/archives/' >
+                
+                
+                
+                    <!-- <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-archive" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <rect x="3" y="4" width="18" height="4" rx="2" />
+  <path d="M5 8v10a2 2 0 0 0 2 2h10a2 2 0 0 0 2 -2v-10" />
+  <line x1="10" y1="12" x2="14" y2="12" />
+</svg>
+
+ -->
+
+<svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-list" width="44" height="44" viewBox="0 0 24 24" stroke-width="1.5" stroke="#bfbfc0" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+  <line x1="9" y1="6" x2="20" y2="6" />
+  <line x1="9" y1="12" x2="20" y2="12" />
+  <line x1="9" y1="18" x2="20" y2="18" />
+  <line x1="5" y1="6" x2="5" y2="6.01" />
+  <line x1="5" y1="12" x2="5" y2="12.01" />
+  <line x1="5" y1="18" x2="5" y2="18.01" />
+</svg>
+                
+                <span>Archives</span>
+            </a>
+        </li>
+        
+        
+        <li >
+            <a href='/search/' >
+                
+                
+                
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-search" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="10" cy="10" r="7" />
+  <line x1="21" y1="21" x2="15" y2="15" />
+</svg>
+
+
+
+                
+                <span>Search</span>
+            </a>
+        </li>
+        
+
+        <div class="menu-bottom-section">
+            
+            
+                <li id="dark-mode-toggle">
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-left" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="8" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-toggle-right" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="16" cy="12" r="2" />
+  <rect x="2" y="6" width="20" height="12" rx="6" />
+</svg>
+
+
+
+                    <span>Dark Mode</span>
+                </li>
+            
+        </div>
+    </ol>
+</aside>
+
+    <aside class="sidebar right-sidebar sticky">
+        
+            
+                
+    <section class="widget archives">
+        <div class="widget-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-hash" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <line x1="5" y1="9" x2="19" y2="9" />
+  <line x1="5" y1="15" x2="19" y2="15" />
+  <line x1="11" y1="4" x2="7" y2="20" />
+  <line x1="17" y1="4" x2="13" y2="20" />
+</svg>
+
+
+
+        </div>
+        <h2 class="widget-title section-title">Table of contents</h2>
+        
+        <div class="widget--toc">
+            <nav id="TableOfContents">
+  <ol>
+    <li><a href="#概述">概述</a></li>
+    <li><a href="#思路">思路</a></li>
+    <li><a href="#实现">实现</a>
+      <ol>
+        <li><a href="#初始化数据结构">初始化数据结构</a></li>
+      </ol>
+    </li>
+  </ol>
+</nav>
+        </div>
+    </section>
+
+            
+        
+    </aside>
+
+
+            <main class="main full-width">
+    <article class="main-article">
+    <header class="article-header">
+
+    <div class="article-details">
+    
+    <header class="article-category">
+        
+            <a href="/categories/%E7%AE%97%E6%B3%95/" >
+                算法
+            </a>
+        
+    </header>
+    
+
+    <div class="article-title-wrapper">
+        <h2 class="article-title">
+            <a href="/p/topk-%E7%AE%97%E6%B3%95-%E5%B0%8F%E9%A1%B6%E5%A0%86/">TopK 算法 - 小顶堆</a>
+        </h2>
+    
+        
+    </div>
+
+    
+    
+    
+    
+    <footer class="article-time">
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-calendar-time" width="56" height="56" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <path d="M11.795 21h-6.795a2 2 0 0 1 -2 -2v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v4" />
+  <circle cx="18" cy="18" r="4" />
+  <path d="M15 3v4" />
+  <path d="M7 3v4" />
+  <path d="M3 11h16" />
+  <path d="M18 16.496v1.504l1 1" />
+</svg>
+                <time class="article-time--published">Oct 10, 2024</time>
+            </div>
+        
+
+        
+            <div>
+                <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-clock" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <polyline points="12 7 12 12 15 15" />
+</svg>
+
+
+
+                <time class="article-time--reading">
+                    4 minute read
+                </time>
+            </div>
+        
+    </footer>
+    
+
+    
+</div>
+
+</header>
+
+    <section class="article-content">
+    
+    
+    <h2 id="概述">概述</h2>
+<ul>
+<li>题目：<a class="link" href="https://leetcode.cn/problems/kth-largest-element-in-a-stream/description/"  target="_blank" rel="noopener"
+    >Leetcode 703</a> : 取出数据流中第K大的元素</li>
+<li>描述： 设计一个找到数据流中第 k 大元素的类（class）。注意是排序后的第 k 大元素，不是第 k 个不同的元素。请实现 KthLargest 类：</li>
+<li>
+<ul>
+<li>KthLargest(int k, int[] nums) 使用整数 k 和整数流 nums 初始化对象。</li>
+</ul>
+</li>
+<li>
+<ul>
+<li>int add(int val) 将 val 插入数据流 nums 后，返回当前数据流中第 k 大的元素。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="思路">思路</h2>
+<ol>
+<li>
+<p>使用数组 nums []int 存储数据流，模拟堆结构，堆中只存储 <code>k</code> 个元素，且堆顶元素<code>nums[0]</code>为最小值。</p>
+</li>
+<li>
+<p>每次插入数据，如果数据流中的元素个数小于 <code>k</code>，直接插入堆中，如果数据流中的元素个数大于等于 <code>k</code>，判断插入的元素是否大于堆顶元素，如果大于堆顶元素，则将堆顶元素替换为插入的元素，然后重新调整堆，保持堆的有序性。</p>
+</li>
+</ol>
+<ul>
+<li>插入元素时，执行上浮算法将该元素与父级元素比较和交换，直到父级元素小于等于该元素。</li>
+<li>替换堆首元素时，执行下沉算法，将堆首元素与子级元素比较和交换，直到子级元素大于该元素。</li>
+</ul>
+<ol start="3">
+<li>获取第 <code>k</code> 大元素，直接返回 <code>nums[0]</code> 即可。</li>
+</ol>
+<hr>
+<h2 id="实现">实现</h2>
+<h3 id="初始化数据结构">初始化数据结构</h3>
+<ul>
+<li>定义结构体类型 <code>minHeap</code> 并创建一个堆结构</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// 堆结构
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">minHeap</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span>  <span class="c1">// 存储数据
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">k</span>    <span class="kt">int</span>  <span class="c1">// 堆中元素个数，非实际堆中元素个数
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// createMinHeap 创建一个堆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="nf">createMinHeap</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">k</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">minHeap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">heap</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">minHeap</span><span class="p">{</span><span class="nx">nums</span><span class="p">:</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{},</span> <span class="nx">k</span><span class="p">:</span> <span class="nx">k</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">heap</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">heap</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>在<code>minHeap</code>上定义<code>add</code>方法，用于插入元素，并保持堆的有序性。</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">mh</span> <span class="o">*</span><span class="nx">minHeap</span><span class="p">)</span> <span class="nf">add</span><span class="p">(</span><span class="nx">num</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">k</span> <span class="p">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 堆中还有位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span> <span class="c1">// 添加在堆尾，然后开始上浮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nf">swim</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>      <span class="c1">// 上浮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// 堆中没有位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="nx">num</span> <span class="p">&gt;</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">{</span> <span class="c1">// num 大于堆顶的数字，即大于堆中的最小值，将最小值替换为num，然后下沉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="nx">num</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">mh</span><span class="p">.</span><span class="nf">sink</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// 下沉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义下沉算法<code>sink</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// sink 下沉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">mh</span> <span class="o">*</span><span class="nx">minHeap</span><span class="p">)</span> <span class="nf">sink</span><span class="p">(</span><span class="nx">idx</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// idx 开始下沉的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="k">for</span> <span class="mi">2</span><span class="o">*</span><span class="nx">idx</span><span class="o">+</span><span class="mi">1</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 左子节点不溢出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 当前节点与左右两个节点中较小的一个交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">child</span> <span class="o">:=</span> <span class="mi">2</span><span class="o">*</span><span class="nx">idx</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">child</span><span class="o">+</span><span class="mi">1</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="p">&gt;</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">child</span><span class="o">++</span> <span class="c1">// 取右子节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 子节点大于等于当前值，下沉结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">break</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="p">=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 将下标更新为当前交换的子节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">idx</span> <span class="p">=</span> <span class="nx">child</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><ul>
+<li>定义上浮算法<code>swim</code></li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="c1">// swim 上浮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">mh</span> <span class="o">*</span><span class="nx">minHeap</span><span class="p">)</span> <span class="nf">swim</span><span class="p">(</span><span class="nx">idx</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// idx 开始上浮的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="k">for</span> <span class="nx">idx</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span> <span class="c1">// idx 上浮至0(根节点)时停止
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">parent</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="c1">// 父节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">parent</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 父节点小于等于当前值，上浮结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">break</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">parent</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span> <span class="p">=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">parent</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">idx</span> <span class="p">=</span> <span class="nx">parent</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><p>&ndash; 完整代码如下</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span><span class="lnt">23
+</span><span class="lnt">24
+</span><span class="lnt">25
+</span><span class="lnt">26
+</span><span class="lnt">27
+</span><span class="lnt">28
+</span><span class="lnt">29
+</span><span class="lnt">30
+</span><span class="lnt">31
+</span><span class="lnt">32
+</span><span class="lnt">33
+</span><span class="lnt">34
+</span><span class="lnt">35
+</span><span class="lnt">36
+</span><span class="lnt">37
+</span><span class="lnt">38
+</span><span class="lnt">39
+</span><span class="lnt">40
+</span><span class="lnt">41
+</span><span class="lnt">42
+</span><span class="lnt">43
+</span><span class="lnt">44
+</span><span class="lnt">45
+</span><span class="lnt">46
+</span><span class="lnt">47
+</span><span class="lnt">48
+</span><span class="lnt">49
+</span><span class="lnt">50
+</span><span class="lnt">51
+</span><span class="lnt">52
+</span><span class="lnt">53
+</span><span class="lnt">54
+</span><span class="lnt">55
+</span><span class="lnt">56
+</span><span class="lnt">57
+</span><span class="lnt">58
+</span><span class="lnt">59
+</span><span class="lnt">60
+</span><span class="lnt">61
+</span><span class="lnt">62
+</span><span class="lnt">63
+</span><span class="lnt">64
+</span><span class="lnt">65
+</span><span class="lnt">66
+</span><span class="lnt">67
+</span><span class="lnt">68
+</span><span class="lnt">69
+</span><span class="lnt">70
+</span><span class="lnt">71
+</span><span class="lnt">72
+</span><span class="lnt">73
+</span><span class="lnt">74
+</span><span class="lnt">75
+</span><span class="lnt">76
+</span><span class="lnt">77
+</span><span class="lnt">78
+</span><span class="lnt">79
+</span><span class="lnt">80
+</span><span class="lnt">81
+</span><span class="lnt">82
+</span><span class="lnt">83
+</span><span class="lnt">84
+</span><span class="lnt">85
+</span><span class="lnt">86
+</span><span class="lnt">87
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kn">package</span> <span class="nx">main</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// 小顶堆
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">type</span> <span class="nx">minHeap</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">k</span>    <span class="kt">int</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">createMinHeap</span><span class="p">(</span><span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">,</span> <span class="nx">k</span> <span class="kt">int</span><span class="p">)</span> <span class="o">*</span><span class="nx">minHeap</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 初始化
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">heap</span> <span class="o">:=</span> <span class="o">&amp;</span><span class="nx">minHeap</span><span class="p">{</span><span class="nx">nums</span><span class="p">:</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{},</span> <span class="nx">k</span><span class="p">:</span> <span class="nx">k</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">for</span> <span class="nx">i</span> <span class="o">:=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">i</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">nums</span><span class="p">);</span> <span class="nx">i</span><span class="o">++</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">heap</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">nums</span><span class="p">[</span><span class="nx">i</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">heap</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// add 添加元素
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">mh</span> <span class="o">*</span><span class="nx">minHeap</span><span class="p">)</span> <span class="nf">add</span><span class="p">(</span><span class="nx">num</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">if</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">k</span> <span class="p">&gt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 堆中还有位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span> <span class="p">=</span> <span class="nb">append</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">num</span><span class="p">)</span> <span class="c1">// 添加在堆尾，然后开始上浮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nf">swim</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span>      <span class="c1">// 上浮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="p">}</span> <span class="k">else</span> <span class="p">{</span> <span class="c1">// 堆中没有位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="nx">num</span> <span class="p">&gt;</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">{</span> <span class="c1">// num 大于堆顶的数字，即大于堆中的最小值，将最小值替换为num，然后下沉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="p">=</span> <span class="nx">num</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">mh</span><span class="p">.</span><span class="nf">sink</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span> <span class="c1">// 下沉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// sink 下沉
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">mh</span> <span class="o">*</span><span class="nx">minHeap</span><span class="p">)</span> <span class="nf">sink</span><span class="p">(</span><span class="nx">idx</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// idx 开始下沉的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="k">for</span> <span class="mi">2</span><span class="o">*</span><span class="nx">idx</span><span class="o">+</span><span class="mi">1</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="p">{</span> <span class="c1">// 左子节点不溢出
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="c1">// 当前节点与左右两个节点中较小的一个交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">child</span> <span class="o">:=</span> <span class="mi">2</span><span class="o">*</span><span class="nx">idx</span> <span class="o">+</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">child</span><span class="o">+</span><span class="mi">1</span> <span class="p">&lt;</span> <span class="nb">len</span><span class="p">(</span><span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">)</span> <span class="o">&amp;&amp;</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="p">&gt;</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="o">+</span><span class="mi">1</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="nx">child</span><span class="o">++</span> <span class="c1">// 取右子节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="o">&gt;=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 子节点大于等于当前值，下沉结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">break</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">]</span> <span class="p">=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">child</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="c1">// 将下标更新为当前交换的子节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">idx</span> <span class="p">=</span> <span class="nx">child</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// swim 上浮
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">func</span> <span class="p">(</span><span class="nx">mh</span> <span class="o">*</span><span class="nx">minHeap</span><span class="p">)</span> <span class="nf">swim</span><span class="p">(</span><span class="nx">idx</span> <span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// idx 开始上浮的位置
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="k">for</span> <span class="nx">idx</span> <span class="p">&gt;</span> <span class="mi">0</span> <span class="p">{</span> <span class="c1">// idx 上浮至0时停止
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">parent</span> <span class="o">:=</span> <span class="p">(</span><span class="nx">idx</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">&gt;&gt;</span> <span class="mi">1</span> <span class="c1">// 父节点
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="k">if</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">parent</span><span class="p">]</span> <span class="o">&lt;=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">// 父节点小于等于当前值，上浮结束
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>   <span class="k">break</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c1">// 交换
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>  <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">parent</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">]</span> <span class="p">=</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">idx</span><span class="p">],</span> <span class="nx">mh</span><span class="p">.</span><span class="nx">nums</span><span class="p">[</span><span class="nx">parent</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">idx</span> <span class="p">=</span> <span class="nx">parent</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">type</span> <span class="nx">KthLargest</span> <span class="kd">struct</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">heap</span> <span class="o">*</span><span class="nx">minHeap</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">Constructor</span><span class="p">(</span><span class="nx">k</span> <span class="kt">int</span><span class="p">,</span> <span class="nx">nums</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="nx">KthLargest</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">KthLargest</span><span class="p">{</span><span class="nx">heap</span><span class="p">:</span> <span class="nf">createMinHeap</span><span class="p">(</span><span class="nx">nums</span><span class="p">,</span> <span class="nx">k</span><span class="p">)}</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="p">(</span><span class="nx">this</span> <span class="o">*</span><span class="nx">KthLargest</span><span class="p">)</span> <span class="nf">Add</span><span class="p">(</span><span class="nx">val</span> <span class="kt">int</span><span class="p">)</span> <span class="kt">int</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="k">return</span> <span class="nx">this</span><span class="p">.</span><span class="nx">heap</span><span class="p">.</span><span class="nf">add</span><span class="p">(</span><span class="nx">val</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">k</span> <span class="o">:=</span> <span class="nf">Constructor</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="p">[]</span><span class="kt">int</span><span class="p">{</span><span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="mi">8</span><span class="p">,</span> <span class="mi">2</span><span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div>
+</section>
+
+
+    <footer class="article-footer">
+    
+    <section class="article-tags">
+        
+            <a href="/tags/%E7%AE%97%E6%B3%95/">算法</a>
+        
+    </section>
+
+
+    
+    <section class="article-copyright">
+        <svg xmlns="http://www.w3.org/2000/svg" class="icon icon-tabler icon-tabler-copyright" width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">
+  <path stroke="none" d="M0 0h24v24H0z"/>
+  <circle cx="12" cy="12" r="9" />
+  <path d="M14.5 9a3.5 4 0 1 0 0 6" />
+</svg>
+
+
+
+        <span>Licensed under CC BY-NC-SA 4.0</span>
+    </section>
+    </footer>
+
+
+    
+        <link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.css"integrity="sha256-J&#43;iAE0sgH8QSz9hpcDxXIftnj65JEZgNhGcgReTTK9s="crossorigin="anonymous"
+            ><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/katex.min.js"integrity="sha256-InsNdER1b2xUewP&#43;pKCUJpkhiqwHgqiPXDlIk7GzBu4="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/katex@0.15.6/dist/contrib/auto-render.min.js"integrity="sha256-y39Mpg7V3D4lhBX4x6O0bUqTV4pSrfgwEfGKfxkOdgI="crossorigin="anonymous"
+                defer
+                >
+            </script><script>
+    window.addEventListener("DOMContentLoaded", () => {
+        renderMathInElement(document.querySelector(`.article-content`), {
+            delimiters: [
+                { left: "$$", right: "$$", display: true },
+                { left: "$", right: "$", display: false },
+                { left: "\\(", right: "\\)", display: false },
+                { left: "\\[", right: "\\]", display: true }
+            ],
+            ignoredClasses: ["gist"]
+        });})
+</script>
+    
+</article>
+
+    
+
+    
+
+<aside class="related-content--wrapper">
+    <h2 class="section-title">Related content</h2>
+    <div class="related-content">
+        <div class="flex article-list--tile">
+            
+                
+<article class="">
+    <a href="/p/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/">
+        
+        
+
+        <div class="article-details">
+            <h2 class="article-title">二叉树遍历</h2>
+        </div>
+    </a>
+</article>
+
+            
+        </div>
+    </div>
+</aside>
+
+     
+    
+        
+    <script src="https://utteranc.es/client.js" 
+        repo="devxiaokang/blog"
+        issue-term="pathname"
+        
+        crossorigin="anonymous"
+        async
+        >
+</script>
+
+<style>
+    .utterances {
+        max-width: unset;
+    }
+</style>
+
+<script>
+    let utterancesLoaded = false;
+
+    function setUtterancesTheme(theme) {
+        let utterances = document.querySelector('.utterances iframe');
+        if (utterances) {
+            utterances.contentWindow.postMessage(
+                {
+                    type: 'set-theme',
+                    theme: `github-${theme}`
+                },
+                'https://utteranc.es'
+            );
+        }
+    }
+
+    addEventListener('message', event => {
+        if (event.origin !== 'https://utteranc.es') return;
+
+        
+        utterancesLoaded = true;
+        setUtterancesTheme(document.documentElement.dataset.scheme)
+    });
+
+    window.addEventListener('onColorSchemeChange', (e) => {
+        if (!utterancesLoaded) return;
+        setUtterancesTheme(e.detail)
+    })
+</script>
+
+
+    
+
+    <footer class="site-footer">
+    <section class="copyright">
+        &copy; 
+        
+            2019 - 
+        
+        2024 不积跬步无以至千里
+    </section>
+    
+    <section class="powerby">
+        
+            皖ICP备20014602号 <br/>
+        Built with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> <br />
+        Theme <b><a href="https://github.com/CaiJimmy/hugo-theme-stack" target="_blank" rel="noopener" data-version="3.16.0">Stack</a></b> designed by <a href="https://jimmycai.com" target="_blank" rel="noopener">Jimmy</a>
+    </section>
+</footer>
+
+
+    
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+
+    
+    <div class="pswp__bg"></div>
+
+    
+    <div class="pswp__scroll-wrap">
+
+        
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+
+        
+        <div class="pswp__ui pswp__ui--hidden">
+
+            <div class="pswp__top-bar">
+
+                
+
+                <div class="pswp__counter"></div>
+
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+
+                
+                
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                        <div class="pswp__preloader__cut">
+                            <div class="pswp__preloader__donut"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div>
+            </div>
+
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+
+        </div>
+
+    </div>
+
+</div><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.js"integrity="sha256-ePwmChbbvXbsO02lbM3HoHbSHTHFAeChekF1xKJdleo="crossorigin="anonymous"
+                defer
+                >
+            </script><script 
+                src="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe-ui-default.min.js"integrity="sha256-UKkzOn/w1mBxRmLLGrSeyB4e1xbrp4xylgAWb3M42pU="crossorigin="anonymous"
+                defer
+                >
+            </script><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/default-skin/default-skin.min.css"crossorigin="anonymous"
+            ><link 
+                rel="stylesheet" 
+                href="https://cdn.jsdelivr.net/npm/photoswipe@4.1.3/dist/photoswipe.min.css"crossorigin="anonymous"
+            >
+
+            </main>
+        </div>
+        <script 
+                src="https://cdn.jsdelivr.net/npm/node-vibrant@3.1.6/dist/vibrant.min.js"integrity="sha256-awcR2jno4kI5X0zL8ex0vi2z&#43;KMkF24hUW8WePSA9HM="crossorigin="anonymous"
+                
+                >
+            </script><script type="text/javascript" src="/ts/main.js" defer></script>
+<script>
+    (function () {
+        const customFont = document.createElement('link');
+        customFont.href = "https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700&display=swap";
+
+        customFont.type = "text/css";
+        customFont.rel = "stylesheet";
+
+        document.head.appendChild(customFont);
+    }());
+</script>
+
+    </body>
+</html>

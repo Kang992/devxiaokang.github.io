@@ -6,7 +6,15 @@
         <description>Recent content in Rust on 不积跬步无以至千里</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Tue, 23 Apr 2024 17:00:23 +0800</lastBuildDate><atom:link href="https://x-xkang.com/categories/rust/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Thu, 09 May 2024 14:26:30 +0800</lastBuildDate><atom:link href="https://x-xkang.com/categories/rust/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Rust 学习（六）-- 引用与借用</title>
+        <link>https://x-xkang.com/p/rust-%E5%AD%A6%E4%B9%A0%E5%85%AD--%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/</link>
+        <pubDate>Thu, 09 May 2024 14:26:30 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/rust-%E5%AD%A6%E4%B9%A0%E5%85%AD--%E5%BC%95%E7%94%A8%E4%B8%8E%E5%80%9F%E7%94%A8/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Rust学习（五）-- 认识所有权</title>
         <link>https://x-xkang.com/p/rust%E5%AD%A6%E4%B9%A0%E4%BA%94--%E8%AE%A4%E8%AF%86%E6%89%80%E6%9C%89%E6%9D%83/</link>
         <pubDate>Tue, 23 Apr 2024 17:00:23 +0800</pubDate>
