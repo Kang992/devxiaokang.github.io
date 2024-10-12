@@ -6,7 +6,15 @@
         <description>Recent content in Golang on 不积跬步无以至千里</description>
         <generator>Hugo -- gohugo.io</generator>
         <language>en-us</language>
-        <lastBuildDate>Thu, 09 Nov 2023 16:09:27 +0800</lastBuildDate><atom:link href="https://x-xkang.com/tags/golang/index.xml" rel="self" type="application/rss+xml" /><item>
+        <lastBuildDate>Sat, 12 Oct 2024 08:48:16 +0800</lastBuildDate><atom:link href="https://x-xkang.com/tags/golang/index.xml" rel="self" type="application/rss+xml" /><item>
+        <title>Golang面试题之 Channel</title>
+        <link>https://x-xkang.com/p/golang%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B9%8B-channel/</link>
+        <pubDate>Sat, 12 Oct 2024 08:48:16 +0800</pubDate>
+        
+        <guid>https://x-xkang.com/p/golang%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B9%8B-channel/</guid>
+        <description></description>
+        </item>
+        <item>
         <title>Golang数据类型之Map源码实现</title>
         <link>https://x-xkang.com/p/golang%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bmap%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0/</link>
         <pubDate>Thu, 09 Nov 2023 16:09:27 +0800</pubDate>

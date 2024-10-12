@@ -3,18 +3,45 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://x-xkang.com/categories/</loc>
-    <lastmod>2024-10-10T14:55:15+08:00</lastmod>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/categories/golang/</loc>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/p/golang-new-%E5%92%8C-make%E5%85%B3%E9%94%AE%E5%AD%97%E7%9A%84%E5%8C%BA%E5%88%AB/</loc>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/tags/make/</loc>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/tags/new/</loc>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
   </url><url>
     <loc>https://x-xkang.com/post/</loc>
-    <lastmod>2024-10-10T14:55:15+08:00</lastmod>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
   </url><url>
     <loc>https://x-xkang.com/tags/</loc>
-    <lastmod>2024-10-10T14:55:15+08:00</lastmod>
-  </url><url>
-    <loc>https://x-xkang.com/p/topk-%E7%AE%97%E6%B3%95-%E5%B0%8F%E9%A1%B6%E5%A0%86/</loc>
-    <lastmod>2024-10-10T14:55:15+08:00</lastmod>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
   </url><url>
     <loc>https://x-xkang.com/</loc>
+    <lastmod>2024-10-12T09:25:01+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/tags/channel/</loc>
+    <lastmod>2024-10-12T08:48:16+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/categories/channel/</loc>
+    <lastmod>2024-10-12T08:48:16+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/tags/golang/</loc>
+    <lastmod>2024-10-12T08:48:16+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/p/golang%E9%9D%A2%E8%AF%95%E9%A2%98%E4%B9%8B-channel/</loc>
+    <lastmod>2024-10-12T08:48:16+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/categories/%E9%9D%A2%E8%AF%95%E9%A2%98/</loc>
+    <lastmod>2024-10-12T08:48:16+08:00</lastmod>
+  </url><url>
+    <loc>https://x-xkang.com/p/topk-%E7%AE%97%E6%B3%95-%E5%B0%8F%E9%A1%B6%E5%A0%86/</loc>
     <lastmod>2024-10-10T14:55:15+08:00</lastmod>
   </url><url>
     <loc>https://x-xkang.com/tags/%E7%AE%97%E6%B3%95/</loc>
@@ -92,12 +119,6 @@
     <loc>https://x-xkang.com/p/rust%E5%AD%A6%E4%B9%A0%E4%BA%94--%E8%AE%A4%E8%AF%86%E6%89%80%E6%9C%89%E6%9D%83/</loc>
     <lastmod>2024-04-23T17:00:23+08:00</lastmod>
   </url><url>
-    <loc>https://x-xkang.com/tags/golang/</loc>
-    <lastmod>2023-11-09T16:09:27+08:00</lastmod>
-  </url><url>
-    <loc>https://x-xkang.com/categories/golang/</loc>
-    <lastmod>2023-11-09T16:09:27+08:00</lastmod>
-  </url><url>
     <loc>https://x-xkang.com/p/golang%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B9%8Bmap%E6%BA%90%E7%A0%81%E5%AE%9E%E7%8E%B0/</loc>
     <lastmod>2023-11-09T16:09:27+08:00</lastmod>
   </url><url>
@@ -121,9 +142,6 @@
   </url><url>
     <loc>https://x-xkang.com/p/%E4%BA%8C%E5%8F%89%E6%A0%91%E9%81%8D%E5%8E%86/</loc>
     <lastmod>2023-09-22T10:33:53+08:00</lastmod>
-  </url><url>
-    <loc>https://x-xkang.com/tags/channel/</loc>
-    <lastmod>2023-03-29T11:08:08+08:00</lastmod>
   </url><url>
     <loc>https://x-xkang.com/p/golang--channel/</loc>
     <lastmod>2023-03-29T11:08:08+08:00</lastmod>
