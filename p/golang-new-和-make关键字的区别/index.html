@@ -233,6 +233,7 @@
             <li><a href="#返回值-1">返回值</a></li>
           </ol>
         </li>
+        <li><a href="#总结">总结</a></li>
       </ol>
     </li>
   </ol>
@@ -303,7 +304,7 @@
 
 
                 <time class="article-time--reading">
-                    4 minute read
+                    5 minute read
                 </time>
             </div>
         
@@ -612,6 +613,9 @@
 </div>
 </div><h4 id="返回值-1">返回值</h4>
 <p><code>make(T [, args]) T</code> 的返回值为 <code>T</code> 的引用，在函数内部可以直接修改原始值</p>
+<ul>
+<li>Slice，返回不再是零值，而是一个空切片，可以通过下标修改元素值</li>
+</ul>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
 <pre tabindex="0" class="chroma"><code><span class="lnt"> 1
@@ -630,19 +634,23 @@
 </span><span class="lnt">14
 </span><span class="lnt">15
 </span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
 </span></code></pre></td>
 <td class="lntd">
 <pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
-</span></span><span class="line"><span class="cl"> <span class="c1">// Slice，初始化内存和数据结构，返回长度=2的[]int类型切片的引用
+</span></span><span class="line"><span class="cl"> <span class="c1">// Slice，初始化内存和数据结构，返回长度=2的[]int类型切片的引用，
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="c1">//【注意】：这里的s可以通过下标直接修改元素值，如s[1]=999，但下标不可以超过`make(t [,args])`中的`args`参数，会导致溢出。
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">s</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">([]</span><span class="kt">int</span><span class="p">,</span> <span class="mi">2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">s</span><span class="p">[</span><span class="mi">1</span><span class="p">]=</span><span class="mi">999</span>
 </span></span><span class="line"><span class="cl">
-</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of s is %#v\n&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">// 输出：value of s is []int{0, 0}
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of s is %#v\n&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">// 输出：value of s is []int{0, 999}
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span>
 </span></span><span class="line"><span class="cl"> <span class="c1">// 修改s的值，在下一行的打印中会生效，说明 `s` 是引用类型
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nf">updateSlice</span><span class="p">(</span><span class="nx">s</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"> <span class="c1">// 上面updateSlice内修改的值，在这里依然生效
-</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of s is updated %#v\n&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">// 输出：value of s is updated []int{99, 0}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of s is updated %#v\n&#34;</span><span class="p">,</span> <span class="nx">s</span><span class="p">)</span> <span class="c1">// 输出：value of s is updated []int{99, 999}
 </span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">}</span>
 </span></span><span class="line"><span class="cl">
 </span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">updateSlice</span><span class="p">(</span><span class="nx">s</span> <span class="p">[]</span><span class="kt">int</span><span class="p">)</span> <span class="p">{</span>
@@ -650,7 +658,108 @@
 </span></span><span class="line"><span class="cl"><span class="p">}</span>
 </span></span></code></pre></td></tr></table>
 </div>
+</div><ul>
+<li>Map，返回的也不是map的零值<code>nil</code>，而是一个空map</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// Map
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">m</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> 
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of m-1: %#v\n&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="c1">// 输出：value of m-1: map[string]string{}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 修改 map，这里m不再是map的零值，而是一个空map，可以直接修改
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">m</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;zhangsan&#34;</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of m-2: %#v\n&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="c1">// 输出：value of m-2: map[string]string{&#34;name&#34;:&#34;zhangsan&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"> <span class="nf">updateMap</span><span class="p">(</span><span class="nx">m</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of m-3: %#v\n&#34;</span><span class="p">,</span> <span class="nx">m</span><span class="p">)</span> <span class="c1">// 输出：value of m-3: map[string]string{&#34;age&#34;:&#34;18&#34;, &#34;name&#34;:&#34;lisi&#34;}
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">updateMap</span><span class="p">(</span><span class="nx">m</span> <span class="kd">map</span><span class="p">[</span><span class="kt">string</span><span class="p">]</span><span class="kt">string</span><span class="p">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">m</span><span class="p">[</span><span class="s">&#34;name&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;lisi&#34;</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">m</span><span class="p">[</span><span class="s">&#34;age&#34;</span><span class="p">]</span> <span class="p">=</span> <span class="s">&#34;18&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
 </div>
+</div><ul>
+<li>Channel, 返回的并不是chan的零值<code>nil</code>，而是一个空channel，可以像channel中写入数据，但如果是通过<code>new</code>初始化的channel，则初始化之后的channel是零值nil,写入数据会阻塞，并不会报错</li>
+</ul>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt"> 1
+</span><span class="lnt"> 2
+</span><span class="lnt"> 3
+</span><span class="lnt"> 4
+</span><span class="lnt"> 5
+</span><span class="lnt"> 6
+</span><span class="lnt"> 7
+</span><span class="lnt"> 8
+</span><span class="lnt"> 9
+</span><span class="lnt">10
+</span><span class="lnt">11
+</span><span class="lnt">12
+</span><span class="lnt">13
+</span><span class="lnt">14
+</span><span class="lnt">15
+</span><span class="lnt">16
+</span><span class="lnt">17
+</span><span class="lnt">18
+</span><span class="lnt">19
+</span><span class="lnt">20
+</span><span class="lnt">21
+</span><span class="lnt">22
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-go" data-lang="go"><span class="line"><span class="cl"><span class="kd">func</span> <span class="nf">main</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">ch</span> <span class="o">:=</span> <span class="nb">make</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of ch: %#v\n&#34;</span><span class="p">,</span> <span class="nx">ch</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="nx">ch2</span> <span class="o">:=</span> <span class="nb">new</span><span class="p">(</span><span class="kd">chan</span> <span class="kt">int</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of ch2: %#v\n&#34;</span><span class="p">,</span> <span class="o">*</span><span class="nx">ch2</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="nx">ch3</span> <span class="o">:=</span> <span class="o">*</span><span class="nx">ch2</span>
+</span></span><span class="line"><span class="cl"> <span class="k">go</span> <span class="kd">func</span><span class="p">()</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">   <span class="k">if</span> <span class="nx">v</span><span class="p">,</span> <span class="nx">ok</span> <span class="o">:=</span> <span class="o">&lt;-</span><span class="nx">ch3</span><span class="p">;</span> <span class="nx">ok</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">fmt</span><span class="p">.</span><span class="nf">Printf</span><span class="p">(</span><span class="s">&#34;value of ch3: %v\n&#34;</span><span class="p">,</span> <span class="nx">v</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">break</span>
+</span></span><span class="line"><span class="cl">   <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">   <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;loop...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">}</span>
+</span></span><span class="line"><span class="cl"> <span class="p">}()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"> <span class="nx">fmt</span><span class="p">.</span><span class="nf">Println</span><span class="p">(</span><span class="s">&#34;starting insert number to channel...&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"> <span class="c1">// 【重点】ch3=ch时，这里正常写入数据，因为make返回的是一个空channel；但是如果ch3=*ch2时，这里会阻塞，因为new 返回的*ch2是零值nil，向值为nil的channel写入数据时是会永久阻塞的
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span> <span class="nx">ch3</span> <span class="o">&lt;-</span> <span class="mi">2</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span></code></pre></td></tr></table>
+</div>
+</div><h3 id="总结">总结</h3>
+<p><code>new(T)</code> 是为<code>T</code>分配内存空间并将空间初始化为<code>T</code>的零值，返回的是<code>T</code>的指针并且<code>T</code>可以使任意数据类型；而<code>make(T [,args])</code> 分配内存空间之后会初始化底层的数据结构，返回的是<code>T</code>类型数据结构初始化之后的引用，而不是T的零值，并且<code>T</code>只能是<code>slice</code>、<code>map</code>、<code>channel</code>中的其中一个。</p>
 </section>
 
 
