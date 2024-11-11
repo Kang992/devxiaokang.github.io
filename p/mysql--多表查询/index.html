@@ -222,7 +222,7 @@
         <li><a href="#内连接">内连接</a></li>
         <li><a href="#外连接">外连接</a></li>
         <li><a href="#自连接">自连接</a></li>
-        <li><a href="#联合查询-union-union-all">联合查询-union, union all</a></li>
+        <li><a href="#联合查询-union-union-all">联合查询 union, union all</a></li>
         <li><a href="#子查询">子查询</a>
           <ol>
             <li><a href="#子查询----标量子查询">子查询 &ndash; 标量子查询</a></li>
@@ -297,7 +297,7 @@
 
 
                 <time class="article-time--reading">
-                    1 minute read
+                    2 minute read
                 </time>
             </div>
         
@@ -336,7 +336,8 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="w"> </span><span class="p">[</span><span class="k">INNER</span><span class="p">]</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表</span><span class="mi">2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">连接条件</span><span class="p">;</span><span class="w">  
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><hr>
+</div><p>结果集：表1 和 表2的交集</p>
+<hr>
 <h3 id="外连接">外连接</h3>
 <ul>
 <li>左外连接</li>
@@ -350,10 +351,20 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="w"> </span><span class="k">LEFT</span><span class="w"> </span><span class="p">[</span><span class="k">OUTER</span><span class="p">]</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表</span><span class="mi">2</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">条件</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><ul>
+</div><p>结果集：表1的所有数据（表2中不存在的数据用 null 填充）</p>
+<ul>
 <li>右外连接</li>
 </ul>
 <p>相当于查询表2（右表）的所有数据 包含 表1和表2交集部分的数据</p>
+<div class="highlight"><div class="chroma">
+<table class="lntable"><tr><td class="lntd">
+<pre tabindex="0" class="chroma"><code><span class="lnt">1
+</span></code></pre></td>
+<td class="lntd">
+<pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表</span><span class="mi">2</span><span class="w"> </span><span class="k">RIGHT</span><span class="w"> </span><span class="p">[</span><span class="k">OUTER</span><span class="p">]</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表</span><span class="mi">1</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">条件</span><span class="p">;</span><span class="w">
+</span></span></span></code></pre></td></tr></table>
+</div>
+</div><p>结果集：表2的所有数据（表1中不存在的数据用 null 填充）</p>
 <hr>
 <h3 id="自连接">自连接</h3>
 <p>自连接查询，可以是内连接查询，也可以是外连接查询。</p>
@@ -365,8 +376,9 @@
 <pre tabindex="0" class="chroma"><code class="language-sql" data-lang="sql"><span class="line"><span class="cl"><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表</span><span class="n">A</span><span class="w"> </span><span class="err">别名</span><span class="n">A</span><span class="w"> </span><span class="k">JOIN</span><span class="w"> </span><span class="err">表</span><span class="n">A</span><span class="w"> </span><span class="err">别名</span><span class="n">B</span><span class="w"> </span><span class="k">ON</span><span class="w"> </span><span class="err">条件</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><hr>
-<h3 id="联合查询-union-union-all">联合查询-union, union all</h3>
+</div><p>结果集：表1和表2的交集</p>
+<hr>
+<h3 id="联合查询-union-union-all">联合查询 union, union all</h3>
 <p>对于union查询，就是把多次查询的结果并起来，形成一个新的查询结果集。</p>
 <div class="highlight"><div class="chroma">
 <table class="lntable"><tr><td class="lntd">
@@ -380,7 +392,8 @@
 </span></span></span><span class="line"><span class="cl"><span class="w"></span><span class="k">SELECT</span><span class="w"> </span><span class="err">字段列表</span><span class="w"> </span><span class="k">FROM</span><span class="w"> </span><span class="err">表</span><span class="n">B</span><span class="p">;</span><span class="w">
 </span></span></span></code></pre></td></tr></table>
 </div>
-</div><hr>
+</div><p>结果集：表1和表2的并集</p>
+<hr>
 <h3 id="子查询">子查询</h3>
 <p>SQL语句中嵌套SELECT语句，称为嵌套查询，又称子查询。</p>
 <div class="highlight"><div class="chroma">

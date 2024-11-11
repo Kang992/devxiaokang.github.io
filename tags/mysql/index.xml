@@ -649,7 +649,7 @@
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;页合并&lt;/p&gt;
-&lt;p&gt;当删除一行数据时，实际上记录并没有被物理删除，只是记录被标记（flaged）为删除并且它的空间变的允许被其他记录声明使用。当页中删除的记录大奥 &lt;code&gt;MERGE_THRESHOLD&lt;/code&gt;(默认为页的50%)，Innodb会开始寻找最靠近的页（前或后）看看是否可以将两个页合并以优化空间使用。&lt;/p&gt;
+&lt;p&gt;当删除一行数据时，实际上记录并没有被物理删除，只是记录被标记（flaged）为删除并且它的空间变的允许被其他记录声明使用。当页中删除的记录大于 &lt;code&gt;MERGE_THRESHOLD&lt;/code&gt;(默认为页的50%)，Innodb会开始寻找最靠近的页（前或后）看看是否可以将两个页合并以优化空间使用。&lt;/p&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;主键设计原则&lt;/p&gt;
@@ -1608,7 +1608,8 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;INNER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;连接条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;  
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
+&lt;/div&gt;&lt;p&gt;结果集：表1 和 表2的交集&lt;/p&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;外连接&#34;&gt;外连接&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;左外连接&lt;/li&gt;
@@ -1622,10 +1623,20 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;LEFT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;OUTER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;ul&gt;
+&lt;/div&gt;&lt;p&gt;结果集：表1的所有数据（表2中不存在的数据用 null 填充）&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;右外连接&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;相当于查询表2（右表）的所有数据 包含 表1和表2交集部分的数据&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
+&lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;lnt&#34;&gt;1
+&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;
+&lt;td class=&#34;lntd&#34;&gt;
+&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;RIGHT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;p&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;OUTER&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;&lt;p&gt;结果集：表2的所有数据（表1中不存在的数据用 null 填充）&lt;/p&gt;
 &lt;hr&gt;
 &lt;h3 id=&#34;自连接&#34;&gt;自连接&lt;/h3&gt;
 &lt;p&gt;自连接查询，可以是内连接查询，也可以是外连接查询。&lt;/p&gt;
@@ -1637,8 +1648,9 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sql&#34; data-lang=&#34;sql&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;别名&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;JOIN&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;A&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;别名&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;ON&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;条件&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
-&lt;h3 id=&#34;联合查询-union-union-all&#34;&gt;联合查询-union, union all&lt;/h3&gt;
+&lt;/div&gt;&lt;p&gt;结果集：表1和表2的交集&lt;/p&gt;
+&lt;hr&gt;
+&lt;h3 id=&#34;联合查询-union-union-all&#34;&gt;联合查询 union, union all&lt;/h3&gt;
 &lt;p&gt;对于union查询，就是把多次查询的结果并起来，形成一个新的查询结果集。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
 &lt;table class=&#34;lntable&#34;&gt;&lt;tr&gt;&lt;td class=&#34;lntd&#34;&gt;
@@ -1652,7 +1664,8 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;w&#34;&gt;&lt;/span&gt;&lt;span class=&#34;k&#34;&gt;SELECT&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;字段列表&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;k&#34;&gt;FROM&lt;/span&gt;&lt;span class=&#34;w&#34;&gt; &lt;/span&gt;&lt;span class=&#34;err&#34;&gt;表&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;B&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;;&lt;/span&gt;&lt;span class=&#34;w&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;
 &lt;/div&gt;
-&lt;/div&gt;&lt;hr&gt;
+&lt;/div&gt;&lt;p&gt;结果集：表1和表2的并集&lt;/p&gt;
+&lt;hr&gt;
 &lt;h3 id=&#34;子查询&#34;&gt;子查询&lt;/h3&gt;
 &lt;p&gt;SQL语句中嵌套SELECT语句，称为嵌套查询，又称子查询。&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;div class=&#34;chroma&#34;&gt;
@@ -2076,10 +2089,10 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#启用二进制日志
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;log-bin=mysql-bin
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 设置不要复制的数据库(可设置多个)
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 设置不要复制的数据库(可设置多个，多行配置)
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# binlog-ignore-db=information_schema
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 设置需要复制的数据库 需要复制的主数据库名字
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;# 设置需要复制的数据库 需要复制的主数据库名字（可设置多个，多行配置）
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;binlog-do-db=testdb
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;#设置logbin格式
@@ -2367,7 +2380,7 @@ Innodb引擎会遍历整张表，把每一行的主键ID值都取出来，返回
 &lt;h4 id=&#34;4根据字段个数可分为&#34;&gt;4、根据字段个数可分为&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;单列索引&lt;/li&gt;
-&lt;li&gt;联合索引（符合索引，组合索引）&lt;/li&gt;
+&lt;li&gt;联合索引（复合索引，组合索引）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;二根据数据结构分类&#34;&gt;二、根据数据结构分类&lt;/h3&gt;
 &lt;p&gt;MySQL按数据结构分类可分为：B+tree索引，Hash索引，Full-text索引&lt;/p&gt;
@@ -2611,7 +2624,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 	
 &gt;&lt;/p&gt;
 &lt;p&gt;索引合并查询，会同时使用&lt;code&gt;idx_status_vmstatus&lt;/code&gt; 和 &lt;code&gt;uniq_instance&lt;/code&gt; 扫描记录并给普通索引加锁，然后通过普通索引中的主键ID去锁定主键索引，问题就出现在这里，由于 idx_status_vmstatus 索引扫描和 &lt;code&gt;uniq_instance&lt;/code&gt;索引扫描是同时的，如果两条update语句同时执行，则 事务2 先锁定 锁定 &lt;code&gt;uniq_instance&lt;/code&gt; 成功后锁定对应的主键，然后事务1 锁定&lt;code&gt;idx_status_vmstatus&lt;/code&gt; 成功后也去锁定主键,此时主键已被事务2锁定，于是阻塞等待&lt;code&gt;primary&lt;/code&gt;释放，接着事务2开始扫描 &lt;code&gt;idx_status_vmstatus&lt;/code&gt; 发现普通索引被事务1锁住，于是阻塞等待&lt;code&gt;idx_status_vmstatus&lt;/code&gt;，于是出现最终的 事务2等待 事务2释放&lt;code&gt;idx_status_vmstatus&lt;/code&gt;，事务1等待事务1释放&lt;code&gt;primary&lt;/code&gt;，即出现死锁。&lt;/p&gt;
-&lt;p&gt;解决方案也比较简单，先查出主键ID，使用主键ID再更新记录，因为使用主键ID直接加锁的话，锁粒度更小，及时同时更新一条记录，也不会出现同时等待对方将锁释放的场景。问题描述的比较简单，但在排查过程中还是走了不少弯路的。&lt;/p&gt;</description>
+&lt;p&gt;解决方案也比较简单，先查出主键ID，使用主键ID再更新记录，因为使用主键ID直接加锁的话，锁粒度更小，即使同时更新一条记录，也不会出现同时等待对方将锁释放的场景。问题描述的比较简单，但在排查过程中还是走了不少弯路的。&lt;/p&gt;</description>
         </item>
         <item>
         <title>Mysql -- 关键字的执行顺序</title>
@@ -2680,7 +2693,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;2一致性consistency&#34;&gt;&lt;strong&gt;2、一致性&lt;/strong&gt;（&lt;strong&gt;C&lt;/strong&gt;onsistency）&lt;/h3&gt;
 &lt;blockquote&gt;
-&lt;p&gt;在事务开始之前以及事务结束之后，数据库的完整性没有被破坏。这标识写入的数据必须完全符合所有的预设规则，这包含数据的精确度，串联性以及后续数据库可以自发的完成预定的工作。&lt;/p&gt;
+&lt;p&gt;在事务执行前后，数据库中的数据必须满足一定的约束条件，保证数据的逻辑完整性。如果事务执行过程中出现错误，则会回滚到事务开始前的状态。&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;h3 id=&#34;3隔离性isolation&#34;&gt;&lt;strong&gt;3、隔离性&lt;/strong&gt;（&lt;strong&gt;I&lt;/strong&gt;solation）&lt;/h3&gt;
 &lt;blockquote&gt;
@@ -2775,7 +2788,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 &lt;ul&gt;
 &lt;li&gt;&lt;strong&gt;幻读&lt;/strong&gt;&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;一个事务先根据某些条件查出一些记录，之后另一个事务又想表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能够把另一个事务插入的数据也查出来。
+&lt;p&gt;一个事务先根据某些条件查出一些记录，之后另一个事务又向数据表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能够把另一个事务插入的数据也查出来。
 （幻读在读未提交、读已提交、可重复读隔离级别中都可能会出现）&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;https://x-xkang.com/images/mysql-transaction/phantom-read.png&#34;
 	
@@ -2837,7 +2850,7 @@ MySQL中的InnoDB 存储引擎要求必须有聚簇索引，默认在主键字�
 &lt;h3 id=&#34;1redo-log重做日志&#34;&gt;1、&lt;strong&gt;redo log(重做日志)&lt;/strong&gt;&lt;/h3&gt;
 &lt;p&gt;MySQL 为了提升性能不会把每次的修改都实时同步到磁盘，而是会优先存储到 Buffer Pool（缓冲池）里面，把这个当做缓存来用，然后使用后台线程去做缓冲池和磁盘之间的同步&lt;/p&gt;
 &lt;p&gt;如果还没来得及同步数据就出现宕机或者断电，就会导致丢失部分已提交事务的修改信息，&lt;/p&gt;
-&lt;p&gt;所以引入了&lt;strong&gt;redo log&lt;/strong&gt;来记录已成功提交事务的修改信息，并且把 redo log 持久化到磁盘，系统重启之后读取 redo log 恢复最新数据&lt;/p&gt;
+&lt;p&gt;所以引入了**redo log（回滚）**来记录已成功提交事务的修改信息，并且把 redo log 持久化到磁盘，系统重启之后读取 redo log 恢复最新数据&lt;/p&gt;
 &lt;blockquote&gt;
 &lt;p&gt;&lt;strong&gt;redo log&lt;/strong&gt; 是用来恢复数据的，用于保障已提交事务的持久化特性。&lt;/p&gt;
 &lt;/blockquote&gt;

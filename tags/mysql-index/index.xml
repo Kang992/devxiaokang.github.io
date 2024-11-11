@@ -33,7 +33,7 @@
 &lt;h4 id=&#34;4根据字段个数可分为&#34;&gt;4、根据字段个数可分为&lt;/h4&gt;
 &lt;ul&gt;
 &lt;li&gt;单列索引&lt;/li&gt;
-&lt;li&gt;联合索引（符合索引，组合索引）&lt;/li&gt;
+&lt;li&gt;联合索引（复合索引，组合索引）&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;二根据数据结构分类&#34;&gt;二、根据数据结构分类&lt;/h3&gt;
 &lt;p&gt;MySQL按数据结构分类可分为：B+tree索引，Hash索引，Full-text索引&lt;/p&gt;

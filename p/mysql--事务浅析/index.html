@@ -341,7 +341,7 @@
 </blockquote>
 <h3 id="2一致性consistency"><strong>2、一致性</strong>（<strong>C</strong>onsistency）</h3>
 <blockquote>
-<p>在事务开始之前以及事务结束之后，数据库的完整性没有被破坏。这标识写入的数据必须完全符合所有的预设规则，这包含数据的精确度，串联性以及后续数据库可以自发的完成预定的工作。</p>
+<p>在事务执行前后，数据库中的数据必须满足一定的约束条件，保证数据的逻辑完整性。如果事务执行过程中出现错误，则会回滚到事务开始前的状态。</p>
 </blockquote>
 <h3 id="3隔离性isolation"><strong>3、隔离性</strong>（<strong>I</strong>solation）</h3>
 <blockquote>
@@ -436,7 +436,7 @@
 <ul>
 <li><strong>幻读</strong></li>
 </ul>
-<p>一个事务先根据某些条件查出一些记录，之后另一个事务又想表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能够把另一个事务插入的数据也查出来。
+<p>一个事务先根据某些条件查出一些记录，之后另一个事务又向数据表中插入了符合这些条件的记录，原先的事务再次按照该条件查询时，能够把另一个事务插入的数据也查出来。
 （幻读在读未提交、读已提交、可重复读隔离级别中都可能会出现）</p>
 <p><img src="/images/mysql-transaction/phantom-read.png"
 	
@@ -498,7 +498,7 @@
 <h3 id="1redo-log重做日志">1、<strong>redo log(重做日志)</strong></h3>
 <p>MySQL 为了提升性能不会把每次的修改都实时同步到磁盘，而是会优先存储到 Buffer Pool（缓冲池）里面，把这个当做缓存来用，然后使用后台线程去做缓冲池和磁盘之间的同步</p>
 <p>如果还没来得及同步数据就出现宕机或者断电，就会导致丢失部分已提交事务的修改信息，</p>
-<p>所以引入了<strong>redo log</strong>来记录已成功提交事务的修改信息，并且把 redo log 持久化到磁盘，系统重启之后读取 redo log 恢复最新数据</p>
+<p>所以引入了**redo log（回滚）**来记录已成功提交事务的修改信息，并且把 redo log 持久化到磁盘，系统重启之后读取 redo log 恢复最新数据</p>
 <blockquote>
 <p><strong>redo log</strong> 是用来恢复数据的，用于保障已提交事务的持久化特性。</p>
 </blockquote>
